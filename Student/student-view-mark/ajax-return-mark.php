@@ -19,7 +19,7 @@ if(isset($_POST['semester'])){
     $resultSub = mysqli_query($conn, $sqlGetSubject);
     if(mysqli_num_rows($resultSub)>0){
         echo '<div class="table-responsive">';
-        echo '<table class="table table-striped">'
+        echo '<table class="table table-striped table-hover">'
         . '<tr>'
                 . '<th colspan="4" class="text-center">Semester: '.$semester.' </th>'
         . '</tr>'

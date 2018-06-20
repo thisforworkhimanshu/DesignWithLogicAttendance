@@ -51,7 +51,13 @@ if(!isset($_SESSION['enrolment'])){
                 </div>  
             </nav>
             <div id="dashboard" style="margin-top: 2%;">
-                H
+                <?php
+                    require_once '../Connection.php';
+                    $connectionn = new Connection();
+                    $conn = $connectionn->createConnection("college");
+                    
+                    
+                ?>
             </div>
         </div>
     </body>
