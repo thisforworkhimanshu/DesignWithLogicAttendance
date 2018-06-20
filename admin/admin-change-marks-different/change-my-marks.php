@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-if(isset($_POST['btnSubmit'])){
+if(isset($_POST['submit'])){
     
     session_start();
 
