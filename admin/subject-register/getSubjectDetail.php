@@ -65,11 +65,17 @@ if(!isset($_SESSION['aid'])){
                                         mysqli_query($conn, $sqlpra4)&&
                                         mysqli_query($conn, $sqlprac5)){
                                     
-                                    
-                                        $sqlalter = "ALTER TABLE sem".$sem."_".$dept_id." ADD COLUMN ".$subject_code."_m int(10), ADD COLUMN ".$subject_code."_v int(10)";
-                                        $sqlalterr = "ALTER TABLE sem".$sem."_".$dept_id."_r ADD COLUMN ".$subject_code."_r int(10)";
-                                        if(mysqli_query($conn, $sqlalter)&& mysqli_query($conn, $sqlalterr)){
-                                            $status=true;
+                                        if($theory_hour==0){
+                                            $sqlalter = "ALTER TABLE sem".$sem."_".$dept_id." ADD COLUMN ".$subject_code."_v int(10)";
+                                            if(mysqli_query($conn, $sqlalter)){
+                                                $status=true;
+                                            }
+                                        }else{
+                                            $sqlalter = "ALTER TABLE sem".$sem."_".$dept_id." ADD COLUMN ".$subject_code."_m int(10), ADD COLUMN ".$subject_code."_v int(10)";
+                                            $sqlalterr = "ALTER TABLE sem".$sem."_".$dept_id."_r ADD COLUMN ".$subject_code."_r int(10)";
+                                            if(mysqli_query($conn, $sqlalter)&& mysqli_query($conn, $sqlalterr)){
+                                                $status=true;
+                                            }
                                         }
                                 }else{
                                     $status=false;
