@@ -72,7 +72,8 @@ if(isset($_SESSION['aid'])){
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" href="admin/admin-marks-view/admin-marks-view.php">View Student Marks</a>
                                     <a class="dropdown-item" href="admin/admin-marks-view/admin-view-grade.php">Student Grade History</a>
-                                    <a class="dropdown-item" href="">Change Student Marks</a>
+                                    <a class="dropdown-item" href="admin/admin-change-marks/get-Student-Details.php">Change Student Marks</a>
+                                    <a class="dropdown-item" href="admin/admin-change-marks-different/get-Change-Detail.php">Marks Change Multiple Sem wise</a>
                                  </div>
                             </li>
                         </ul>
