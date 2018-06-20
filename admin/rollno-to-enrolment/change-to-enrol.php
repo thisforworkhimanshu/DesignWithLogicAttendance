@@ -90,7 +90,7 @@ if(isset($_POST['btnSumit'])){
                 $email = $csv[7];
                 $cellno = $csv[8];
                 
-                $sql = "UPDATE student SET student_enrolment = $enrol WHERE student_enrolment = $rollno";
+                $sql = "UPDATE student SET student_enrolment = $enrol,student_password='".$enrol."' WHERE student_enrolment = $rollno";
                 $sqlins = "UPDATE sem1_".$dept_id." SET enrolment = $enrol WHERE enrolment = $rollno";
                 $sqlins1 = "UPDATE sem1_".$dept_id."_r SET enrolment = $enrol WHERE enrolment = $rollno";
                 $sqlins2 = "UPDATE sem2_".$dept_id." SET enrolment = $enrol WHERE enrolment = $rollno";
