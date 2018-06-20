@@ -18,11 +18,8 @@ if(isset($_POST['semester'])){
     $sqlGetSubject = "select subject_code,subject_name from subject where dept_id = $dept_id and semester = $semester";
     $resultSub = mysqli_query($conn, $sqlGetSubject);
     if(mysqli_num_rows($resultSub)>0){
-        echo '<div class="row">';
-        echo '<div class="col-3"></div>';
-        echo '<div class="col-6">';
         echo '<div class="table-responsive">';
-        echo '<table class="table-sm table-striped">'
+        echo '<table class="table table-striped">'
         . '<tr>'
                 . '<th colspan="4" class="text-center">Semester: '.$semester.' </th>'
         . '</tr>'
@@ -55,7 +52,7 @@ if(isset($_POST['semester'])){
                         . '<td>'.$remidmark.'</td>'
                 . '</tr>';
         }
-        echo '</div>'
+        echo '</table>'
         . '</div>';
     }else{
         echo 'No Data';

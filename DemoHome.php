@@ -14,15 +14,10 @@ and open the template in the editor.
         <div class="c100 p100 small green">
 
             <span>100%</span>
-
             <div class="slice">
-
                 <div class="bar"></div>
-
                 <div class="fill"></div>
-
             </div>
-
         </div>
     </body>
 </html>

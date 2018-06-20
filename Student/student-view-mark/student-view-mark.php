@@ -6,6 +6,9 @@ and open the template in the editor.
 -->
 <?php
 session_start();
+if(!isset($_SESSION['enrolment'])){
+    header("Location: ../studentindex.php");
+}
 $dept_id = $_SESSION['s_dept_id'];
 $enrolment =  $_SESSION['enrolment'];
 ?>
@@ -91,7 +94,13 @@ $enrolment =  $_SESSION['enrolment'];
                     });
                 </script>
             </div>
-            <div id="showTable"></div>
+            <div class="row">
+                <div class="col-3"></div>
+                <div class="col-6">
+                    <div id="showTable"></div>
+                </div>
+            </div>
+            
         </div>
     </body>
 </html>

@@ -4,6 +4,12 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<?php
+session_start();
+if(!isset($_SESSION['enrolment'])){
+    header("Location: studentindex.php");
+}
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -21,12 +27,12 @@ and open the template in the editor.
     <body>
         <div class="container">
             <div class="bg-light text-center">
-                <hr style="border-color: greenyellow; margin-top: 0%;"/>
+                <hr style="margin-top: 0%;"/>
                 <div>
                     <h3>Shantilal Shah Engineering College</h3>
                     <label>New Sidsar Campus, Bhavnagar - 364001</label>
                 </div>
-                <hr style="border-color: greenyellow;"/>
+                <hr/>
             </div>
             <nav class="navbar navbar-expand-md bg-light navbar-light">
                 <a class="navbar-brand" href="welcomestudent.php">Student</a>
@@ -44,6 +50,9 @@ and open the template in the editor.
                   </ul>
                 </div>  
             </nav>
+            <div id="dashboard" style="margin-top: 2%;">
+                H
+            </div>
         </div>
     </body>
 </html>
