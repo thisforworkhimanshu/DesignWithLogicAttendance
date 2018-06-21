@@ -5,6 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
+error_reporting(E_ALL ^ E_WARNING); 
 session_start();
 if(!isset($_SESSION['aid'])){
     header("Location: ../../index.php");
@@ -86,8 +87,15 @@ if(!isset($_SESSION['aid'])){
                         $conn = $connection->createConnection("college");
                         $dept_id = $_SESSION['a_dept_id'];
                         
-                        $sqlsubject = "select subject_code,subject_name from subject where dept_id = $dept_id and semester = $semester";
-                        $resultSubject = mysqli_query($conn, $sqlsubject);
+                        if($examtype=="m"||$examtype=="r"){
+                            $sqlsubject = "SELECT subject.subject_code,subject.subject_name,teaching_scheme.total_theory FROM subject INNER JOIN teaching_scheme ON teaching_scheme.subject_code=subject.subject_code WHERE subject.semester= $semester and subject.dept_id= $dept_id and teaching_scheme.total_theory >0";
+                            $resultSubject = mysqli_query($conn, $sqlsubject);
+                        }else if($examtype=="v"){
+                            $sqlsubject = "SELECT subject.subject_code,subject.subject_name,teaching_scheme.total_theory FROM subject INNER JOIN teaching_scheme ON teaching_scheme.subject_code=subject.subject_code WHERE subject.semester= $semester and subject.dept_id= $dept_id and teaching_scheme.total_practical >0";
+                            $resultSubject = mysqli_query($conn, $sqlsubject);
+                        }
+                        
+                        
                         if(mysqli_num_rows($resultSubject)>0){
                             
                             ?>

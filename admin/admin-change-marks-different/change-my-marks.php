@@ -29,27 +29,47 @@ if(isset($_POST['submit'])){
             if(isset($_POST[$subject_code])){
                 if($examtype==="m"){
                     $mark = $_POST[$subject_code];
-                    $sqlupdate = "UPDATE sem".$semester."_".$dept_id." SET ".$subject_code."_m = $mark where enrolment = $enrolment";
-                    if(mysqli_query($conn, $sqlupdate)){
-                        $status=TRUE;
-                    }else{
+                    
+                    if($mark>30||$mark<0){
                         $status=FALSE;
+                        break;
+                    }else{
+                        $sqlupdate = "UPDATE sem".$semester."_".$dept_id." SET ".$subject_code."_m = $mark where enrolment = $enrolment";
+                        if(mysqli_query($conn, $sqlupdate)){
+                            $status=TRUE;
+                        }else{
+                            $status=FALSE;
+                        }
                     }
+                    
                 }else if($examtype==="v"){
                     $mark = $_POST[$subject_code];
-                    $sqlupdate = "UPDATE sem".$semester."_".$dept_id." SET ".$subject_code."_v = $mark where enrolment = $enrolment";
-                    if(mysqli_query($conn, $sqlupdate)){
-                        $status=TRUE;
-                    }else{
+                    
+                    if($mark>30||$mark<0){
                         $status=FALSE;
+                        break;
+                    }else{
+                        $sqlupdate = "UPDATE sem".$semester."_".$dept_id." SET ".$subject_code."_v = $mark where enrolment = $enrolment";
+                        if(mysqli_query($conn, $sqlupdate)){
+                            $status=TRUE;
+                        }else{
+                            $status=FALSE;
+                        }
                     }
+                    
                 }else if($examtype==="r"){
                     $mark = $_POST[$subject_code];
-                    $sqlupdate = "UPDATE sem".$semester."_".$dept_id."_r SET ".$subject_code."_r = $mark where enrolment = $enrolment";
-                    if(mysqli_query($conn, $sqlupdate)){
-                        $status=TRUE;
-                    }else{
+                    
+                    if($mark>30||$mark<0){
                         $status=FALSE;
+                        break;
+                    }else{
+                        $sqlupdate = "UPDATE sem".$semester."_".$dept_id."_r SET ".$subject_code."_r = $mark where enrolment = $enrolment";
+                        if(mysqli_query($conn, $sqlupdate)){
+                            $status=TRUE;
+                        }else{
+                            $status=FALSE;
+                        }
                     }
                 }
             }else{
