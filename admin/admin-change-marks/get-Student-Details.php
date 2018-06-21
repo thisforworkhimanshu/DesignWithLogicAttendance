@@ -58,6 +58,7 @@ if(!isset($_SESSION['aid'])){
                             $("#enrolment").prop("disabled",true);
                             $("#marks").prop("disabled",true);
                             $("#btnSubmit").prop("disabled",true);
+                            
                             $("#semester").change(function(){
                                 if(this.selectedIndex===0){
                                     $("#subject").prop("disabled",true);
@@ -66,8 +67,32 @@ if(!isset($_SESSION['aid'])){
                                     $("#marks").prop("disabled",true);
                                     $("#btnSubmit").prop("disabled",true);
                                 }else{
+                                    $("#examtype").prop("disabled",false);
+                                }
+                            });
+                            
+                            $("#subject").change(function(){
+                                if(this.selectedIndex===0){
+                                    $("#examtype").prop("disabled",true);
+                                    $("#enrolment").prop("disabled",true);
+                                    $("#marks").prop("disabled",true);
+                                    $("#btnSubmit").prop("disabled",true);
+                                }else{
+                                    $("#enrolment").prop("disabled",false);
+                                    $("#marks").prop("disabled",false);
+                                }
+                            });
+                            
+                            $("#examtype").change(function(){
+                                if(this.selectedIndex===0){
+                                    $("#enrolment").prop("disabled",true);
+                                    $("#marks").prop("disabled",true);
+                                    $("#btnSubmit").prop("disabled",true);
+                                }else{
+                                    $("#subject").prop("disabled",false);
                                     var sem = $("#semester").val();
-                                    $.post('ajax-processSubject.php',{semester:sem},
+                                    var examtype = $("#examtype").val();
+                                    $.post('ajax-processSubject.php',{semester:sem,examtype:examtype},
                                     function(response) {
                                         $("#subject").prop("disabled",false);
                                         $("#subject").html(response);
@@ -76,39 +101,21 @@ if(!isset($_SESSION['aid'])){
                                     });
                                 }
                             });
-                            $("#subject").change(function(){
-                                if(this.selectedIndex===0){
-                                    $("#examtype").prop("disabled",true);
-                                    $("#enrolment").prop("disabled",true);
-                                    $("#marks").prop("disabled",true);
-                                    $("#btnSubmit").prop("disabled",true);
-                                }else{
-                                    $("#examtype").prop("disabled",false);
-                                }
-                            });
-                            $("#examtype").change(function(){
-                                if(this.selectedIndex===0){
-                                    $("#enrolment").prop("disabled",true);
-                                    $("#marks").prop("disabled",true);
-                                    $("#btnSubmit").prop("disabled",true);
-                                }else{
-                                    $("#enrolment").prop("disabled",false);
-                                }
-                            });
                         }); 
                     </script>
-                        
-                        <div class="form-group">
-                            <select id="subject" name="subject" class="form-control">
-                                <option>--Select Subject--</option>
-                            </select>
-                        </div>
+                    
                         <div class="form-group">
                             <select class="form-control" name="examtype" id="examtype" required>
                                 <option value="">--Select Exam Type--</option>
                                 <option value="m">Mid Semester Exam</option>
                                 <option value="r">Remedial Exam for Mid</option>
                                 <option value="v">Internal Viva</option>
+                            </select>
+                        </div>
+                    
+                        <div class="form-group">
+                            <select id="subject" name="subject" class="form-control">
+                                <option>--Select Subject--</option>
                             </select>
                         </div>
                         
