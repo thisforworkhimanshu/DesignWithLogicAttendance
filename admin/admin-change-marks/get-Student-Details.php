@@ -134,10 +134,15 @@ if(!isset($_SESSION['aid'])){
                                             url: "ajax-get-Marks.php",
                                             data: {enrolment:enrol,semester:sem,examtype:examtype,subject:subject},
                                             success: function(data){
-                                                console.log(data);
-                                                $("#marks").val(data);
-                                                $("#marks").prop("disabled",false);
-                                                $("#btnSubmit").prop("disabled",false);
+                                                if(data===""){
+                                                    $("#marks").prop("disabled",true);
+                                                    $("#btnSubmit").prop("disabled",true);
+                                                }else{
+                                                    $("#marks").val(data);
+                                                    $("#marks").prop("disabled",false);
+                                                    $("#btnSubmit").prop("disabled",false);
+                                                }
+                                                
                                             }
                                         });
                                     }
@@ -162,21 +167,73 @@ if(!isset($_SESSION['aid'])){
                                     if(mark===""){
                                         alert('Input All Details Please');
                                     }else{
-                                        $.ajax({
-                                            type: 'POST' ,
-                                            url: "ajax-change-mark.php",
-                                            data: {enrolment:enrol,semester:sem,examtype:examtype,subject:subject,mark:mark},
-                                            success: function (data) {
-                                                console.log(data);
-                                                if(data==="ok"){
-                                                    alert("Marks Change Success");
-                                                    $("#enrolment").val("");
-                                                    $("#marks").val("");
-                                                }else{
-                                                    alert("Marks Changing Failed...");
-                                                }
+                                        if(examtype==="m"){
+                                            if(mark>30){
+                                                alert('Mark Should Be Less Than 30');
+                                            }else if(mark<0){
+                                                alert('Mark Should Be Greater Than 0');
+                                            }else{
+                                                $.ajax({
+                                                    type: 'POST' ,
+                                                    url: "ajax-change-mark.php",
+                                                    data: {enrolment:enrol,semester:sem,examtype:examtype,subject:subject,mark:mark},
+                                                    success: function (data) {
+                                                        console.log(data);
+                                                        if(data==="ok"){
+                                                            alert("Marks Change Success");
+                                                            $("#enrolment").val("");
+                                                            $("#marks").val("");
+                                                        }else{
+                                                            alert("Marks Changing Failed...");
+                                                        }
+                                                    }
+                                                });
                                             }
-                                        });
+                                        }else if(examtype==="r"){
+                                            if(mark>30){
+                                                alert('Mark Should Be Less Than 30');
+                                            }else if(mark<0){
+                                                alert('Mark Should Be Greater Than 0');
+                                            }else{
+                                                $.ajax({
+                                                    type: 'POST' ,
+                                                    url: "ajax-change-mark.php",
+                                                    data: {enrolment:enrol,semester:sem,examtype:examtype,subject:subject,mark:mark},
+                                                    success: function (data) {
+                                                        console.log(data);
+                                                        if(data==="ok"){
+                                                            alert("Marks Change Success");
+                                                            $("#enrolment").val("");
+                                                            $("#marks").val("");
+                                                        }else{
+                                                            alert("Marks Changing Failed...");
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        }else if(examtype==="v"){
+                                            if(mark>20){
+                                                alert('Mark Should Be Less Than 20');
+                                            }else if(mark<0){
+                                                alert('Mark Should Be Greater Than 0');
+                                            }else{
+                                                $.ajax({
+                                                    type: 'POST' ,
+                                                    url: "ajax-change-mark.php",
+                                                    data: {enrolment:enrol,semester:sem,examtype:examtype,subject:subject,mark:mark},
+                                                    success: function (data) {
+                                                        console.log(data);
+                                                        if(data==="ok"){
+                                                            alert("Marks Change Success");
+                                                            $("#enrolment").val("");
+                                                            $("#marks").val("");
+                                                        }else{
+                                                            alert("Marks Changing Failed...");
+                                                        }
+                                                    }
+                                                });
+                                            }
+                                        }
                                     }
                                     return false;
                                });
