@@ -21,8 +21,6 @@ if(isset($_SESSION['aid'])){
         <link rel="stylesheet" href="css/style.css"/>
         <!-- jQuery library -->
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
          
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -80,7 +78,7 @@ if(isset($_SESSION['aid'])){
                                     var dataString = 'uname1='+uname+'&pass1='+pass;
                                     $.ajax({
                                         type: "POST",
-                                        url: "http://localhost/DesignwithLogicAttendance/login-ajax/ajaxadminlogin.php",
+                                        url: "login-ajax/ajaxadminlogin.php",
                                         data: dataString,
                                         cache: false,
                                         beforeSend: function () {
@@ -92,7 +90,7 @@ if(isset($_SESSION['aid'])){
                                             if(result==="ok"){
                                                 $("#login_button").html('<span class="glyphicon glyphicon-transfer"></span> Signing In...');
                                                 setTimeout(function() {
-                                                    window.location.href="http://localhost/DesignwithLogicAttendance/welcomeadmin.php";
+                                                    window.location.href="welcomeadmin.php";
                                                     $body.removeClass("loading");
                                                 },4000);
                                                 

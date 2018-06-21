@@ -33,7 +33,7 @@ if(isset($_SESSION['fid'])){
         
     </head>
     <body>
-        <div class="container-fluid">
+        <div class="container">
             <div>
                 <nav class="navbar navbar-expand-sm bg-light">
                 <a class="navbar-brand" href="index.php">Management</a>
@@ -79,7 +79,7 @@ if(isset($_SESSION['fid'])){
                                     var dataString = 'uname1='+uname+'&pass1='+pass;
                                     $.ajax({
                                         type: "POST",
-                                        url: "http://localhost/DesignwithLogicAttendance/login-ajax/ajaxfacultylogin.php",
+                                        url: "login-ajax/ajaxfacultylogin.php",
                                         data: dataString,
                                         cache: false,
                                         beforeSend: function () {
@@ -91,7 +91,7 @@ if(isset($_SESSION['fid'])){
                                             if(result==="ok"){
                                                 $("#login_button").html('<span class="glyphicon glyphicon-transfer"></span> Signing In...');
                                                 setTimeout(function() {
-                                                    window.location.href="http://localhost/DesignwithLogicAttendance/welcomefaculty.php";
+                                                    window.location.href="welcomefaculty.php";
                                                     $body.removeClass("loading");
                                                 },4000);
                                                 
