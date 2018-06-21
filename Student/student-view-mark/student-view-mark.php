@@ -67,7 +67,7 @@ $enrolment =  $_SESSION['enrolment'];
                         }
                     ?>
                     <select id="semester" name="semester" class="form-control">
-                        <option value="">--Select Semester--</option>
+                        <option value="" disabled selected>--Select Semester--</option>
                         <?php
                             for($i=1;$i<=$semester;$i++){
                                 ?>
@@ -95,8 +95,8 @@ $enrolment =  $_SESSION['enrolment'];
                 </script>
             </div>
             <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
                     <div id="showTable"></div>
                 </div>
             </div>

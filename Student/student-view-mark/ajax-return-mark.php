@@ -15,8 +15,8 @@ if(isset($_POST['semester'])){
     $connection = new Connection();
     $conn = $connection->createConnection("college");
     
-    $sqlGetSubject = "select subject_code,subject_name from subject where dept_id = $dept_id and semester = $semester";
-    $resultSub = mysqli_query($conn, $sqlGetSubject);
+    $sqlsubject = "SELECT subject.subject_code,subject.subject_name,teaching_scheme.total_theory FROM subject INNER JOIN teaching_scheme ON teaching_scheme.subject_code=subject.subject_code WHERE subject.semester= $semester and subject.dept_id= $dept_id and teaching_scheme.total_theory >0";;
+    $resultSub = mysqli_query($conn, $sqlsubject);
     if(mysqli_num_rows($resultSub)>0){
         echo '<div class="table-responsive">';
         echo '<table class="table table-striped table-hover">'
@@ -32,6 +32,7 @@ if(isset($_POST['semester'])){
         while ($row = mysqli_fetch_assoc($resultSub)) {
             $sub_code = $row['subject_code'];
             $sub_name = $row['subject_name'];
+            
             $sqlGetMarkMid = "select ".$sub_code."_m as mid from sem".$semester."_".$dept_id." where enrolment = $enrolment";
             $resultmid = mysqli_query($conn, $sqlGetMarkMid);
             $rowmid = mysqli_fetch_assoc($resultmid);
