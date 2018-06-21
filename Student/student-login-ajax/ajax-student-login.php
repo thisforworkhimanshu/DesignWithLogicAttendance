@@ -14,13 +14,14 @@ if(isset($_POST['username'])&&isset($_POST['password'])){
     $connection = new Connection();
     $conn = $connection->createConnection("college");
     
-    $sqlcheck = "select student_enrolment,student_dept_id from student where student_enrolment = $username and student_password = '".$password."' ";
+    $sqlcheck = "select student_enrolment,student_dept_id,student_semester from student where student_enrolment = $username and student_password = '".$password."' ";
     $result = mysqli_query($conn, $sqlcheck);
     if(mysqli_num_rows($result)>0){
         $row = mysqli_fetch_assoc($result);
         session_start();
         $_SESSION['s_dept_id'] = $row['student_dept_id'];
         $_SESSION['enrolment'] = $row['student_enrolment'];
+        $_SESSION['s_sem'] = $row['student_semester'];
         echo "ok";
     }else{
         echo "notok";
