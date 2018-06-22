@@ -37,16 +37,16 @@ if(!isset($_SESSION['aid'])){
             <div id="studentDetailHere">
                 <form action="admin-view-student.php" method="get">
                 <div class="row" id="hideIt">
-                    <div class="col-sm-3">
+                    <div class="col-lg-3 form-group">
                         <input type="text" id="batchyear" placeholder="Batch Year" name="batchyear" class="form-control" required/>                            
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-lg-3 form-group">
                         <input type="submit" name="submit_btn" id="btnSubmit" value="View" class="form-control btn btn-success"/>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-lg-3 form-group">
                         <input type="text" id="searchBox" class="form-control" placeholder="Search"/>
                     </div>
-                    <div class="col-sm-3 text-center">
+                    <div class="col-lg-3 text-center form-group">
                         <input type="button" id="print" class="btn btn-outline-dark" value="Print"/>
                     </div>
                 </div>

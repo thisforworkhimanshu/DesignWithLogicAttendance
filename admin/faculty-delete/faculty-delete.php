@@ -71,7 +71,12 @@ if(!isset($_SESSION['aid'])){
                     if(mysqli_query($conn, $sql))
                     {
                         ?>
-            <div class="alert alert-success">Record Delete Sucessfully...</div>
+            <div class="alert alert-success">Record Delete Sucessfully...Redirecting</div>
+            <script>
+                setTimeout(function(){
+                    window.location.href='faculty-delete.php';
+                },1000);
+            </script>
             <?php
                     }
                     

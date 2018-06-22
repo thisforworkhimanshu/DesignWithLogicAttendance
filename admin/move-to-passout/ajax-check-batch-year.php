@@ -35,9 +35,10 @@ if(isset($_POST['batchyear'])){
             }else{
                 $jsonArray = array("sem"=>$sem,"status"=>"present");
                 echo json_encode($jsonArray);
-//                echo "present";
+
             }
         }else{
+            echo mysqli_error($conn);
             echo "notpresent";
         }
     }

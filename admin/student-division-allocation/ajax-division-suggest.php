@@ -24,11 +24,12 @@ if(isset($_POST['batchyear'])&&isset($_POST['divVal'])){
             $no_of_row = $conn->count;
             $totalstud = $resultcount->total;
             
-            $limit = floor($totalstud/2);
+            $limit = ceil($totalstud/2);
+            
             
             $sqlavg = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment DESC LIMIT $limit";
             $resultavg = $conn->ObjectBuilder()->rawQueryOne($sqlavg);
-            $upto = ($resultavg->student_enrolment)-1;
+            $upto = ($resultavg->student_enrolment);
             
             $return_arr = array("toenrol"=>$upto,"fromenrol"=>$from);
             

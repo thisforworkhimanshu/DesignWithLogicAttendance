@@ -130,6 +130,16 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item active" href="../../admin/admin-view-student/admin-view-student.php">View Student</a>
                             <?php
+                    } else {
+                         ?>
+                    <a class="dropdown-item" href="../../admin/student-registration/student-registration.php">Student Registration</a>
+                    <a class="dropdown-item" href="../../admin/detain-student-registration/register-into-detain.php">Detain Student</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/student-division-allocation/student-division-allocation.php">Division Allocation</a>
+                    <a class="dropdown-item" href="../../admin/student-prac-batch-allocation/student-prac-batch-allocation.php">Practical Batch Allocation</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/admin-view-student/admin-view-student.php">View Student</a>
+                            <?php
                     }
                     
                     ?>
