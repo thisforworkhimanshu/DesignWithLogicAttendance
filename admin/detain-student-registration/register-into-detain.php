@@ -81,8 +81,14 @@ if(!isset($_SESSION['aid'])){
                 </div>
             </div>
             
-            <div id="msgerr" style="width: 30%;"></div>
-            <div id="msgsuccess" style="width: 30%;"></div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div id="msgerr"></div>
+                    <div id="msgsuccess"></div>
+                </div>
+            </div>
+            
+            
             
             <hr/>
             <div class="badge-light" style="margin-top: 1%;">
