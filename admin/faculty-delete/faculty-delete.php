@@ -40,8 +40,8 @@ if(!isset($_SESSION['aid'])){
                     ?>
             <form action="faculty-delete.php" method="post">
                 <div class="row form-group" style="margin-top: 2%;">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-6">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
                         <select name="faculty" class="form-control">
                             <option value="" disabled selected>--Select Faculty --</option>
                                 <?php

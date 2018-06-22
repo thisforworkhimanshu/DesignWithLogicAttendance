@@ -40,7 +40,7 @@ if(!isset($_SESSION['aid'])){
                     $dept_id = $_SESSION['a_dept_id'];
             ?>
             <div class="row">
-                <div class="col-lg-auto">
+                <div class="col-lg-12">
                     <div class="table-responsive-lg" style="margin-top: 2%;">
                         <table class="table table-striped">
                             <tr>

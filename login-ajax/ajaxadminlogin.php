@@ -13,6 +13,7 @@
         $row = mysqli_fetch_assoc($result);
         $_SESSION['aid'] = $row['admin_id'];
         $_SESSION['a_fname'] = $row['admin_fname'];
+        $_SESSION['a_uname'] = $_POST['uname1'];
         $_SESSION['a_dept_id'] = $row['admin_dept_id'];
         echo "ok";
     }else{

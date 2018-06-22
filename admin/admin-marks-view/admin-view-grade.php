@@ -37,14 +37,14 @@ if(!isset($_SESSION['aid'])){
             <div style="margin-top: 2%;">
                 <form action="admin-view-grade.php" method="post">
                     <div class="row form-group">
-                        <div class="col-4"></div>
-                        <div class="col-4">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
                             <input type="text" class="form-control" placeholder="Enrolment Number" name="enrol" required autofocus/>
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-5"></div>
-                        <div class="col-2">
+                        <div class="col-lg-5"></div>
+                        <div class="col-lg-2">
                             <input type="submit" class="form-control btn btn-success" name="submit_btn" required/>
                         </div>
                     </div>

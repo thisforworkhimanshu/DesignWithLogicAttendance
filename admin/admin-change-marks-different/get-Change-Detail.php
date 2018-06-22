@@ -38,7 +38,7 @@ if(!isset($_SESSION['aid'])){
             <form action="get-Change-Detail.php" method="post">
                 <div class="row">
                     <div class="col-lg-4 form-group">
-                        <select name="semester" id="semester" class="form-control">
+                        <select name="semester" id="semester" class="form-control" required>
                             <option value="">--Select Semester--</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -51,7 +51,7 @@ if(!isset($_SESSION['aid'])){
                         </select>
                     </div>
                     <div class="col-lg-4 form-group">
-                        <select name="examtype" id="examtype" class="form-control">
+                        <select name="examtype" id="examtype" class="form-control" required>
                             <option value="">--Select Exam Type--</option>
                             <option value="m">Mid Semester Exam</option>
                             <option value="r">Remedial Exam for Mid</option>
@@ -59,7 +59,7 @@ if(!isset($_SESSION['aid'])){
                         </select>
                     </div>
                     <div class="col-lg-4 form-group">
-                        <input type="text" id="enrolment" name="enrolment" class="form-control" placeholder="Enrolment Number"/>
+                        <input type="text" id="enrolment" name="enrolment" class="form-control" placeholder="Enrolment Number" required/>
                     </div>
                 </div>
 
@@ -70,6 +70,18 @@ if(!isset($_SESSION['aid'])){
                     </div>
                 </div>
             </form>
+            
+            <script>
+                $("#btnSubmit").click(function(){
+                   var sem = $("#semester").val();
+                   var examtype = $("#examtype").val();
+                   var enrol = $("#enrolment").val();
+                   if(sem===""||examtype===""||enrol===""){
+                       alert('Fill Details Please');
+                       return false;
+                   }
+                });
+            </script>
             <div class="showTable">
                 <?php
                     if(isset($_POST['enrolment'])&&isset($_POST['semester'])&&isset($_POST['examtype'])){
@@ -166,10 +178,10 @@ if(!isset($_SESSION['aid'])){
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="margin-top: 2%;">
                         <div class="col-lg-4"></div>
                         <div class="col-lg-4">
-                            <input type="submit" name="submit" id="submit" class="form-control btn btn-primary"/>
+                            <input type="submit" name="submit" id="submit" class="form-control btn btn-primary" value="Update"/>
                         </div>
                     </div>
                 </form>

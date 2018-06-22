@@ -26,7 +26,7 @@ and open the template in the editor.
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="c100 p100 small green">
+<!--        <div class="c100 p100 small green">
 
             <span>100%</span>
             <div class="slice">
@@ -118,6 +118,95 @@ and open the template in the editor.
             </div>
         </div>
         
-        <div class="modal"></div>
+        <div class="modal"></div>-->
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Management</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Faculty
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Faculty Registration</a>
+                    <a class="dropdown-item" href="#">Faculty Subject Allocation</a>
+                    <a class="dropdown-item" href="#">Faculty Detail Updation</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">List Faculty</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Student
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Student Registration</a>
+                    <a class="dropdown-item" href="#">Detain Student</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Division Allocation</a>
+                    <a class="dropdown-item" href="#">Practical Batch Allocation</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">View Student</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Marks
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Student Grade History</a>
+                    <a class="dropdown-item" href="#">Student Mark History</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Change Student Mark</a>
+                    <a class="dropdown-item" href="#">Change Mark Sem wise</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Attendance
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Check Attendance</a>
+                    <a class="dropdown-item" href="#">Change Attendance</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Generate Detention List</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Miscelleaneous
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Add Subject</a>
+                    <a class="dropdown-item" href="#">Transfer Roll No. To Enrolment No.</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Move Batch To Next Semester</a>
+                  </div>
+                </li>
+            
+            </ul>
+            <ul class="navbar-nav navbar-right">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">Profile</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                  </li>
+            </ul>
+        </div>
+      </nav>
+</div>
     </body>
 </html>
