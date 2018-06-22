@@ -38,51 +38,59 @@ if(!isset($_SESSION['aid'])){
                 $(document).ready(function(){
                    $("#btnSubmit").click(function(){
                        var enrol = $("#enrolment").val();
-                       $.ajax({
-                          type: 'POST',
-                          url: "ajax-detain-stud.php",
-                          data: {enrolment:enrol},
-                          beforeSend: function (xhr) {
-                              $("#msgerr").hide();
-                              $("#msgsuccess").hide();
-                          },
-                          success: function (data) {
-                              if(data==="norecord"){
-                                  $("#msgsuccess").hide();
-                                  $("#msgerr").show();
-                                  $("#msgerr").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">No Record Found</div>');
-                              }else if(data==="already"){
-                                  $("#msgsuccess").hide();
-                                  $("#msgerr").show();
-                                  $("#msgerr").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Already Detain</div>');
-                              }else if(data==="success"){
-                                  $("#msgerr").hide();
-                                  $("#msgsuccess").show();
-                                  $("#msgsuccess").html('<div class="alert alert-success"> <span class="glyphicon glyphicon-info-sign">Successfully Detain</div>');
-                              }else if(data==="failed"){
-                                  $("#msgsuccess").show();
-                                  $("#msgerr").hide();
-                                  $("#msgsuccess").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Operation Failed</div>');
-                              }
-                          }
-                       });
+                       if(enrol===""){
+                           alert('Input Enrolment Please');
+                           return false;
+                       }else{
+                           $.ajax({
+                                type: 'POST',
+                                url: "ajax-detain-stud.php",
+                                data: {enrolment:enrol},
+                                beforeSend: function (xhr) {
+                                    $("#msgerr").hide();
+                                    $("#msgsuccess").hide();
+                                },
+                                success: function (data) {
+                                    if(data==="norecord"){
+                                        $("#msgsuccess").hide();
+                                        $("#msgerr").show();
+                                        $("#msgerr").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">No Record Found</div>');
+                                    }else if(data==="already"){
+                                        $("#msgsuccess").hide();
+                                        $("#msgerr").show();
+                                        $("#msgerr").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Already Detain</div>');
+                                    }else if(data==="success"){
+                                        $("#msgerr").hide();
+                                        $("#msgsuccess").show();
+                                        $("#msgsuccess").html('<div class="alert alert-success"> <span class="glyphicon glyphicon-info-sign">Successfully Detain</div>');
+                                    }else if(data==="failed"){
+                                        $("#msgsuccess").show();
+                                        $("#msgerr").hide();
+                                        $("#msgsuccess").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Operation Failed</div>');
+                                    }
+                                }
+                            });
+                       }
+                       return false;
                    });
                 });
             </script>
             
-            <div class="row" style="margin-top: 3%;">
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="enrolment" placeholder="Enrolment Number" name="enrolment"/>
+            <form>
+                <div class="row" style="margin-top: 3%;">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="enrolment" placeholder="Enrolment Number" name="enrolment" required="required"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="submit" id="btnSubmit" value="Detain" class="btn btn-danger"/>
                     </div>
                 </div>
-                <div class="col-lg-2">
-                    <input type="submit" id="btnSubmit" value="Detain" class="btn btn-danger"/>
-                </div>
-            </div>
+            </form>
             
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-4 form-group">
                     <div id="msgerr"></div>
                     <div id="msgsuccess"></div>
                 </div>
@@ -103,57 +111,70 @@ if(!isset($_SESSION['aid'])){
                    $("#btnSubmitReg").click(function(){
                        var enrol = $("#enrolmentReg").val();
                        var batchyear = $("#batchyear").val();
-                       $.ajax({
-                          type: 'POST',
-                          url: "ajax-regularized-detain-student.php",
-                          data: {enrolment:enrol,batchyear:batchyear},
-                          beforeSend: function (xhr) {
-                              $("#msgerrR").hide();
-                              $("#msgsuccessR").hide();
-                          },
-                          success: function (data) {
-                              console.log(data);
-                              if(data==="norecord"){
-                                  $("#msgsuccessR").hide();
-                                  $("#msgerrR").show();
-                                  $("#msgerrR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">No Record Found</div>');
-                              }else if(data==="notvalid"){
-                                  $("#msgsuccessR").hide();
-                                  $("#msgerrR").show();
-                                  $("#msgerrR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Batch Year Not Valid</div>');
-                              }else if(data==="success"){
-                                  $("#msgerrR").hide();
-                                  $("#msgsuccessR").show();
-                                  $("#msgsuccessR").html('<div class="alert alert-success"> <span class="glyphicon glyphicon-info-sign">Successfully Regularised</div>');
-                              }else if(data==="failed"){
-                                  $("#msgsuccessR").show();
-                                  $("#msgerrR").hide();
-                                  $("#msgsuccessR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Operation Failed</div>');
-                              }
-                          }
-                       });
+                       
+                       if(enrol===""||batchyear===""){
+                           alert('Input All Details Please');
+                           return false;
+                       }else{
+                            $.ajax({
+                                type: 'POST',
+                                url: "ajax-regularized-detain-student.php",
+                                data: {enrolment:enrol,batchyear:batchyear},
+                                beforeSend: function (xhr) {
+                                    $("#msgerrR").hide();
+                                    $("#msgsuccessR").hide();
+                                },
+                                success: function (data) {
+                                    console.log(data);
+                                    if(data==="norecord"){
+                                        $("#msgsuccessR").hide();
+                                        $("#msgerrR").show();
+                                        $("#msgerrR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">No Record Found</div>');
+                                    }else if(data==="notvalid"){
+                                        $("#msgsuccessR").hide();
+                                        $("#msgerrR").show();
+                                        $("#msgerrR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Batch Year Not Valid</div>');
+                                    }else if(data==="success"){
+                                        $("#msgerrR").hide();
+                                        $("#msgsuccessR").show();
+                                        $("#msgsuccessR").html('<div class="alert alert-success"> <span class="glyphicon glyphicon-info-sign">Successfully Regularised</div>');
+                                    }else if(data==="failed"){
+                                        $("#msgsuccessR").show();
+                                        $("#msgerrR").hide();
+                                        $("#msgsuccessR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Operation Failed</div>');
+                                    }
+                                }
+                            });
+                       }
+                       return false;
                    });
                 });
             </script>
             
-            <div class="row" style="margin-top: 3%;">
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="enrolmentReg" placeholder="Enrolment Number" name="enrolment"/>
+            <form>
+                <div class="row" style="margin-top: 3%;">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="enrolmentReg" placeholder="Enrolment Number" name="enrolment"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="batchyear" placeholder="Batch Year" name="enrolment"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="submit" id="btnSubmitReg" value="Regularise" class="btn btn-success"/>
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="batchyear" placeholder="Batch Year" name="enrolment"/>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <input type="submit" id="btnSubmitReg" value="Detain" class="btn btn-danger"/>
+            </form>
+            
+            <div class="row">
+                <div class="col-lg-4">
+                    <div id="msgerrR"></div>
+                    <div id="msgsuccessR"></div>
                 </div>
             </div>
-            
-            <div id="msgerrR" style="width: 30%;"></div>
-            <div id="msgsuccessR" style="width: 30%;"></div>
         </div>
     </body>
 </html>
