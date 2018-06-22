@@ -42,8 +42,8 @@ if(!isset($_SESSION['fid'])){
                 </div>
             </div>
             <div class="row" style="margin-top: 3%;">
-                <div class="col-4"></div>
-                <div id="formDetails" class="col-4">
+                <div class="col-lg-4"></div>
+                <div id="formDetails" class="col-lg-4">
                     <form action="upload-to-database.php" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <select name="semester" id="semester" class="form-control" required>
@@ -167,11 +167,11 @@ if(!isset($_SESSION['fid'])){
                             <input type="file" id="excel-file" name="file" class="form-control-file" required/>
                         </div>
                         <div class="row">
-                            <div class="col"></div>
-                            <div class="col">
+                            <div class="col-lg"></div>
+                            <div class="col-lg">
                                 <input type="submit" name="submit_file" id="btnSubmit" value="submit" class="btn btn-primary"/>
                             </div>
-                            <div class="col"></div>
+                            <div class="col-lg"></div>
                         </div>
                     </form>
                 </div>
@@ -193,8 +193,8 @@ if(!isset($_SESSION['fid'])){
             </script>
             
             <div class="row" style="margin-top: 3%;">
-                <div class="col-4"></div>
-                <div class="col-4">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
                     <div id="msghere">
                         <?php
                             if(isset($_GET['status'])){
@@ -209,7 +209,7 @@ if(!isset($_SESSION['fid'])){
                         ?>
                     </div>
                 </div>
-                <div class="col-4"></div>
+                <div class="col-lg-4"></div>
             </div>                        
         </div>
     </body>

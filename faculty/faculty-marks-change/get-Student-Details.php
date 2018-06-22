@@ -37,8 +37,8 @@ if(!isset($_SESSION['fid'])){
             </div>
             <form action="showSubjects.php" method="get">
                 <div class="row form-group">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <select class="form-control" name="semester" id="semester" required>
                                 <option value="">--Select Semester--</option>
@@ -143,9 +143,14 @@ if(!isset($_SESSION['fid'])){
                                             data: {enrolment:enrol,semester:sem,examtype:examtype,subject:subject},
                                             success: function(data){
                                                 console.log(data);
-                                                $("#marks").val(data);
-                                                $("#marks").prop("disabled",false);
-                                                $("#btnSubmit").prop("disabled",false);
+                                                if(data===""){
+                                                    $("#marks").prop("disabled",true);
+                                                    $("#btnSubmit").prop("disabled",true);
+                                                }else{
+                                                    $("#marks").val(data);
+                                                    $("#marks").prop("disabled",false);
+                                                    $("#btnSubmit").prop("disabled",false);
+                                                }
                                             }
                                         });
                                     }
@@ -169,6 +174,8 @@ if(!isset($_SESSION['fid'])){
                                     
                                     if(mark===""){
                                         alert('Input All Details Please');
+                                    }else if(mark>30||mark<0){
+                                        alert('Mark Should Be between 0 to 30');
                                     }else{
                                         $.ajax({
                                             type: 'POST' ,

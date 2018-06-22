@@ -33,55 +33,62 @@ if(isset($_SESSION['fid'])){
     <body>
         <div class="container">
             <div>
-                <nav class="navbar navbar-expand-sm bg-light">
-                    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
-                        <a class="navbar-brand" href="">Management</a>
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                    Task
-                                </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="faculty/view-subject/view-subject-lecture.php">Check My Subject Allocation</a>
-                                </div>
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="#">Management</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="facultyLogin.php">Home</a>
                             </li>
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Task
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="faculty/view-subject/view-subject-lecture.php">Check My Subject Allocation</a>
+                              </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Marks
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="faculty/faculty-marks-entry/faculty-marks-entry.php">Marks Entry</a>
+                                <a class="dropdown-item" href="faculty/faculty-marks-change/get-Student-Details.php">Change Marks</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="faculty/faculty-view-mark/faculty-view-marks.php">View Marks</a>
+                              </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Attendance
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Fill Attendance</a>
+                                <a class="dropdown-item" href="#">View Attendance</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Change Attendance</a>
+                              </div>
+                            </li>
+
                         </ul>
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav navbar-right">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                    Marks
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="faculty/faculty-marks-entry/faculty-marks-entry.php">Marks Entry</a>
-                                    <a class="dropdown-item" href="faculty/faculty-view-mark/faculty-view-marks.php">View Marks</a>
-                                    <a class="dropdown-item" href="">Change Marks</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="#">Profile</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="sessionDestroy.php">Logout</a>
                                 </div>
-                            </li>
+                              </li>
                         </ul>
                     </div>
-                    
-                    <div class="mx-auto order-0">
-                        <label class="navbar-brand mx-auto" href="#"> <?php
-                            echo 'Welcome : '.$_SESSION['f_name'];
-                        ?></label>
-                    </div>
-                   
-                    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                    Attendance
-                                </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="">Fill Attendance</a>
-                                    <a class="dropdown-item" href="">View Attendance</a>
-                                </div>
-                            </li>
-                            <li class="nav-item"><a class="nav-link"  href="sessionDestroy.php">Logout</a></li>
-                        </ul>
-                    </div>
-                
-            </nav>
+                  </nav>
             </div>
             <div class="row">
                 <div class="col"></div>
@@ -97,5 +104,5 @@ if(isset($_SESSION['fid'])){
 </html>
 <?php
 } else {
-    header("Location: index.php");
+    header("Location: facultyLogin.php");
 }

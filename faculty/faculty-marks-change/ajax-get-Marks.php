@@ -13,7 +13,7 @@ if(isset($_POST['enrolment'])&&isset($_POST['semester'])&&isset($_POST['examtype
     $examtype = $_POST['examtype'];
     $subject = $_POST['subject'];
     
-    $dept_id = $_SESSION['a_dept_id'];
+    $dept_id = $_SESSION['f_dept_id'];
     
     
     require_once '../../Connection.php';

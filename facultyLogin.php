@@ -35,7 +35,7 @@ if(isset($_SESSION['fid'])){
     <body>
         <div class="container">
             <div>
-                <nav class="navbar navbar-expand-sm bg-light">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="index.php">Management</a>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">

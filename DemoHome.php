@@ -134,28 +134,10 @@ and open the template in the editor.
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Faculty
+                    Task
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Faculty Registration</a>
-                    <a class="dropdown-item" href="#">Faculty Subject Allocation</a>
-                    <a class="dropdown-item" href="#">Faculty Detail Updation</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">List Faculty</a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Student
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Student Registration</a>
-                    <a class="dropdown-item" href="#">Detain Student</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Division Allocation</a>
-                    <a class="dropdown-item" href="#">Practical Batch Allocation</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">View Student</a>
+                    <a class="dropdown-item" href="#">Check My Subject Allocation</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -163,11 +145,10 @@ and open the template in the editor.
                     Marks
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Student Grade History</a>
-                    <a class="dropdown-item" href="#">Student Mark History</a>
+                    <a class="dropdown-item" href="#">Marks Entry</a>
+                    <a class="dropdown-item" href="#">Change Marks</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Change Student Mark</a>
-                    <a class="dropdown-item" href="#">Change Mark Sem wise</a>
+                    <a class="dropdown-item" href="#">View Marks</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -175,21 +156,10 @@ and open the template in the editor.
                     Attendance
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Check Attendance</a>
+                    <a class="dropdown-item" href="#">Fill Attendance</a>
+                    <a class="dropdown-item" href="#">View Attendance</a>
+                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Change Attendance</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Generate Detention List</a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Miscelleaneous
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Add Subject</a>
-                    <a class="dropdown-item" href="#">Transfer Roll No. To Enrolment No.</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Move Batch To Next Semester</a>
                   </div>
                 </li>
             

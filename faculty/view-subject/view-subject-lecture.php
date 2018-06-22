@@ -62,16 +62,16 @@ if(!isset($_SESSION['fid'])){
             </div>
             
             <div id="showlecturesubject" style="margin-top: 3%;" class="row">
-                <div class="col-4"></div>
-                <div class="col-8">    
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">    
                     <form>
                         <div class="row">
-                            <div class="col-5">
+                            <div class="col-lg-5">
                                 <div class="form-group">
                                     <input class="form-control" id="semester" name="semester" placeholder="Semester"/>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="col-lg-3 form-group">
                                 <input type="submit" class="form-control btn btn-primary" id="btnSubmit" value="Show"/>
                             </div>
                         </div>

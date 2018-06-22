@@ -36,31 +36,63 @@ if(!isset($_SESSION['fid'])){
             <?php
                 require_once '../../master-layout/faculty/master-faculty-layout.php';
             ?>
-            <form class="form-inline" method="get" action="faculty-view-marks.php">
-                <div class="form-group">
-                    <select name="semester" id="semester" class="form-control" required>
-                        <option>--Select Semester</option>
-                <?php
-                    require_once '../../Connection.php';
-                    $connection = new Connection();
-                    $conn = $connection->createConnection("college");
-                    if(!$conn){
-                        die('Connection To Database Failed');
-                    }else{
-                        $fid = $_SESSION['fid'];
-                        $dept_id = $_SESSION['f_dept_id'];
-                        $sqldistinct = "SELECT DISTINCT(semester) as sem FROM subject_faculty_allocation WHERE faculty_id = $fid ORDER BY semester ASC";
-                        $resultdistinct = mysqli_query($conn, $sqldistinct);
-                        while($row = mysqli_fetch_object($resultdistinct)){
-                            ?>
-            <option value="<?php echo $row->sem?>"><?php echo $row->sem;?></option>
-                            <?php
+            <form class="form" method="get" action="faculty-view-marks.php">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <select name="semester" id="semester" class="form-control" required>
+                            <option>--Select Semester</option>
+                    <?php
+                        require_once '../../Connection.php';
+                        $connection = new Connection();
+                        $conn = $connection->createConnection("college");
+                        if(!$conn){
+                            die('Connection To Database Failed');
+                        }else{
+                            $fid = $_SESSION['fid'];
+                            $dept_id = $_SESSION['f_dept_id'];
+                            $sqldistinct = "SELECT DISTINCT(semester) as sem FROM subject_faculty_allocation WHERE faculty_id = $fid ORDER BY semester ASC";
+                            $resultdistinct = mysqli_query($conn, $sqldistinct);
+                            while($row = mysqli_fetch_object($resultdistinct)){
+                                ?>
+                <option value="<?php echo $row->sem?>"><?php echo $row->sem;?></option>
+                                <?php
+                            }
                         }
-                    }
-                ?>
-                    </select>
+                    ?>
+                        </select>
+                    </div>
                 </div>
-
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <select id="subject" name="subject" class="form-control">
+                            <option>--Select Subject--</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <select id="lectype" name="lectype" class="form-control">
+                            <option>--Select Lecture/Practical--</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-3">
+                    <div>
+                        <select id="divtype" name="divtype" class="form-control">
+                            <option>--Select Type</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div>
+                        <input type="submit" id="btnSubmit" class="btn btn-primary"/>
+                    </div>
+                </div>
+            </div>
+            
                 <script>
                     $(document).ready(function(){
                         $("#semester").change(function(){
@@ -117,28 +149,6 @@ if(!isset($_SESSION['fid'])){
                         
                     });
                 </script>
-
-                <div class="form-group">
-                    <select id="subject" name="subject" class="form-control">
-                        <option>--Select Subject--</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <select id="lectype" name="lectype" class="form-control">
-                        <option>--Select Lecture/Practical--</option>
-                    </select>
-                </div>
-                
-                <div>
-                    <select id="divtype" name="divtype" class="form-control">
-                        <option>--Select Type</option>
-                    </select>
-                </div>
-                
-                <div>
-                    <input type="submit" id="btnSubmit" class="btn btn-primary"/>
-                </div>
             </form>
             
             <?php
@@ -150,116 +160,121 @@ if(!isset($_SESSION['fid'])){
                     
                     ?>
             <div class="markShow">
-                <div class="table-responsive" style="margin-left: 22%; margin-top: 2%;">
-                    <table class="table-bordered table-hover text-center">
-                        <tr>
-                            <td colspan="4" class="text-center"><h4>Shantilal Shah Engineering College</h4></td>
-                        </tr>
-                        <tr>
-                            
-                            <?php
-                                $sqlsubject = "SELECT short_name from subject where subject_code =$sub_code";
-                                $result = mysqli_query($conn, $sqlsubject);
-                                $rowsub = mysqli_fetch_assoc($result);
-                                $name = $rowsub['short_name'];
-                            ?>
-                            <td><b>Subject Name </b>: <?php echo $name ?></td>
-                            <td><b>Subject Code</b> : <?php echo $sub_code?></td>
-                            <td><b>Semester</b> : <?php echo $semester ?></td>
-                            <td><b>Division </b>: <?php echo $divtype?></td>    
-                        </tr>
-                        
-                        <?php
-                        if($lectype==="theory"){
-                            ?>
-                        <tr>
-                            <th>Enrolment</th>
-                            <th>Name</th>
-                            <th>Mid Marks</th>
-                            <th>Remedial Mid Marks</th>
-                        </tr>   
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8">
+                        <div class="table-responsive-lg" style="margin-top: 2%;">
+                            <table class="table-lg table-bordered table-hover text-center">
+                                <tr>
+                                    <td colspan="4" class="text-center"><h4>Shantilal Shah Engineering College</h4></td>
+                                </tr>
+                                <tr>
+
+                                    <?php
+                                        $sqlsubject = "SELECT short_name from subject where subject_code =$sub_code";
+                                        $result = mysqli_query($conn, $sqlsubject);
+                                        $rowsub = mysqli_fetch_assoc($result);
+                                        $name = $rowsub['short_name'];
+                                    ?>
+                                    <td><b>Subject Name </b>: <?php echo $name ?></td>
+                                    <td><b>Subject Code</b> : <?php echo $sub_code?></td>
+                                    <td><b>Semester</b> : <?php echo $semester ?></td>
+                                    <td><b>Division </b>: <?php echo $divtype?></td>    
+                                </tr>
+
                                 <?php
-                            $sqlgetStud = "SELECT student_enrolment,student_name FROM student WHERE student_division = '".$divtype."' ";
-                            $resultStud = mysqli_query($conn, $sqlgetStud);
-                            if(mysqli_num_rows($resultStud)>0){
-                                comehere:
-                                while($row= mysqli_fetch_assoc($resultStud)){
-
-                                    $enrol = $row['student_enrolment'];
-                                    $name = $row['student_name'];
-
-                                    $sqlcheckdet = "SELECT enrolment from detain_stud where enrolment = $enrol";
-                                    $resultdet = mysqli_query($conn, $sqlcheckdet);
-                                    if(mysqli_num_rows($resultdet)>0){
-                                        goto comehere;
-                                    }else{
-                                    $sqlmark = "SELECT ".$sub_code."_m as mid FROM sem".$semester."_".$dept_id." WHERE enrolment = $enrol";
-                                    $resultmark = mysqli_query($conn, $sqlmark);
-                                    $rowmark = mysqli_fetch_assoc($resultmark);
+                                if($lectype==="theory"){
                                     ?>
                                 <tr>
-                                    <td><?php echo $enrol;?></td>
-                                    <td><?php echo $name?></td>
-                                    <?php
-
-                                        $markmid = $rowmark['mid'];
-                                        if($markmid>=12){
-
-                                        ?>
-                                    <td><?php echo $markmid ?></td>
-                                    <td>-N.A.-</td>
+                                    <th>Enrolment</th>
+                                    <th>Name</th>
+                                    <th>Mid Marks</th>
+                                    <th>Remedial Mid Marks</th>
+                                </tr>   
                                         <?php
-                                        }else{
-                                            $sqlmark = "SELECT ".$sub_code."_r as mid FROM sem".$semester."_".$dept_id."_r WHERE enrolment = $enrol";
+                                    $sqlgetStud = "SELECT student_enrolment,student_name FROM student WHERE student_division = '".$divtype."' ";
+                                    $resultStud = mysqli_query($conn, $sqlgetStud);
+                                    if(mysqli_num_rows($resultStud)>0){
+                                        comehere:
+                                        while($row= mysqli_fetch_assoc($resultStud)){
+
+                                            $enrol = $row['student_enrolment'];
+                                            $name = $row['student_name'];
+
+                                            $sqlcheckdet = "SELECT enrolment from detain_stud where enrolment = $enrol";
+                                            $resultdet = mysqli_query($conn, $sqlcheckdet);
+                                            if(mysqli_num_rows($resultdet)>0){
+                                                goto comehere;
+                                            }else{
+                                            $sqlmark = "SELECT ".$sub_code."_m as mid FROM sem".$semester."_".$dept_id." WHERE enrolment = $enrol";
                                             $resultmark = mysqli_query($conn, $sqlmark);
                                             $rowmark = mysqli_fetch_assoc($resultmark);
-                                            $markre = $rowmark['mid'];
                                             ?>
-                                            <td><?php echo $markmid?></td>
-                                            <td><?php echo $markre?></td>
+                                        <tr>
+                                            <td><?php echo $enrol;?></td>
+                                            <td><?php echo $name?></td>
                                             <?php
+
+                                                $markmid = $rowmark['mid'];
+                                                if($markmid>=12){
+
+                                                ?>
+                                            <td><?php echo $markmid ?></td>
+                                            <td>-N.A.-</td>
+                                                <?php
+                                                }else{
+                                                    $sqlmark = "SELECT ".$sub_code."_r as mid FROM sem".$semester."_".$dept_id."_r WHERE enrolment = $enrol";
+                                                    $resultmark = mysqli_query($conn, $sqlmark);
+                                                    $rowmark = mysqli_fetch_assoc($resultmark);
+                                                    $markre = $rowmark['mid'];
+                                                    ?>
+                                                    <td><?php echo $markmid?></td>
+                                                    <td><?php echo $markre?></td>
+                                                    <?php
+                                                }
+                                           ?>
+                                        </tr>
+                                        <?php
+                                            }
                                         }
-                                   ?>
+                                    }
+                                }else if($lectype==="practical"){
+                                        ?>
+                                <tr>
+                                    <th>Enrolment</th>
+                                    <th colspan="2">Name</th>
+                                    <th>Internal Viva</th>
+                                </tr>   
+                                    <?php
+                                    $sqlgetStud = "SELECT student_enrolment,student_name FROM student WHERE student_division = '".$divtype."' ";
+                                    $resultStud = mysqli_query($conn, $sqlgetStud);
+                                    if(mysqli_num_rows($resultStud)>0){
+                                        while($row= mysqli_fetch_assoc($resultStud)){
+
+                                            $enrol = $row['student_enrolment'];
+                                            $name = $row['student_name'];
+
+                                            $sqlmark = "SELECT ".$sub_code."_v as iv FROM sem".$semester."_".$dept_id." WHERE enrolment = $enrol";
+                                            $resultmark = mysqli_query($conn, $sqlmark);
+                                            $rowmark = mysqli_fetch_assoc($resultmark);
+                                            ?>
+                                <tr>
+                                    <td><?php echo $enrol;?></td>
+                                    <td colspan="2"><?php echo $name?></td>
+                                    <?php
+                                        $internal = $rowmark['iv'];
+                                    ?>
+                                    <td><?php echo $internal ?></td>
                                 </tr>
-                                <?php
+                                    <?php
+                                        }
                                     }
                                 }
-                            }
-                        }else if($lectype==="practical"){
                                 ?>
-                        <tr>
-                            <th>Enrolment</th>
-                            <th colspan="2">Name</th>
-                            <th>Internal Viva</th>
-                        </tr>   
-                            <?php
-                            $sqlgetStud = "SELECT student_enrolment,student_name FROM student WHERE student_division = '".$divtype."' ";
-                            $resultStud = mysqli_query($conn, $sqlgetStud);
-                            if(mysqli_num_rows($resultStud)>0){
-                                while($row= mysqli_fetch_assoc($resultStud)){
-                                    
-                                    $enrol = $row['student_enrolment'];
-                                    $name = $row['student_name'];
-                                    
-                                    $sqlmark = "SELECT ".$sub_code."_v as iv FROM sem".$semester."_".$dept_id." WHERE enrolment = $enrol";
-                                    $resultmark = mysqli_query($conn, $sqlmark);
-                                    $rowmark = mysqli_fetch_assoc($resultmark);
-                                    ?>
-                        <tr>
-                            <td><?php echo $enrol;?></td>
-                            <td colspan="2"><?php echo $name?></td>
-                            <?php
-                                $internal = $rowmark['iv'];
-                            ?>
-                            <td><?php echo $internal ?></td>
-                        </tr>
-                            <?php
-                                }
-                            }
-                        }
-                        ?>
-                    </table>
-                </div>
+                            </table>
+                        </div>
+                    </div>
+                </div>                
             </div>                        
                         <?php
                 }

@@ -7,7 +7,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="../../index.php">Home</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -15,12 +15,63 @@
                     Faculty
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <?php $pagename = basename($_SERVER['PHP_SELF']); 
+                    if($pagename==="faculty-register.php"){
+                        ?>
+                    <a class="dropdown-item active" href="../../admin/facultyRegistration/faculty-register.php">Faculty Registration</a>
+                    <a class="dropdown-item" href="../../admin/subject-faculty-allocation/subject-faculty-allocation.php">Faculty Subject Allocation</a>
+                    <a class="dropdown-item" href="../../admin/faculty-update/faculty-update.php">Faculty Detail Updation</a>
+                    <a class="dropdown-item" href="../../admin/faculty-delete/faculty-delete.php">Faculty Remove</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/faculty-view/faculty-view.php">List Faculty</a>
+                            <?php
+                    }else if($pagename==="subject-faculty-allocation.php"){
+                        ?>
+                    <a class="dropdown-item" href="../../admin/facultyRegistration/faculty-register.php">Faculty Registration</a>
+                    <a class="dropdown-item active" href="../../admin/subject-faculty-allocation/subject-faculty-allocation.php">Faculty Subject Allocation</a>
+                    <a class="dropdown-item" href="../../admin/faculty-update/faculty-update.php">Faculty Detail Updation</a>
+                    <a class="dropdown-item" href="../../admin/faculty-delete/faculty-delete.php">Faculty Remove</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/faculty-view/faculty-view.php">List Faculty</a>
+                            <?php
+                    }else if($pagename==="faculty-update.php"){
+                        ?>
+                    <a class="dropdown-item" href="../../admin/facultyRegistration/faculty-register.php">Faculty Registration</a>
+                    <a class="dropdown-item" href="../../admin/subject-faculty-allocation/subject-faculty-allocation.php">Faculty Subject Allocation</a>
+                    <a class="dropdown-item active" href="../../admin/faculty-update/faculty-update.php">Faculty Detail Updation</a>
+                    <a class="dropdown-item" href="../../admin/faculty-delete/faculty-delete.php">Faculty Remove</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/faculty-view/faculty-view.php">List Faculty</a>
+                            <?php
+                    }else if($pagename==="faculty-delete.php"){
+                        ?>
+                    <a class="dropdown-item" href="../../admin/facultyRegistration/faculty-register.php">Faculty Registration</a>
+                    <a class="dropdown-item" href="../../admin/subject-faculty-allocation/subject-faculty-allocation.php">Faculty Subject Allocation</a>
+                    <a class="dropdown-item" href="../../admin/faculty-update/faculty-update.php">Faculty Detail Updation</a>
+                    <a class="dropdown-item active" href="../../admin/faculty-delete/faculty-delete.php">Faculty Remove</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/faculty-view/faculty-view.php">List Faculty</a>
+                            <?php
+                    }else if($pagename==="faculty-view.php"){
+                        ?>
+                    <a class="dropdown-item" href="../../admin/facultyRegistration/faculty-register.php">Faculty Registration</a>
+                    <a class="dropdown-item" href="../../admin/subject-faculty-allocation/subject-faculty-allocation.php">Faculty Subject Allocation</a>
+                    <a class="dropdown-item" href="../../admin/faculty-update/faculty-update.php">Faculty Detail Updation</a>
+                    <a class="dropdown-item" href="../../admin/faculty-delete/faculty-delete.php">Faculty Remove</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item active" href="../../admin/faculty-view/faculty-view.php">List Faculty</a>
+                            <?php
+                    }else{
+                        ?>
                     <a class="dropdown-item" href="../../admin/facultyRegistration/faculty-register.php">Faculty Registration</a>
                     <a class="dropdown-item" href="../../admin/subject-faculty-allocation/subject-faculty-allocation.php">Faculty Subject Allocation</a>
                     <a class="dropdown-item" href="../../admin/faculty-update/faculty-update.php">Faculty Detail Updation</a>
                     <a class="dropdown-item" href="../../admin/faculty-delete/faculty-delete.php">Faculty Remove</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="../../admin/faculty-view/faculty-view.php">List Faculty</a>
+                            <?php
+                    }
+                    ?>                    
                   </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -28,13 +79,60 @@
                     Student
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="../../admin/student-registration/student-registration.php">Student Registration</a>
+                    <?php
+                    if($pagename==="student-registration.php"){
+                        ?>
+                    <a class="dropdown-item active" href="../../admin/student-registration/student-registration.php">Student Registration</a>
                     <a class="dropdown-item" href="../../admin/detain-student-registration/register-into-detain.php">Detain Student</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="../../admin/student-division-allocation/student-division-allocation.php">Division Allocation</a>
                     <a class="dropdown-item" href="../../admin/student-prac-batch-allocation/student-prac-batch-allocation.php">Practical Batch Allocation</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="../../admin/admin-view-student/admin-view-student.php">View Student</a>
+                            <?php
+                    }else if($pagename==="register-into-detain.php"){
+                        ?>
+                    <a class="dropdown-item" href="../../admin/student-registration/student-registration.php">Student Registration</a>
+                    <a class="dropdown-item active" href="../../admin/detain-student-registration/register-into-detain.php">Detain Student</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/student-division-allocation/student-division-allocation.php">Division Allocation</a>
+                    <a class="dropdown-item" href="../../admin/student-prac-batch-allocation/student-prac-batch-allocation.php">Practical Batch Allocation</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/admin-view-student/admin-view-student.php">View Student</a>
+                            <?php
+                    }else if($pagename==="student-division-allocation.php"){
+                        ?>
+                    <a class="dropdown-item" href="../../admin/student-registration/student-registration.php">Student Registration</a>
+                    <a class="dropdown-item" href="../../admin/detain-student-registration/register-into-detain.php">Detain Student</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item active" href="../../admin/student-division-allocation/student-division-allocation.php">Division Allocation</a>
+                    <a class="dropdown-item" href="../../admin/student-prac-batch-allocation/student-prac-batch-allocation.php">Practical Batch Allocation</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/admin-view-student/admin-view-student.php">View Student</a>
+                            <?php
+                    }else if($pagename==="student-prac-batch-allocation.php"){
+                        ?>
+                    <a class="dropdown-item" href="../../admin/student-registration/student-registration.php">Student Registration</a>
+                    <a class="dropdown-item" href="../../admin/detain-student-registration/register-into-detain.php">Detain Student</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/student-division-allocation/student-division-allocation.php">Division Allocation</a>
+                    <a class="dropdown-item active" href="../../admin/student-prac-batch-allocation/student-prac-batch-allocation.php">Practical Batch Allocation</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/admin-view-student/admin-view-student.php">View Student</a>
+                            <?php
+                    }else if($pagename==="admin-view-student.php"){
+                        ?>
+                    <a class="dropdown-item" href="../../admin/student-registration/student-registration.php">Student Registration</a>
+                    <a class="dropdown-item" href="../../admin/detain-student-registration/register-into-detain.php">Detain Student</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../../admin/student-division-allocation/student-division-allocation.php">Division Allocation</a>
+                    <a class="dropdown-item" href="../../admin/student-prac-batch-allocation/student-prac-batch-allocation.php">Practical Batch Allocation</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item active" href="../../admin/admin-view-student/admin-view-student.php">View Student</a>
+                            <?php
+                    }
+                    
+                    ?>
                   </div>
                 </li>
                 <li class="nav-item dropdown">

@@ -87,7 +87,7 @@ if(isset($_POST['batchyear'])&&isset($_POST['divVal'])){
                 $result = $conn->getOne("student");
                 $from = $result['student_enrolment'];
 
-                $sqlavg = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25 OFFSET 25";
+                $sqlavg = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25";
                 $resultavg = $conn->ObjectBuilder()->rawQueryOne($sqlavg);
                 $upto = ($resultavg->student_enrolment)-1;
 
