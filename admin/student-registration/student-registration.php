@@ -65,47 +65,47 @@ if(!isset($_SESSION['aid'])){
             <div style="margin-top: 3%;">
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-lg-4">
                             <button type="button" id="btnRegular" class="btn btn-info form-control">Regular Student</button>
                         </div>
-                        <div class="col-4"></div>
-                        <div class="col-4">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
                             <button type="button" id="btnDiploma" class="btn btn-info form-control">Diploma to Degree Student</button>
                         </div>
                     </div>
                     <div id="divregular">
                         <form action="upload-student-registration.php" method="post" name="upload_excel" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-sm-3">
+                                <div class="col-lg-3">
                                     <label>Term Start Date</label>
                                     <input type="date" name="fromDate" min="<?php echo date("Y-m-d")?>" class="form-control"/>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-lg-3">
                                     <label>Term End Date</label>
                                     <input type="date" name="toDate" min="<?php echo date("Y-m-d")?>" class="form-control"/>
                                 </div>
                             </div>
                             <div class=""><label style="color: red; font-size: 14px;">* CSV File only accepted with prescribe format as below, you can afford only first column for your purpose.</label></div>
                             <div class="table-responsive">
-                                <table class="table-sm">
+                                <table class="table table-striped">
                                     <tr>
-                                        <td>Enrolment |</td>
-                                        <td>Name |</td>
-                                        <td>Semester |</td>
-                                        <td>Department ID |</td>
-                                        <td>Admission Year |</td>
-                                        <td>Batch Year |</td>
-                                        <td>Email |</td>
-                                        <td>Mobile Number </td>
+                                        <td>Enrolment &nbsp;</td>
+                                        <td>Name &nbsp;</td>
+                                        <td>Semester &nbsp;</td>
+                                        <td>Department ID &nbsp;</td>
+                                        <td>Admission Year &nbsp;</td>
+                                        <td>Batch Year &nbsp;</td>
+                                        <td>Email &nbsp;</td>
+                                        <td>Mobile Number &nbsp;</td>
                                     </tr>
                                 </table>
                             </div>
                             <div style="margin-top: 2%;">                            
                                     <div class="row">
-                                        <div class="col-6">
+                                        <div class="col-lg-6">
                                             <input type="file" name="file" id="fileupload" class="form-control-file btn btn-light" required/>
                                         </div>
-                                        <div class="col-1">
+                                        <div class="col-lg-1">
                                             <input type="submit" name="submit_file" id="btnSubmit" class=" btn btn-success" value="Upload"/>
                                         </div>
                                     </div>
@@ -138,15 +138,15 @@ if(!isset($_SESSION['aid'])){
                         <div><label style="color: red; font-size: 14px;">* CSV File only accepted with prescribe format as below, you can afford only first column for your purpose.</label></div>
                         <div><label style="color: red; font-size: 14px;">* <b>Batch Year should be one less than Admission year, For e.g 2016 Admitted Student's batch year is 2015</b>.</label></div>
                         <div class="table-responsive">
-                            <table class="table-sm">
+                            <table class="table  table-striped">
                                 <tr>
-                                    <td>Enrolment |</td>
-                                    <td>Name |</td>
-                                    <td>Semester |</td>
-                                    <td>Department ID |</td>
-                                    <td>Admission Year |</td>
-                                    <td>Batch Year |</td>
-                                    <td>Email |</td>
+                                    <td>Enrolment </td>
+                                    <td>Name </td>
+                                    <td>Semester </td>
+                                    <td>Department ID </td>
+                                    <td>Admission Year </td>
+                                    <td>Batch Year </td>
+                                    <td>Email </td>
                                     <td>Mobile Number </td>
                                 </tr>
                             </table>
@@ -154,10 +154,10 @@ if(!isset($_SESSION['aid'])){
                         <div style="margin-top: 2%;">
                             <form action="upload-diploma-student-registration.php" method="post" name="upload_excel" enctype="multipart/form-data">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-lg-6">
                                         <input type="file" name="file" id="fileupload" class="form-control-file btn btn-light" required/>
                                     </div>
-                                    <div class="col-1">
+                                    <div class="col-lg-1">
                                         <input type="submit" name="submit_file" id="btnSubmit" class=" btn btn-success" value="Upload"/>
                                     </div>
                                 </div>

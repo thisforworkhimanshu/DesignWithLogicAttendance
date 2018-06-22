@@ -35,8 +35,8 @@ if(!isset($_SESSION['aid'])){
             </div>
             <form action="showSubjects.php" method="get">
                 <div class="row form-group">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
                         <div class="form-group">
                             <select class="form-control" name="semester" id="semester" required>
                                 <option value="">--Select Semester--</option>

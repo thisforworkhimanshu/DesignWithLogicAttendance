@@ -51,8 +51,8 @@ if(isset($_SESSION['fid'])){
             </nav>
             </div>
             <div class="row">
-                <div class="col"></div>
-                <div class="col">
+                <div class="col-lg"></div>
+                <div class="col-lg">
                     <form id="login-form" method="post">
                         <h3 class="text-center">Faculty Login</h3>
                         <div class="form-group" style="margin-top: 30px;">
@@ -113,7 +113,7 @@ if(isset($_SESSION['fid'])){
                         <button type="submit" name="login_button" id="login_button" class="btn btn-primary">Sign In</button>
                     </form>
                 </div>
-                <div class="col"></div>
+                <div class="col-lg"></div>
             </div>
         </div>
         

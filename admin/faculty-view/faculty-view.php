@@ -39,38 +39,42 @@ if(!isset($_SESSION['aid'])){
                     $conn = $connection->createConnection("college");
                     $dept_id = $_SESSION['a_dept_id'];
             ?>
-            <div class="table-responsive-sm" style="margin-top: 2%;">
-                <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Designation</th>
-                        <th>Email</th>
-                        <th>Mobile Number</th>
-                    </tr>
-                    <?php
-                        $sql = "select * from faculty where dept_id = $dept_id";
-                        $result = mysqli_query($conn, $sql);
-                        if(mysqli_num_rows($result)>0){
-                            while($row = mysqli_fetch_assoc($result)){
-                                ?>
-                    <tr>
-                        <td><?php echo $row['faculty_id']?></td>
-                        <td><?php echo $row['faculty_fname']?></td>
-                        <td><?php echo $row['faculty_uname']?></td>
-                        <td><?php echo $row['faculty_pass']?></td>
-                        <td><?php echo $row['faculty_designation']?></td>
-                        <td><?php echo $row['faculty_email']?></td>
-                        <td><?php echo $row['faculty_cellno']?></td>
-                    </tr>
-                                    
-                                    <?php
-                            }
-                        }
-                    ?>
-                </table>
+            <div class="row">
+                <div class="col-lg-auto">
+                    <div class="table-responsive-lg" style="margin-top: 2%;">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Password</th>
+                                <th>Designation</th>
+                                <th>Email</th>
+                                <th>Mobile Number</th>
+                            </tr>
+                            <?php
+                                $sql = "select * from faculty where dept_id = $dept_id";
+                                $result = mysqli_query($conn, $sql);
+                                if(mysqli_num_rows($result)>0){
+                                    while($row = mysqli_fetch_assoc($result)){
+                                        ?>
+                            <tr>
+                                <td><?php echo $row['faculty_id']?></td>
+                                <td><?php echo $row['faculty_fname']?></td>
+                                <td><?php echo $row['faculty_uname']?></td>
+                                <td><?php echo $row['faculty_pass']?></td>
+                                <td><?php echo $row['faculty_designation']?></td>
+                                <td><?php echo $row['faculty_email']?></td>
+                                <td><?php echo $row['faculty_cellno']?></td>
+                            </tr>
+
+                                            <?php
+                                    }
+                                }
+                            ?>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </body>

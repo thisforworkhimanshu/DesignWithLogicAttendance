@@ -29,13 +29,13 @@ if(!isset($_SESSION['aid'])){
                 require_once '../../master-layout/admin/master-page-admin.php';
             ?>
             <div class="row" style="margin-top: 2%;">
-                <div class="col-3 form-group">
+                <div class="col-lg-3 form-group">
                     <input type="text" class="form-control" id="batchyear" placeholder="Batch Year"/>
                 </div>
-                <div class="col-2 form-group">
+                <div class="col-lg-2 form-group">
                     <input type="submit" id="btnGo" class="form-control btn btn-primary" value="Go"/>
                 </div>
-                <div class="col-5 form-group">
+                <div class="col-lg-5 form-group">
                     <div id="error" class="alert-danger form-control text-center"></div>
                     <div id="success" class="alert alert-success form-control text-center"></div>
                 </div>
@@ -93,17 +93,17 @@ if(!isset($_SESSION['aid'])){
                     </div>
                     <hr/>
                     <div class="row" style="margin-top: 2%;">
-                        <div class="col-sm-3">
+                        <div class="col-lg-3">
                             <label><i>Start Date:</i></label>
                             <input type="date" name="date" min="<?php echo date("Y-m-d")?>" id="fromDate" class="form-control" required="required"/>
                         </div>
 
-                        <div class="col-sm-3">
+                        <div class="col-lg-3">
                             <label><i>End Date:</i></label>
                             <input type="date" name="date" min="<?php echo date("Y-m-d")?>" id="toDate" class="form-control" required="required"/>
                         </div>
 
-                        <div class="col-sm-2">
+                        <div class="col-lg-2">
                             <label style="color: red;">*Are you sure?</label>
                             <input type="submit" id="btnSubmit" class="form-control btn btn-danger"/>
                         </div>
@@ -111,12 +111,12 @@ if(!isset($_SESSION['aid'])){
                 </form>
                 
                 <div class="row">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
                         <div class="alert alert-success text-center" id="msgSuccess" style="margin-top: 2%;">H</div>
                         <div class="alert alert-danger text-center" id="msgFailed" style="margin-top: 2%;">H</div>
                     </div>
-                    <div class="col-sm-4"></div>
+                    <div class="col-lg-4"></div>
                     
                 </div>
                 

@@ -71,12 +71,12 @@ if(!isset($_SESSION['aid'])){
             </script>
             
             <div class="row" style="margin-top: 3%;">
-                <div class="col-sm-3">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <input type="text" class="form-control" id="enrolment" placeholder="Enrolment Number" name="enrolment"/>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-lg-2">
                     <input type="submit" id="btnSubmit" value="Detain" class="btn btn-danger"/>
                 </div>
             </div>
@@ -131,17 +131,17 @@ if(!isset($_SESSION['aid'])){
             </script>
             
             <div class="row" style="margin-top: 3%;">
-                <div class="col-sm-3">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <input type="text" class="form-control" id="enrolmentReg" placeholder="Enrolment Number" name="enrolment"/>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-lg-3">
                     <div class="form-group">
                         <input type="text" class="form-control" id="batchyear" placeholder="Batch Year" name="enrolment"/>
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-lg-2">
                     <input type="submit" id="btnSubmitReg" value="Detain" class="btn btn-danger"/>
                 </div>
             </div>

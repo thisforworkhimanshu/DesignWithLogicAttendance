@@ -82,7 +82,7 @@ if(!isset($_SESSION['aid'])){
                         if(mysqli_num_rows($result)>0){
                             ?>
                             <div style="margin-top: 2%;" id="printThese">
-                                <div class="table-responsive-sm">
+                                <div class="table-responsive-lg">
                                     <table class="table text-center">
                                         <thead>
                                         <tr>

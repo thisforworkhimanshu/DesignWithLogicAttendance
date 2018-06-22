@@ -30,7 +30,7 @@ if(!isset($_SESSION['aid'])){
             ?>
             <div class="badge-light" style="margin-top: 0.5%;">
                 <div class="text-center">
-                    <h5 style="font-size: 1.3vw;">Division Allocation To Students</h5>
+                    <h5>Division Allocation To Students</h5>
                 </div>
             </div>
             
@@ -105,7 +105,7 @@ if(!isset($_SESSION['aid'])){
                                 url: "ajax-division-suggest.php",
                                 data: {batchyear: batchyear,divVal:divVal},
                                 success: function (data) {
-//                                    console.log(data);
+                                    console.log(data);
                                     var JSONObject = JSON.parse(data);
                                     var toenrol = JSONObject.toenrol;
                                     var fromenrol = JSONObject.fromenrol;
@@ -169,14 +169,14 @@ if(!isset($_SESSION['aid'])){
             
             <div class="division-allocation" style="margin-top: 2%;">
                 <div class="row form-group">
-                    <div class="col-sm-2">
+                    <div class="col-lg-2">
                         <input type="text" name="batchyear" placeholder="Batch Year" id="batchyear" class="form-control"/>
                     </div>
-                    <div id="totalcountdiv" class="col-4 text-center form-control alert-success" style="display: none;"></div>
+                    <div id="totalcountdiv" class="col-lg-4 text-center form-control alert-success" style="display: none;"></div>
                 </div>
                 
                 <div class="row form-group">
-                    <div class="col-sm-2">
+                    <div class="col-lg-2">
                         <select name="divison" id="division" class="form-control">
                             <option value="">Select Division</option>
                             <option value="A">A</option>
@@ -185,10 +185,10 @@ if(!isset($_SESSION['aid'])){
                     </div>
                     <input type="hidden" id="fromenrol" name="fromenrol"/>
                     <input type="hidden" id="toenrol" name="toenrol"/>
-                    <div id="suggestion-text" class="col-4 text-center form-control alert-light" style="display: none;">Suggestion for Division</div>
-                    <div id="suggest-div-alloc" class="col-4 text-center form-control alert-success" style="display: none;"></div>
-                    <div id="gowithsuggestion" class="col-sm-2 form-group" style="display: none;"><button id="btnSuggest" class="form-control btn btn-primary text-center">Go With Suggestion</button></div>
-                    <div id="suggest-div-success" class="col-sm-4 text-center form-control alert-success" style="margin-left: 2%; display: none;"></div>
+                    <div id="suggestion-text" class="col-lg-4 text-center form-control alert-light" style="display: none;">Suggestion for Division</div>
+                    <div id="suggest-div-alloc" class="col-lg-4 text-center form-control alert-success" style="display: none;"></div>
+                    <div id="gowithsuggestion" class="col-lg-2 form-group" style="display: none;"><button id="btnSuggest" class="form-control btn btn-primary text-center">Go With Suggestion</button></div>
+                    <div id="suggest-div-success" class="col-lg-4 text-center form-control alert-success" style="margin-left: 2%; display: none;"></div>
                 </div>
             </div>
             <script>
@@ -243,22 +243,34 @@ if(!isset($_SESSION['aid'])){
                 <div id="inputdetail" class="form-group">
                     <form id="alloc-div-form">
                         <div class="row">
-                                <div class="col-2 text-center">Enrolment From:</div>
-                                <div class="col-3">
+                                <div class="col-lg-2 text-center">Enrolment From:</div>
+                                <div class="col-lg-3">
                                     <input type="text" class="form-control" id="fromenrolinp" required/> 
                                 </div>
 
-                                <div class="col-2 text-center">Enrolment To:</div>
-                                <div class="col-3">
+                                <div class="col-lg-2 text-center">Enrolment To:</div>
+                                <div class="col-lg-3">
                                     <input type="text" class="form-control" id="toenrolinp" required/> 
                                 </div>
                         </div>
-                        <div style="margin-left: 40%; margin-top: 3%;">
-                            <div id="divbtnGo" style="width: 30%;"><button type="submit" id="btnSubmit" class="btn btn-primary form-control">Allocate Division</button></div>
+                        <div class="row" style="margin-top: 3%;">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <div id="divbtnGo"><button type="submit" id="btnSubmit" class="btn btn-primary form-control">Allocate Division</button></div>
+                            </div>
                         </div>
+<!--                        <div style="margin-left: 40%; margin-top: 3%;">
+                            <div id="divbtnGo"><button type="submit" id="btnSubmit" class="btn btn-primary form-control">Allocate Division</button></div>
+                        </div>-->
                     </form>
                 </div>
-                <div id="inputdetailmsg" style="width: 40%; margin-left: 30%;"></div>
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <div id="inputdetailmsg" class="text-center"></div>
+                    </div>
+                </div>
+                
             </div>
             
         </div>

@@ -31,13 +31,13 @@ and open the template in the editor.
             </div>
             <hr/>
             <div style="margin-top: 2%;" class="row">
-                <div class="col-sm-12">
+                <div class="col-lg-12">
                     <b style="color: red;">You can afford only first row for your use*</b>
                     <b style="margin-left: 3%; color: red;">Data Should be in given format only*</b>
                 </div>
             </div>
-            <div class="table-responsive-sm" style="margin-top: 2%;">
-                <table class="table-sm table-striped table-bordered">
+            <div class="table-responsive" style="margin-top: 2%;">
+                <table class="table-lg table-striped table-bordered">
                     <tr>
                         <td>Roll No</td>
                         <td>Enrolment</td>
@@ -56,10 +56,10 @@ and open the template in the editor.
                 <form action="change-to-enrol.php" method="post" name="change_to_enrol" enctype="multipart/form-data">
                     <label style="color: #ff6666;">*Please Choose CSV File Only</label>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-lg-4">
                             <input type="file" class="form-control-file" id="file" name='file'/>
                         </div>
-                        <div class="col-2">
+                        <div class="col-lg-2" style="margin-top: 2%;">
                             <input type="submit" class="form-control btn btn-primary" name="btnSumit" value="Submit" id="btnSubmit"/>
                         </div>
                     </div>
@@ -70,15 +70,15 @@ and open the template in the editor.
                 if(isset($_GET['status'])){
                     if($_GET['status']==="success"){
                         ?>
-            <div class="text-center alert alert-success">Successfully Changed</div>
+            <div class="text-center alert alert-success" style="margin-top: 2%;">Successfully Changed</div>
                             <?php
                     }else if($_GET['status']==="notvalid"){
                         ?>
-            <div class="text-center alert alert-danger">Not Valid Type File</div>
+            <div class="text-center alert alert-danger" style="margin-top: 2%;">Not Valid Type File</div>
                             <?php
                     }else{
                         ?>
-            <div class="text-center alert alert-danger">Operation Failed</div>
+            <div class="text-center alert alert-danger" style="margin-top: 2%;">Operation Failed</div>
                             <?php
                     }
                 }

@@ -135,40 +135,45 @@ if(!isset($_SESSION['aid'])){
                     ?>
                 </div>
                 
-                <div class="form-group" style="margin-top: 3%; margin-left: 33.33%;">
-                    <form action="getSubjectDetail.php" method="get">
-                        <div class="table-responsive">
-                            <table class="table" style="width: 50%;">
-                                <tr>
-                                    <th>Subject Code</th>
-                                    <td><input type="text" name="subject_code" class="form-control" required></td>
-                                </tr>
-                                <tr>
-                                    <th>Subject Name</th>
-                                    <td><input type="text" name="subject_name" class="form-control" required></td>
-                                </tr>
-                                <tr>
-                                    <th>Subject Short Name</th>
-                                    <td><input type="text" name="short_name" class="form-control" required></td>
-                                </tr>
-                                <tr>
-                                    <th>Subject Semester</th>
-                                    <td><input type="text" name="subject_sem" class="form-control" required></td>
-                                </tr>
-                                <tr>
-                                    <th>No of Theory Hours</th>
-                                    <td><input type="text" name="theory_hour" class="form-control" required></td>
-                                </tr>
-                                <tr>
-                                    <th>No of Practical Hours</th>
-                                    <td><input type="text" name="practical_hour" class="form-control" required></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2"><input type="submit" class="btn btn-primary" style="margin-left: 44%;" value="Submit"></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </form>
+                <div class="row">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <div class="form-group" style="margin-top: 3%;">
+                            <form action="getSubjectDetail.php" method="get">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Subject Code</th>
+                                            <td><input type="text" name="subject_code" class="form-control" required></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Subject Name</th>
+                                            <td><input type="text" name="subject_name" class="form-control" required></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Subject Short Name</th>
+                                            <td><input type="text" name="short_name" class="form-control" required></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Subject Semester</th>
+                                            <td><input type="text" name="subject_sem" class="form-control" required></td>
+                                        </tr>
+                                        <tr>
+                                            <th>No of Theory Hours</th>
+                                            <td><input type="text" name="theory_hour" class="form-control" required></td>
+                                        </tr>
+                                        <tr>
+                                            <th>No of Practical Hours</th>
+                                            <td><input type="text" name="practical_hour" class="form-control" required></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2"><input type="submit" class="btn btn-primary" style="margin-left: 44%;" value="Submit"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>    
+                    </div>
                 </div>
             </div>
                     <?php

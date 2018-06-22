@@ -26,7 +26,7 @@ if(isset($_POST['batchyear'])&&isset($_POST['divVal'])){
             
             $limit = floor($totalstud/2);
             
-            $sqlavg = "SELECT student_enrolment FROM (SELECT * FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment DESC LIMIT $limit) AS T WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 1";
+            $sqlavg = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment DESC LIMIT $limit";
             $resultavg = $conn->ObjectBuilder()->rawQueryOne($sqlavg);
             $upto = ($resultavg->student_enrolment)-1;
             

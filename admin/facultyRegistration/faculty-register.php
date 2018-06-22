@@ -29,8 +29,8 @@ if(!isset($_SESSION['aid'])){
                 require_once '../../master-layout/admin/master-page-admin.php';
             ?>
             <div class="row">
-                <div class="col-3"></div>
-                <div class="col-6">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
                     <form>
                         <h4 class="text-center">Faculty Registration</h4>
                         <div class="form-group">
@@ -132,12 +132,12 @@ if(!isset($_SESSION['aid'])){
                             <label class="control-label">Gender</label>
                             <div>
                                 <div class="row">
-                                    <div class="col-sm-3">
+                                    <div class="col-lg-3">
                                         <label class="radio-inline">
                                             <input type="radio" name="gender" id="femaleRadio" value="Female" required="required">Female
                                         </label>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-lg-6">
                                         <label class="radio-inline">
                                             <input type="radio" name="gender" id="maleRadio" value="Male" required="required">Male
                                         </label>
@@ -209,15 +209,15 @@ if(!isset($_SESSION['aid'])){
                         <div id="error"></div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-sm-2"></div>
-                                <div class="col-sm-8">
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-8">
                                     <button type="submit" id="btnSubmit" class="btn btn-primary btn-block">Register</button>
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
-                <div class="col-3"></div>
+                <div class="col-lg-3"></div>
             </div>
         </div>
         

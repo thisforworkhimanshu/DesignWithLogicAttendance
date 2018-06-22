@@ -63,6 +63,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="../../admin/move-batch-next-sem/getBatchDetails.php">Move Batch to Next Sem</a>
                         <a class="dropdown-item" href="../../admin/subject-register/getSubjectDetail.php">Add Subject</a>
+                        <a class="dropdown-item" href="../../admin/rollno-to-enrolment/roll-to-enrolment.php">Roll To Enrol</a>
                     </div>
                 </li>
                 <li class="nav-item"><a class="nav-link"  href="../../sessionDestroy.php">Logout</a></li>

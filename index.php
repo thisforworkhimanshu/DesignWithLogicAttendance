@@ -34,7 +34,7 @@ if(isset($_SESSION['aid'])){
     <body>
         <div class="container">
             <div>
-                <nav class="navbar navbar-expand-sm bg-light">
+                <nav class="navbar navbar-expand-lg bg-light">
                 <a class="navbar-brand" href="index.php">Management</a>
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
@@ -50,8 +50,8 @@ if(isset($_SESSION['aid'])){
             </nav>
             </div>
             <div class="row">
-                <div class="col"></div>
-                <div class="col">
+                <div class="col-lg"></div>
+                <div class="col-lg">
                     <form id="login-form" method="post">
                         <h3 class="text-center">Administrator Login</h3>
                         <div class="form-group" style="margin-top: 30px;">
@@ -112,7 +112,7 @@ if(isset($_SESSION['aid'])){
                         <button type="submit" name="login_button" id="login_button" class="btn btn-primary">Sign In</button>
                     </form>
                 </div>
-                <div class="col"></div>
+                <div class="col-lg"></div>
             </div>
         </div>
         

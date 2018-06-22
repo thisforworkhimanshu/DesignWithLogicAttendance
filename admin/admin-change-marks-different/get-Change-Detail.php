@@ -37,7 +37,7 @@ if(!isset($_SESSION['aid'])){
             </div>
             <form action="get-Change-Detail.php" method="post">
                 <div class="row">
-                    <div class="col-4 form-group">
+                    <div class="col-lg-4 form-group">
                         <select name="semester" id="semester" class="form-control">
                             <option value="">--Select Semester--</option>
                             <option value="1">1</option>
@@ -50,7 +50,7 @@ if(!isset($_SESSION['aid'])){
                             <option value="8">8</option>
                         </select>
                     </div>
-                    <div class="col-4 form-group">
+                    <div class="col-lg-4 form-group">
                         <select name="examtype" id="examtype" class="form-control">
                             <option value="">--Select Exam Type--</option>
                             <option value="m">Mid Semester Exam</option>
@@ -58,14 +58,14 @@ if(!isset($_SESSION['aid'])){
                             <option value="v">Internal Viva</option>
                         </select>
                     </div>
-                    <div class="col-4 form-group">
+                    <div class="col-lg-4 form-group">
                         <input type="text" id="enrolment" name="enrolment" class="form-control" placeholder="Enrolment Number"/>
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-4"></div>
-                    <div class="col-4">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
                         <input type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary form-control"/>
                     </div>
                 </div>
@@ -101,10 +101,10 @@ if(!isset($_SESSION['aid'])){
                             ?>
                 <form action="change-my-marks.php" method="post">
                     <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-6">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table class="table-lg table-striped">
                                     <tr>
                                         <th>Subject Code</th>
                                         <th>Subject Name</th>
@@ -167,8 +167,8 @@ if(!isset($_SESSION['aid'])){
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-4"></div>
-                        <div class="col-4">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
                             <input type="submit" name="submit" id="submit" class="form-control btn btn-primary"/>
                         </div>
                     </div>
@@ -182,11 +182,11 @@ if(!isset($_SESSION['aid'])){
                     if(isset($_GET['status'])){
                         if($_GET['status']==="success"){
                             ?>
-                <div class="alert alert-success text-center">Successfully Changed</div>
+                <div class="alert alert-success text-center" style="margin-top: 2%;">Successfully Changed</div>
                                 <?php
                         }else if ($_GET['status']==="failed"){
                             ?>
-                <div class="alert alert-success text-center">Operation Failed</div>
+                <div class="alert alert-success text-center" style="margin-top: 2%;">Operation Failed</div>
                                 <?php
                         }
                     }
