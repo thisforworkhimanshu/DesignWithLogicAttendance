@@ -103,6 +103,7 @@ if(isset($_SESSION['aid'])){
                                 <a class="dropdown-item" href="admin/rollno-to-enrolment/roll-to-enrolment.php">Transfer Roll No. To Enrolment No.</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="admin/move-batch-next-sem/getBatchDetails.php">Move Batch To Next Semester</a>
+                                <a class="dropdown-item" href="admin/move-to-passout/getBatchDetails.php">Move Batch To Passout</a>
                               </div>
                             </li>
 
