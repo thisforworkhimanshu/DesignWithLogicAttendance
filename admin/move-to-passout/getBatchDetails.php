@@ -69,7 +69,7 @@ if(!isset($_SESSION['aid'])){
                                if(msg==="present"){
                                    var sem = jsonObj.sem;
                                    var semn = parseInt(sem);
-                                   if(sem==semn){
+                                   if(semn===8){
                                         $("#givedate").html("Move Batch of Batch Year "+batchyear+" To Passout");
                                         $("#success").show();
                                         $("#error").hide();
@@ -77,6 +77,9 @@ if(!isset($_SESSION['aid'])){
                                         $("#btnGo").prop("disabled",true);
                                         $("#success").html("Present Go Ahead");
                                         $("#showfordate").show();
+                                   }else{
+                                       $("#error").show();
+                                       $("#error").html("Batch Should Be in Final Year and In Last Semester");
                                    }
                                }
                            }
