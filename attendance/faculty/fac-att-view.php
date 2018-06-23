@@ -25,41 +25,49 @@ and open the template in the editor.
 
         <script>
             $(document).ready(function () {
+                var lec_type = '';
 
                 //script:button fatch allocated theory division or practical batch
                 $("#theory").click(function () {
-                    $("#division").prop("disabled", false);
-                    $("#subject").prop("disabled", true);
-                    $("#division").empty();
-                    var sendData = {'type': 'theory'};
-                    callAjax(sendData, "div");
-                });
-                $("#practical").click(function () {
-                    $("#division").prop("disabled", false);
-                    $("#subject").prop("disabled", true);
-                    $("#division").empty();
-                    var sendData = {'type': 'practical'};
-                    callAjax(sendData, "div");
-                });
-
-                //script: combobox fatch subject
-                $("#division").change(function () {
+                    lec_type = 'theory';
+                    $("#division").prop("disabled", true);
                     $("#subject").prop("disabled", false);
                     $("#subject").empty();
-                    var sendData = {'division': $(this).val()};
+                    var sendData = {'lec_type': lec_type};
                     callAjax(sendData);
+                });
+                $("#practical").click(function () {
+                    lec_type = 'practical';
+                    $("#division").prop("disabled", true);
+                    $("#subject").prop("disabled", false);
+                    $("#subject").empty();
+                    var sendData = {'lec_type': lec_type};
+                    callAjax(sendData);
+                });
+
+                //script: combobox fatch subject and call ajax after subject selection
+                $("#division").change(function () {
+                    if (this.selectedIndex !== 0) {
+                        var sendData = {'lec_type': lec_type, 'div': $("#division").val(), 'sub': $(this).val()};
+                        callAjaxtable(sendData);
+                    }
+                });
+                $("#subject").change(function () {
+                    $("#division").prop("disabled", false);
+                    $("#division").empty();
+                    var sendData = {'sub': $(this).val(), 'lec_typed': lec_type};
+                    callAjax(sendData, 'div');
                 });
 
                 function callAjax(sendData, type) {
                     $.ajax({
                         type: 'POST',
-                        url: "ajax-faculty-subject.php",
+                        url: "ajax-faculty-view-subject.php",
                         data: sendData,
                         success: function (data, textStatus, jqXHR) {
                             if (type == 'div') {
                                 appendDivision(data);
                             } else {
-                                console.log(data);
                                 appendSubject(data);
                             }
                         }
@@ -67,6 +75,7 @@ and open the template in the editor.
                 }
 
                 function appendDivision(data) {
+                    console.log(data);
                     jsonData = $.parseJSON(data);
                     $("#division").append($("<option>").text("--Select division--"));
                     $.each(jsonData, function (i, item) {
@@ -82,6 +91,8 @@ and open the template in the editor.
                     });
                 }
 
+                //script: get table data on subject seletion
+
             });
         </script>
 
@@ -92,12 +103,13 @@ and open the template in the editor.
                 <button type="button" class="btn btn-outline-primary" id="theory" value="theory">Theory</button>
                 <button type="button" class="btn btn-outline-primary" id="practical" value="practical">Practical</button>
             </div>
-            <select class="form-control-sm border border-primary" id="division" name="division" style="margin: 5px" disabled="true">
-                <option>--Select division--</option>
-            </select>
             <select class="form-control-sm border border-primary" id="subject" name="subject" style="margin: 5px" disabled="true">
                 <option>--Select subject--</option>
             </select>
+            <select class="form-control-sm border border-primary" id="division" name="division" style="margin: 5px" disabled="true">
+                <option>--Select division--</option>
+            </select>
+
         </div>
         <br/>
         <div>
