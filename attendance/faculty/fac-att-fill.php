@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['fid'])) {
-    header("location:/DesignwithLogicAttendance/facultyLogin.php");
+    header("location:/DesignWithLogicAttendance/facultyLogin.php");
     return;
 }
 ?>
