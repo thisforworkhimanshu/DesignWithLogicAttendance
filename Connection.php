@@ -20,7 +20,7 @@ class Connection {
     private $db_pass = "";  // Change as required
     private $db_name = ""; // Change as required
     
-    function createConnection($dbname){
+    function createConnection($dbname="college"){
         $conn = mysqli_connect("localhost", "root", "", $dbname);
         if(!$conn){
             die('Unexpectedly Connection to Database Failed: We are working on it...');
@@ -29,7 +29,7 @@ class Connection {
         }
     }
     
-    public function Connect($db_name) {
+    public function Connect($db_name="college") {
         if (isset($db_name)){
             $this->db_name = $db_name;
         }
