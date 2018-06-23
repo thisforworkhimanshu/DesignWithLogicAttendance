@@ -45,7 +45,7 @@ if(!isset($_SESSION['aid'])){
                 $(document).ready(function(){
                    $("#error").hide();
                    $("#success").hide();
-                   $("#showfordate").hide();
+                   $("#showfor").hide();
                    $("#batchyear").focus();
                    $("#btnGo").click(function(){
                    var batchyear = $("#batchyear").val();
@@ -70,13 +70,13 @@ if(!isset($_SESSION['aid'])){
                                    var sem = jsonObj.sem;
                                    var semn = parseInt(sem);
                                    if(semn===8){
-                                        $("#givedate").html("Move Batch of Batch Year "+batchyear+" To Passout");
+                                        $("#givemsg").html("Move Batch of Batch Year "+batchyear+" To Passout");
                                         $("#success").show();
                                         $("#error").hide();
                                         $("#batchyear").prop("disabled",true);
                                         $("#btnGo").prop("disabled",true);
                                         $("#success").html("Present Go Ahead");
-                                        $("#showfordate").show();
+                                        $("#showfor").show();
                                    }else{
                                        $("#error").show();
                                        $("#error").html("Batch Should Be in Final Year and In Last Semester");
@@ -88,13 +88,13 @@ if(!isset($_SESSION['aid'])){
                 });
             </script>
             
-            <div id="showfordate">
+            <div id="showfor">
                 <hr/>
                 <form class="form form-group">
                     <div class="badge-light">
-                            <div class="text-center">
-                                <h5 id="givedate"></h5>
-                            </div>
+                        <div class="text-center">
+                            <h5 id="givemsg"></h5>
+                        </div>
                     </div>
                     <hr/>
                     <div class="row">
@@ -120,14 +120,12 @@ if(!isset($_SESSION['aid'])){
                 $(document).ready(function(){
                    $("#msgSuccess").hide();
                    $("#msgFailed").hide();
-                   $("#btnSubmit").click(function(){
-                       var fromDate = $("#fromDate").val();
-                       var toDate = $("#toDate").val();
+                   $("#movepass").click(function(){
                        var batchyear = $("#batchyear").val();
                        $.ajax({
                            type: 'POST',
                            url: "ajax-do-operation.php",
-                           data: {batchyear:batchyear,fromDate:fromDate,toDate:toDate},
+                           data: {batchyear:batchyear},
                            beforeSend: function (xhr) {
                                $("#btnSubmit").prop("disabled",true);
                            },
@@ -136,7 +134,8 @@ if(!isset($_SESSION['aid'])){
                                 if(data==="success"){
                                     $("#msgSuccess").show();
                                     $("#msgFailed").hide();
-                                    $("#msgSuccess").html("Batch is Successfully Moved to Next Semester");
+                                    $("#msgSuccess").html("Batch is Successfully Moved to Passout");
+                                    $("movepass").prop("disabled",true);
                                 }else if(data==="failed"){
                                     $("#msgFailed").show();
                                     $("#msgSuccess").hide();
@@ -144,6 +143,7 @@ if(!isset($_SESSION['aid'])){
                                 }
                            }
                        });
+                       return false;
                    });
                 });
             </script>
