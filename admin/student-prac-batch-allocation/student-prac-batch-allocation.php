@@ -132,12 +132,11 @@ if(!isset($_SESSION['aid'])){
                                             $("#suggest-div-alloc").html(divVal+' : <b>'+fromenrol+'</b> <i>to</i>  <b>'+toenrol+'</b>');
                                             $("#gowithsuggestion").show();
                                             $("#orinput").show();
-                                            $("#toenrolinp").val(toenrol);
-                                            $("#fromenrolinp").val(fromenrol);
                                         });
                                     });
                                 }
-                            });   
+                            });
+                            $("#orinput").show();
                         }
                    });
                    

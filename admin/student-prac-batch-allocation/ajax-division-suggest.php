@@ -24,7 +24,7 @@ if(isset($_POST['batchyear'])&&isset($_POST['divVal'])){
                 $result = $conn->getOne("student");
                 $from = $result['student_enrolment'];
 
-                $sqlavg = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25 OFFSET 25";
+                $sqlavg = "SELECT student_enrolment FROM ( SELECT student_enrolment,batch_year FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25) AS T WHERE batch_year = $batchyear ORDER BY student_enrolment DESC LIMIT 1";
                 $resultavg = $conn->ObjectBuilder()->rawQueryOne($sqlavg);
                 $upto = ($resultavg->student_enrolment);
 
@@ -39,7 +39,7 @@ if(isset($_POST['batchyear'])&&isset($_POST['divVal'])){
                 $resultfrom = $conn->ObjectBuilder()->rawQueryOne($sqlfrom);
                 $from = ($resultfrom->student_enrolment);
                 
-                $sqlto = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25 OFFSET 50";
+                $sqlto = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25 OFFSET 49";
                 $resultto = $conn->ObjectBuilder()->rawQueryOne($sqlto);
                 $upto = ($resultto->student_enrolment);
 
@@ -50,13 +50,11 @@ if(isset($_POST['batchyear'])&&isset($_POST['divVal'])){
                 
             }else if($divVal==="B3"){
                 
-                $limit = 25;
-                
                 $sqlfrom = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25 OFFSET 50";
                 $resultfrom = $conn->ObjectBuilder()->rawQueryOne($sqlfrom);
                 $from = ($resultfrom->student_enrolment);
                 
-                $sqlto = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25 OFFSET 75";
+                $sqlto = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25 OFFSET 74";
                 $resultto = $conn->ObjectBuilder()->rawQueryOne($sqlto);
                 $upto = ($resultto->student_enrolment);
 
@@ -65,8 +63,6 @@ if(isset($_POST['batchyear'])&&isset($_POST['divVal'])){
                 $jsonObj = json_encode($return_arr);
                 echo $jsonObj;
             }else if($divVal==="B4"){
-                
-                $limit = 25;
                 
                 $sqlfrom = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25 OFFSET 75";
                 $resultfrom = $conn->ObjectBuilder()->rawQueryOne($sqlfrom);
@@ -87,7 +83,7 @@ if(isset($_POST['batchyear'])&&isset($_POST['divVal'])){
                 $result = $conn->getOne("student");
                 $from = $result['student_enrolment'];
 
-                $sqlavg = "SELECT student_enrolment FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25";
+                $sqlavg = "SELECT student_enrolment FROM ( SELECT student_enrolment,batch_year FROM student WHERE batch_year = $batchyear ORDER BY student_enrolment ASC LIMIT 25) AS T WHERE batch_year = $batchyear ORDER BY student_enrolment DESC LIMIT 1";
                 $resultavg = $conn->ObjectBuilder()->rawQueryOne($sqlavg);
                 $upto = ($resultavg->student_enrolment)-1;
 
