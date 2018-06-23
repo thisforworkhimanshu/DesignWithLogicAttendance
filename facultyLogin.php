@@ -7,7 +7,7 @@ and open the template in the editor.
 <?php
 session_start();
 if(isset($_SESSION['fid'])){
-    header("Location: welcomefaculty.php");
+    header("location:welcomefaculty.php");
 }
 ?>
 <html>
@@ -20,10 +20,10 @@ if(isset($_SESSION['fid'])){
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css"/>
         <!-- jQuery library -->
-        <script src="node_modules/jquery/dist/jquery.min.js"></script>
-<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!--<script src="node_modules/jquery/dist/jquery.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
          
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         <!-- Popper JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
