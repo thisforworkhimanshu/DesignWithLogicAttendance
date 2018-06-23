@@ -90,7 +90,7 @@ and open the template in the editor.
                 $("#make").click(function () {
                     var sendData = {lec_id: $("#lec_id").val(), div: $("#div").val(), sem: $("#sem").val(), lec_type: $("#lec_type").val(), enrolment: sel};
                     $.ajax({
-                        url: 'faculty-make-att.php',
+                        url: 'ajax-faculty-make-att.php',
                         type: 'POST',
                         data: {jsonData: JSON.stringify(sendData)},
                         success: function (data, textStatus, jqXHR) {
