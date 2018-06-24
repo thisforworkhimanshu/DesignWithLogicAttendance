@@ -185,10 +185,6 @@ if(!isset($_SESSION['aid'])){
                                                 var response = result.substring(0,2);
                                                 if(response==="ok"){
                                                     $("#btnSubmit").html('<span class="glyphicon glyphicon-transfer"></span> Successfully Registered with ID: '+res);
-                                                    setTimeout(function() {
-                                                        $("#btnSubmit").html('<span class="glyphicon glyphicon-transfer"></span> Submit');
-                                                    },10000);
-
                                                 }else{
                                                     $("#error").fadeIn(1000, function(){
                                                         $(":submit").attr("disabled", false);
