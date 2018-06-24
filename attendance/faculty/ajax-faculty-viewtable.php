@@ -29,6 +29,17 @@ if (isset($_POST['lec_type']) && isset($_POST['div']) && isset($_POST['sub'])) {
     $sGetStud = "SELECT student_enrolment,student_name FROM student WHERE student_semester = $sem" . $appendSql;
     $rGetStud = $db->query($sGetStud);
     if ($rGetStud->num_rows > 0) {
+
+        $appendSql = '';
+        if (isset($_POST['dateFrom']) && isset($_POST['dateTo'])) {
+            if ($_POST['dateFrom'] != '' && $_POST['dateTo'] != '') {
+//            echo 'php date: ' . $_POST['dateFrom'] . ' to ' . $_POST['dateTo'];
+                $dateFrom = $_POST['dateFrom'];
+                $dateTo = $_POST['dateTo'];
+                $appendSql = " AND date BETWEEN '" . $dateFrom . "' AND '" . $dateTo . "'";
+//            $appendSql = " AND date BETWEEN '2018-06-08' AND '2018-06-09'";
+            }
+        }
         while ($row = $rGetStud->fetch_assoc()) {
             $enrolment = $row['student_enrolment'];
             $name = $row['student_name'];
@@ -37,7 +48,7 @@ if (isset($_POST['lec_type']) && isset($_POST['div']) && isset($_POST['sub'])) {
             $record['enrolment'] = $enrolment;
             $record['name'] = $name;
 
-            $sgetAttend = "SELECT date,is_present FROM attendance_of_$dept_id INNER JOIN lecture_tb_$dept_id ON attendance_of_$dept_id.lecture_id = lecture_tb_$dept_id.lecture_id where subject_code = $subcode and enrolment = $enrolment and faculty_id = $fac_id AND division = '$div'";
+            $sgetAttend = "SELECT date,is_present FROM attendance_of_$dept_id INNER JOIN lecture_tb_$dept_id ON attendance_of_$dept_id.lecture_id = lecture_tb_$dept_id.lecture_id where subject_code = $subcode and enrolment = $enrolment and faculty_id = $fac_id AND division = '$div'".$appendSql;
             $rgetAttend = $db->query($sgetAttend);
             if ($rgetAttend->num_rows > 0) {
                 while ($dates = $rgetAttend->fetch_assoc()) {
