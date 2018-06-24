@@ -5,6 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
+error_reporting(E_ALL ^ E_WARNING); 
 session_start();
 if(!isset($_SESSION['aid'])){
     header("Location: ../../index.php");
@@ -106,14 +107,16 @@ if(!isset($_SESSION['aid'])){
                             <td style="width: 10%;"><?php echo $sub_code?></td>
                             <td style="width: 40%;"><?php echo $sub_name?></td>
                             <?php
-                                $sqlMarks = "select ".$sub_code."_m as mid ,".$sub_code."_v as viva from sem".$i."_16 where enrolment = $enrol";
+                                $sqlMarks = "select ".$sub_code."_m as mid from sem".$i."_16 where enrolment = $enrol";
+                                $sqlvivaMark = "select ".$sub_code."_v as viva from sem".$i."_16 where enrolment = $enrol";
                                 $resultMarks = mysqli_query($conn, $sqlMarks);
-                                
-                                if(mysqli_num_rows($resultMarks)>0){
+                                $resultviva = mysqli_query($conn, $sqlvivaMark);
+                                if(mysqli_num_rows($resultMarks)>0 || mysqli_num_rows($resultviva)>0){
                                     
                                     $rowMark = mysqli_fetch_assoc($resultMarks);
+                                    $rowViva = mysqli_fetch_assoc($resultviva);
                                     $midmark = $rowMark['mid'];
-                                    $vivamark = $rowMark['viva'];
+                                    $vivamark = $rowViva['viva'];
                                     ?>
                             <td style="text-align: center;">
                                 <?php
@@ -140,6 +143,8 @@ if(!isset($_SESSION['aid'])){
                                             echo "AA";
                                         }
                                     }
+                                }else{
+                                    echo '--';
                                 }
                                 ?>
                             </td>
@@ -153,7 +158,7 @@ if(!isset($_SESSION['aid'])){
                                     ?>
                                         <td style="text-align: center;">
                                         <?php 
-                                        if($midmark!=""){
+                                        if($midmarkr!=""){
                                             if($midmark<12){
                                                 if($midmarkr<12 && $midmarkr!=""){
                                                     echo "FF";
@@ -180,6 +185,8 @@ if(!isset($_SESSION['aid'])){
                                             }else{
                                                 echo "--";
                                             }
+                                        }else{
+                                            echo '--';
                                         }
                                         ?>
                                         </td>
@@ -197,44 +204,48 @@ if(!isset($_SESSION['aid'])){
                             ?>
                             <td style="text-align: center;">
                             <?php
-                                if($vivamark<12&&$vivamark!=""){
-                                    echo "FF";
+                                if($vivamark!=""){
+                                    if($vivamark<12&&$vivamark!=""){
+                                        echo "FF";
+                                    }else{
+                                        if($vivamark==12){
+                                            echo "DD";
+                                        }else if($vivamark>=13 && $vivamark<=15)
+                                        {
+                                                echo "CD";
+                                        }
+                                        else if($vivamark>=16 && $vivamark<=18)
+                                        {
+                                                echo "CC";
+                                        }
+                                        else if($vivamark>=19 && $vivamark<=21)
+                                        {
+                                                echo "BC";
+                                        }
+                                        else if($vivamark>=22 && $vivamark<=24)
+                                        {
+                                                echo "BB";
+                                        }
+                                        else if($vivamark>=25 && $vivamark<=27)
+                                        {
+                                                echo "AB";
+                                        }
+                                        else if($vivamark>=28 && $vivamark<=30)
+                                        {
+                                                echo "AA";
+                                        }
+                                    }
                                 }else{
-                                    if($vivamark==12){
-                                        echo "DD";
-                                    }else if($vivamark>=13 && $vivamark<=15)
-                                    {
-                                            echo "CD";
-                                    }
-                                    else if($vivamark>=16 && $vivamark<=18)
-                                    {
-                                            echo "CC";
-                                    }
-                                    else if($vivamark>=19 && $vivamark<=21)
-                                    {
-                                            echo "BC";
-                                    }
-                                    else if($vivamark>=22 && $vivamark<=24)
-                                    {
-                                            echo "BB";
-                                    }
-                                    else if($vivamark>=25 && $vivamark<=27)
-                                    {
-                                            echo "AB";
-                                    }
-                                    else if($vivamark>=28 && $vivamark<=30)
-                                    {
-                                            echo "AA";
-                                    }
-                                }
+                                    echo '--';
+                                }                                
                             ?>
                             </td>          
                                         <?php
                                 }else{
                                     ?>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td style="text-align: center;">--</td>
+                            <td style="text-align: center;">--</td>
+                            <td style="text-align: center;">--</td>
                                         <?php
                                 }
                             ?>
@@ -245,8 +256,7 @@ if(!isset($_SESSION['aid'])){
                     </table>
                                     <?php
                             }else{
-                                echo 'No Subjects';
-                                break;
+                                continue;
                             }
                         }
                     ?>

@@ -5,6 +5,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
+error_reporting(E_ALL ^ E_WARNING);
 session_start();
 if(!isset($_SESSION['aid'])){
     header("Location: ../../index.php");
@@ -105,44 +106,68 @@ if(!isset($_SESSION['aid'])){
                             <td style="width: 10%;"><?php echo $sub_code?></td>
                             <td style="width: 40%;"><?php echo $sub_name?></td>
                             <?php
-                                $sqlMarks = "select ".$sub_code."_m as mid ,".$sub_code."_v as viva from sem".$i."_16 where enrolment = $enrol";
+                                $sqlMarks = "select ".$sub_code."_m as mid from sem".$i."_16 where enrolment = $enrol";
                                 $resultMarks = mysqli_query($conn, $sqlMarks);
-                                
-                                if(mysqli_num_rows($resultMarks)>0){
+                                $sqlMarksViva = "select ".$sub_code."_v as viva from sem".$i."_16 where enrolment = $enrol";
+                                $resultViva = mysqli_query($conn, $sqlMarksViva);
+                                if(mysqli_num_rows($resultMarks)>0 || mysqli_num_rows($resultViva)>0){
                                     
                                     $rowMark = mysqli_fetch_assoc($resultMarks);
+                                    $rowViva = mysqli_fetch_assoc($resultViva);
+                                    
+                                    if($rowMark['mid']!=""){
                                     ?>
-                            <td style="text-align: center;"><?php echo $rowMark['mid']?></td>
-                            <?php
-                                if($rowMark['mid']<12){
-                                    $sqlMarksr = "select ".$sub_code."_r as remid from sem".$i."_16_r where enrolment = $enrol";
-                                    $resultMarksr = mysqli_query($conn, $sqlMarksr);
-                                    if(mysqli_num_rows($resultMarksr)>0){
-                                        $rowMarkr = mysqli_fetch_assoc($resultMarksr);
-                                    ?>
-                                        <td style="text-align: center;"><?php echo $rowMarkr['remid']; ?></td>
-                                                    <?php
+                                    <td style="text-align: center;"><?php echo $rowMark['mid']?></td>
+                                    <?php
                                     }else{
                                         ?>
                                         <td style="text-align: center;">--</td>
                                         <?php
                                     }
-                                }else{
-                                    ?>
-                                    <td style="text-align: center;">--</td>
-                                    <?php
-                                }
-                            ?>
-                            <td style="text-align: center;"><?php echo $rowMark['viva']?></td>          
+                                    
+                                    if($rowMark['mid']<12){
+                                        $sqlMarksr = "select ".$sub_code."_r as remid from sem".$i."_16_r where enrolment = $enrol";
+                                        $resultMarksr = mysqli_query($conn, $sqlMarksr);
+                                        if(mysqli_num_rows($resultMarksr)>0){
+                                            $rowMarkr = mysqli_fetch_assoc($resultMarksr);
+                                            if($rowMarkr['remid']!=""){
+                                                ?>
+                                                <td style="text-align: center;"><?php echo $rowMarkr['remid']; ?></td>
+                                                <?php
+                                            }else{
+                                                ?>
+                                                <td style="text-align: center;">--</td>
+                                                <?php
+                                            }
+                                        }else{
+                                            ?>
+                                            <td style="text-align: center;">--</td>
+                                            <?php
+                                        }
+                                    }else{
+                                        ?>
+                                        <td style="text-align: center;">--</td>
                                         <?php
-                                }else{
-                                    ?>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                                    }
+                            
+                                    if($rowViva['viva']!=""){
+                                        ?>
+                                        <td style="text-align: center;"><?php echo $rowViva['viva']?></td>          
                                         <?php
+                                    }else{
+                                        ?>
+                                        <td style="text-align: center;">--</td>
+                                        <?php
+                                    }
+                            
+                                }else{
+                                ?>
+                                    <td>--</td>
+                                    <td>--</td>
+                                    <td>--</td>
+                                <?php
                                 }
-                            ?>
+                                ?>
                         </tr>
                                         <?php
                                 }
