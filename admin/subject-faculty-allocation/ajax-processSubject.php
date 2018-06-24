@@ -23,34 +23,16 @@ $resultYear = mysqli_query($conn, $sqlgetYear);
 $row = mysqli_fetch_object($resultYear);
 $_SESSION['batch_year'] = $row->batch_year;
 
-if($sem==1 || $sem==1){
-    $sql = "SELECT subject_code,subject_name FROM subject where semester = $sem and dept_id = $dept_id and dept_id = 1";
-    
-    $result = mysqli_query($conn, $sql);
+$sql = "SELECT subject_code,subject_name FROM subject where semester = $sem and dept_id = $dept_id";
 
-    if(mysqli_num_rows($result)>0){
-        echo "<option value='null'>--Select Subject--</option>";
-        while($row = mysqli_fetch_assoc($result)){
-            $sub_code = $row['subject_code'];
-            $sub_name = $row['subject_name'];
+$result = mysqli_query($conn, $sql);
 
-            echo "<option value='".$sub_code."'>$sub_name</option>";
-        }
-    }
-}else{
-    $sql = "SELECT subject_code,subject_name FROM subject where semester = $sem and dept_id = $dept_id";
-
-    $result = mysqli_query($conn, $sql);
-
-    if(mysqli_num_rows($result)>0){
-        echo "<option value='null'>--Select Subject--</option>";
-        while($row = mysqli_fetch_assoc($result)){
-            $sub_code = $row['subject_code'];
-            $sub_name = $row['subject_name'];
-
-            echo "<option value='".$sub_code."'>$sub_name</option>";
-        }
+if(mysqli_num_rows($result)>0){
+    echo "<option value='null'>--Select Subject--</option>";
+    while($row = mysqli_fetch_assoc($result)){
+        $sub_code = $row['subject_code'];
+        $sub_name = $row['subject_name'];
+         
+        echo "<option value='".$sub_code."'>$sub_name</option>";
     }
 }
-
-

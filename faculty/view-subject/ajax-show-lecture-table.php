@@ -19,7 +19,34 @@ if(isset($_POST['semester'])){
     if(!$conn){
         die('Connection Failed');
     }else{
-        $sqlget = "SELECT subject_code,lecture_type,type FROM subject_faculty_allocation where semester = $semester and faculty_id = $fid and dept_id = $dept_id";
+        
+        function generateCsv($data, $delimiter = ',', $enclosure = '"') {
+            $handle = fopen('php://temp', 'r+');
+            $contents = "";
+            foreach ($data as $line) {
+                    fputcsv($handle, $line, $delimiter, $enclosure);
+            }
+            rewind($handle);
+            while (!feof($handle)) {
+                    $contents .= fread($handle, 8192);
+            }
+            fclose($handle);
+            return $contents;
+        }
+        
+        $sqlGetDept = "select dept_id from department";
+        $rdept = mysqli_query($conn, $sqlGetDept);
+        $deptarray = array();
+        if(mysqli_num_rows($rdept)>0){
+            while($rowdept = mysqli_fetch_assoc($rdept)){
+                $rowdeptid = $rowdept['dept_id'];
+                array_push($deptarray, $rowdeptid);
+            }
+        }
+        
+        $sqldeptid = generateCsv(array($deptarray));
+        
+        $sqlget = "SELECT subject_code,lecture_type,type FROM subject_faculty_allocation where semester = $semester and faculty_id = $fid and dept_id in ($sqldeptid)";
         $resultget = mysqli_query($conn, $sqlget);
         if(mysqli_num_rows($resultget)>0){
             echo '<div class="table-responsive">';

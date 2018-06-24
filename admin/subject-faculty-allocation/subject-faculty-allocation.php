@@ -102,7 +102,8 @@ if(!isset($_SESSION['aid'])){
                                                 $("#lecture_total").prop("disabled",true);
                                             }else{
                                                 var subName  = $("#subject").val();
-                                                $.post('ajax-processFaculty.php',{subject:subName},
+                                                var semester = $("#semester").val();
+                                                $.post('ajax-processFaculty.php',{subject:subName,semester:semester},
                                                     function(response) {
                                                         $("#faculty").prop("disabled",false);
                                                         $("#faculty").html(response);
@@ -337,7 +338,7 @@ if(!isset($_SESSION['aid'])){
                                             var lecturetotal = $("#lecture_total").val();
                                             var stat = "";
                                             var div = $("#choosediv").val();
-                                            if(div==""){
+                                            if(div=="null"){
                                                 stat = $("#choosebatch").val();
                                             }else{
                                                 stat = div;
