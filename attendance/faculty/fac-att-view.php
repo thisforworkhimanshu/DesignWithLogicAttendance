@@ -48,8 +48,8 @@ and open the template in the editor.
                 //script: combobox fatch subject and call ajax after subject selection
                 $("#division").change(function () {
                     if (this.selectedIndex !== 0) {
-                        var sendData = {'lec_type': lec_type, 'div': $("#division").val(), 'sub': $(this).val()};
-                        callAjaxtable(sendData);
+                        var sendData = {'lec_type': lec_type, 'div': $(this).val(), 'sub': $("#subject").val()};
+                        callAjaxTable(sendData);
                     }
                 });
                 $("#subject").change(function () {
@@ -74,9 +74,24 @@ and open the template in the editor.
                     });
                 }
 
+                function callAjaxTable(sendData) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "ajax-faculty-viewtable.php",
+                        data: sendData,
+                        success: function (data, textStatus, jqXHR) {
+                            console.log(data);
+                        }
+                    });
+                }
+                
+                function appendTable(data){
+                   var jsonData = $.parseJSON(data);
+                   
+                }
+                
                 function appendDivision(data) {
-                    console.log(data);
-                    jsonData = $.parseJSON(data);
+                  var  jsonData = $.parseJSON(data);
                     $("#division").append($("<option>").text("--Select division--"));
                     $.each(jsonData, function (i, item) {
                         $("#division").append($("<option>").text(item).val(item));
@@ -84,7 +99,7 @@ and open the template in the editor.
                 }
 
                 function appendSubject(data) {
-                    jsonData = $.parseJSON(data);
+                   var jsonData = $.parseJSON(data);
                     $("#subject").append($("<option>").text("--Select subject--"));
                     $.each(jsonData, function (i, item) {
                         $("#subject").append($("<option>").text(item.short_name).val(item.subject_code));
