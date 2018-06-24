@@ -63,6 +63,12 @@ if(!isset($_SESSION['aid'])){
                 </div>
             </form>
                         <?php
+                }else{
+                    ?>
+            <div class="text-center" style="margin-top: 3%;">
+                <h5>No Faculty Detail Available</h5>
+            </div>
+                        <?php
                 }
                 
                 if(isset($_POST['faculty']) && $_POST['faculty']!="")
