@@ -23,8 +23,8 @@
     this.totalItems = this.el.children().length;
     this.totalPages = Math.max(Math.ceil(this.totalItems / this.options.perPage), this.options.limitPagination);
     this.container = $('<nav></nav>').addClass(this.options.containerClass);
-    this.ul = $('<ul></ul>').addClass(this.options.ulClass);
-
+//    this.ul = $('<ul class="pagination"></ul>').addClass(this.options.ulClass);
+    this.ul = $('<ul class="pagination justify-content-center" style="margin:20px 0"></ul>');
     this.show(this.startPage);
 
     return this;
@@ -33,8 +33,8 @@
   Paginator.prototype = {
     pagination: function(type, page) {
       var _self = this;
-      var li = $('<li></li>');
-      var a = $('<a></a>').attr('href', '#');
+      var li = $('<li class="page-item"></li>');
+      var a = $('<a class="page-link"></a>').attr('href', '#');
       var cssClass = type === 'number' ? _self.options.liClass : type;
       var text = '';
       if (type === 'number') {
@@ -46,7 +46,7 @@
         text = _self.paginationText(type);
       }
 
-      li.addClass(cssClass);
+//      li.addClass(cssClass);
       li.data('pagination-type', type);
       li.data('page', page);
       li.append(a.html(text));

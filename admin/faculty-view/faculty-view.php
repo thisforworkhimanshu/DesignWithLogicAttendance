@@ -19,7 +19,7 @@ if(!isset($_SESSION['aid'])){
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -27,7 +27,7 @@ if(!isset($_SESSION['aid'])){
         <script>
             $(document).ready(function(){
                 $('.table tbody').paginathing({
-                    perPage: 2,
+                    perPage: 8,
                     insertAfter: '.table',
                     pageNumbers: true
                 }); 
@@ -41,7 +41,7 @@ if(!isset($_SESSION['aid'])){
             ?>
             <div class="badge-light" style="margin-top: 2%;">
                     <div class="text-center">
-                        <h4>Faculty Details</h4>
+                        <h5>Faculty Details</h5>
                     </div>
             </div>
             <?php
