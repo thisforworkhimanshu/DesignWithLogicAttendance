@@ -23,6 +23,7 @@ and open the template in the editor.
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="../excelexportjs.js"></script>
 
         <script>
             $(document).ready(function () {
@@ -150,6 +151,16 @@ and open the template in the editor.
 
                 });
 
+                //script:button print export table to excel
+                $("#print").click(function () {
+                    $("#attendance-table [type=checkbox]").remove();
+                    $("#attendance-table").excelexportjs({
+                        containerid: "attendance-table",
+                        datatype: 'table'
+                    });
+                    $("#attendance-table > tbody tr td:first-child").prepend('<input type="checkbox">');
+                });
+
                 function callAjax(sendData, type) {
                     $.ajax({
                         type: 'POST',
@@ -244,17 +255,19 @@ and open the template in the editor.
 
     </head>
     <body>
-        <div>
-            <div class="btn-group form-group d-flex justify-content-center" role="group" aria-label="selection" style="float: left;padding: 5px">
+        <div class="form-inline">
+            <div class="btn-group form-group d-flex justify-content-center form-group mb-2" role="group" aria-label="selection" style="float: left;padding: 5px">
                 <button type="button" class="btn btn-outline-primary" id="theory" value="theory">Theory</button>
                 <button type="button" class="btn btn-outline-primary" id="practical" value="practical">Practical</button>
             </div>
-            <select class="form-control-sm border border-primary" id="subject" name="subject" style="margin: 5px" disabled="true">
-                <option>--Select subject--</option>
-            </select>
-            <select class="form-control-sm border border-primary" id="division" name="division" style="margin: 5px" disabled="true">
-                <option>--Select division--</option>
-            </select>
+            <div class="form-group mx-sm-3 mb-2">
+                <select class="form-control-sm border border-primary" id="subject" name="subject" style="margin: 5px" disabled="true">
+                    <option>--Select subject--</option>
+                </select>
+                <select class="form-control-sm border border-primary" id="division" name="division" style="margin: 5px" disabled="true">
+                    <option>--Select division--</option>
+                </select>
+            </div>
 
         </div>
         <br/>
@@ -263,6 +276,7 @@ and open the template in the editor.
             <input type="text" id="dateFrom" disabled="true"> -from to-
             <input type="text" id="dateTo"  disabled="true">
             <button type="button" class="btn btn-success" id="modal">change</button>
+            <button id="print" class="btn btn-info">export to excel!</button>
         </div>
         <hr/>
         <div id="attendance-view" class="container">
