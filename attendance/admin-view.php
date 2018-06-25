@@ -294,7 +294,7 @@ and open the template in the editor.
                 <?php
             }
             ?>
-            <button style="width:32px; height:33px;" id="div" class="btn btn-primary" ><center>A</center></button>&nbsp;
+                <button style="width:32px; height:33px" id="div" class="btn btn-primary" >A</button>&nbsp;
 
 
         </div>
@@ -335,7 +335,7 @@ and open the template in the editor.
                     <button value="single" id="mbtnPrt">single subject</button>
                     <button value="bulk" id="mbtnBulk">change in bulk</button>                    
                 </div>
-                <div id="mdivShowEnroll" class=" mymodal-container border border-primary rounded" style="margin: 1%">
+                <div id="mdivShowEnroll" class=" mymodal-container border border-primary rounded" style="margin: 1%;overflow: auto">
                     enrollments will be shown here
                 </div>
 
@@ -349,12 +349,12 @@ and open the template in the editor.
                     </div>
 
                     <!--        particular division-->
-                    <div class="mymodal-container" id="mdivPrt" style="justify-content: center;">
-                        <label style="color: gray; font-family: inherit; font-size: 17px;">Select Date:</label>
+                    <div class="mymodal-container d-flex justify-content-center" id="mdivPrt" style="justify-content: center;">
+                        <label style="color: gray; font-family: inherit;">Select Date:</label>
                         <input id="dateSingle" placeholder="Select Date..">
                         <br>
                         <br>
-                        <label style="color: gray; font-family: inherit; font-size: 17px;">Select Faculty:</label>
+                        <label style="color: gray; font-family: inherit;">Select Faculty:</label>
                         <input list="faculty" placeholder="Select Faculty..">
                         <datalist id="faculty">
                             <option value="Internet Explorer">
@@ -365,7 +365,7 @@ and open the template in the editor.
                         </datalist>
                         <br>
                         <br>
-                        <label style="color: gray; font-family: inherit; font-size: 20px;">Select Subject:</label>
+                        <label style="color: gray; font-family: inherit;">Select Subject:</label>
                         <input list="subject" placeholder="Select Subject">
                         <datalist id="subject">
                             <option value="Internet Explorer">
