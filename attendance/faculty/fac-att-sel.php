@@ -61,7 +61,7 @@ and open the template in the editor.
                     $("#division").prop("disabled", false);
                     $("#subject").prop("disabled", true);
                     $("#division").empty();
-                    var sendData = {'type': 'theory'};
+                    var sendData = {'lec_type': 'theory'};
                     callAjax(sendData, "div");
                 });
                 $("#practical").click(function () {
@@ -69,7 +69,7 @@ and open the template in the editor.
                     $("#division").prop("disabled", false);
                     $("#subject").prop("disabled", true);
                     $("#division").empty();
-                    var sendData = {'type': 'practical'};
+                    var sendData = {'lec_type': 'practical'};
                     callAjax(sendData, "div");
                 });
 
