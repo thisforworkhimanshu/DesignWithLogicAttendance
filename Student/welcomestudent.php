@@ -210,7 +210,7 @@ $dept_id = $_SESSION['s_dept_id'];
                                     $subname = $rowSubject['subject_name'];
                                     $subcode = $rowSubject['subject_code'];
 
-                                    $sqlCountTotalThoery = "SELECT COUNT(DISTINCT lecture_id) as t FROM lecture_tb_".$dept_id." WHERE subject_id = $subcode and type = '".$type1."'";
+                                    $sqlCountTotalThoery = "SELECT COUNT(DISTINCT lecture_id) as t FROM lecture_tb_".$dept_id." WHERE subject_code = $subcode and type = '".$type1."'";
                                     $resultSqlTotalThoery = mysqli_query($conn, $sqlCountTotalThoery);
                                     $rowcountThoery = mysqli_fetch_assoc($resultSqlTotalThoery);
                                     $totalsbThoery = $rowcountThoery['t'];
@@ -220,7 +220,7 @@ $dept_id = $_SESSION['s_dept_id'];
                                         <td><?php echo $subname;?></td>
                                     <?php
                                         $sqlAttGetThoery = "SELECT * "
-                                            . "FROM attendance_of_".$dept_id." INNER JOIN lecture_tb_".$dept_id." ON attendance_of_".$dept_id.".lecture_id = lecture_tb_".$dept_id.".lecture_id where subject_id = $subcode and type = 'theory' and enrolment = $enrolment and is_present=1";
+                                            . "FROM attendance_of_".$dept_id." INNER JOIN lecture_tb_".$dept_id." ON attendance_of_".$dept_id.".lecture_id = lecture_tb_".$dept_id.".lecture_id where subject_code = $subcode and type = 'theory' and enrolment = $enrolment and is_present=1";
                                         $resultAttGetThoery = mysqli_query($conn, $sqlAttGetThoery);
                                         $totalAttendentThoery = mysqli_num_rows($resultAttGetThoery);
                                         if($totalsbThoery!=0)
@@ -267,13 +267,13 @@ $dept_id = $_SESSION['s_dept_id'];
                                     <?php
 
                                     //practical
-                                    $sqlCountTotalPractical = "SELECT COUNT(DISTINCT lecture_id) as p FROM lecture_tb_".$dept_id." WHERE subject_id = $subcode and type = '".$type2."'";
+                                    $sqlCountTotalPractical = "SELECT COUNT(DISTINCT lecture_id) as p FROM lecture_tb_".$dept_id." WHERE subject_code = $subcode and type = '".$type2."'";
                                     $resultSqlTotalPractical = mysqli_query($conn, $sqlCountTotalPractical);
                                     $rowcountPractical = mysqli_fetch_assoc($resultSqlTotalPractical);
                                     $totalsbPractical = $rowcountPractical['p'];
 
                                     $sqlAttGetPractical = "SELECT * "
-                                            . "FROM attendance_of_".$dept_id." INNER JOIN lecture_tb_".$dept_id." ON attendance_of_".$dept_id.".lecture_id = lecture_tb_".$dept_id.".lecture_id where subject_id = $subcode and type = 'practical' and enrolment = $enrolment and is_present=1";
+                                            . "FROM attendance_of_".$dept_id." INNER JOIN lecture_tb_".$dept_id." ON attendance_of_".$dept_id.".lecture_id = lecture_tb_".$dept_id.".lecture_id where subject_code = $subcode and type = 'practical' and enrolment = $enrolment and is_present=1";
                                     $resultAttGetPractical = mysqli_query($conn, $sqlAttGetPractical);
                                     $totalAttendentPractical = mysqli_num_rows($resultAttGetPractical);
                                     if($totalsbPractical!=0)
