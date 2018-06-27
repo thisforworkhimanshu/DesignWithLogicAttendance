@@ -171,15 +171,15 @@ and open the template in the editor.
                     if ($("#view").val() === 'normal') {
                         //create table header, normal view
                         $("#attendance-table > thead").append($('<tr>'), $('<tr>'));
-                        $("#attendance-table > thead tr:first-child").append($('<th>').attr("colspan", 2));
-                        $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text('enrolment').css({"width": "140px"}), $('<th>').css({"width": "430px"}).text('name'));
+                        $("#attendance-table > thead tr:first-child").append(wi = $('<th>').attr("colspan", 2)).css('width', '45%');
+                        console.log(wi);
+                        $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text('enrolment').css('width', '15%'), $('<th>').text('name').css('width', '30%'));
                         $.each(jsonData[0], function (i, row) {
                             if (i != 'name' && i != 'enrolment') {
-                                $("#attendance-table > thead tr:first-child").append($('<th>').attr("colspan", 2).css({"width": "80px"}).text(i));
-                                $("#attendance-table > thead tr:nth-child(2)").append($('<th>').css({"width": "44px"}).text('attend'), $('<th>').css({"width": "44px"}).text('total'));
+                                $("#attendance-table > thead tr:first-child").append($('<th>').attr("colspan", 2).text(i).css('text-align', 'center'));
+                                $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text('attend').css('text-align', 'center'), $('<th>').text('total').css('text-align', 'center'));
                             }
                         });
-
                         //create table body, normal view
                         $.each(jsonData, function (i, row) {
 
@@ -187,20 +187,20 @@ and open the template in the editor.
                             var $tr = $("#attendance-table > tbody tr:last-child");
                             $.each(jsonData[i], function (j, value) {
                                 if (j == 'name') {
-                                    $($tr).append($('<td>').css({"width": "400px"}).text(value));
+                                    $($tr).append($('<td>').text(value).css('width', '30%'));
                                 } else if (j == 'enrolment') {
-                                    $($tr).append($('<td>').css({"width": "134px"}).html('<input type="checkbox"/>' + value));
+                                    $($tr).append($('<td>').html('<input type="checkbox"/>' + value).css('width', '15%'));
                                 } else {
                                     if (parseInt(value.total) == 0) {
                                         percentage = 0;
-                                        $($tr).append($('<td>').css({"width": "50px"}).text('-').css("background-color", "#f2f2f2"), $('<td>').css({"width": "50px"}).text('-').css("background-color", "#f2f2f2"));
+                                        $($tr).append($('<td>').text('-').css("background-color", "#f2f2f2"), $('<td>').text('-').css("background-color", "#f2f2f2"));
                                     } else {
                                         percentage = parseInt(value.attend) * 100 / parseInt(value.total);
                                         var setColor = 'transparent';
                                         if (percentage < 75) {
                                             setColor = '#ffcccc';
                                         }
-                                        $($tr).append($('<td>').css({"width": "50px"}).text(value.attend).css("background-color", setColor), $('<td>').css({"width": "50px"}).text(value.total));
+                                        $($tr).append($('<td>').text(value.attend).css("background-color", setColor), $('<td>').text(value.total));
                                     }
 
                                 }
@@ -209,11 +209,11 @@ and open the template in the editor.
                     } else {
                         //create table header, percentage view
 
-                        $("#attendance-table > thead").append($('<tr>'));
-                        $("#attendance-table > thead tr:first-child").append($('<th>').css({"width": "140px"}).text('enrolment'), $('<th>').css({"width": "395px"}).text('name'));
+                        $("#attendance-table > thead").append($('<tr>'), $('<tr>'));
+                        $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text('enrolment'), $('<th>').text('name'));
                         $.each(jsonData[0], function (i, row) {
                             if (i != 'name' && i != 'enrolment') {
-                                $("#attendance-table > thead tr:first-child").append($('<th>').css({"width": "85px"}).text(i));
+                                $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text(i));
                             }
                         });
 
@@ -223,9 +223,9 @@ and open the template in the editor.
                             var $tr = $("#attendance-table > tbody tr:last-child");
                             $.each(jsonData[i], function (j, value) {
                                 if (j == 'name') {
-                                    $($tr).append($('<td>').css({"width": "300px"}).text(value));
+                                    $($tr).append($('<td>').text(value));
                                 } else if (j == 'enrolment') {
-                                    $($tr).append($('<td>').css({"width": "50px"}).html('<input type="checkbox"/>' + value));
+                                    $($tr).append($('<td>').html('<input type="checkbox"/>' + value));
                                 } else {
                                     var setColor = 'transparent';
                                     if (parseInt(value.total) == 0) {
@@ -237,7 +237,7 @@ and open the template in the editor.
                                             setColor = '#ffcccc';
                                         }
                                     }
-                                    $($tr).append($('<td>').css({"width": "65px"}).text(percentage).css("background-color", setColor));
+                                    $($tr).append($('<td>').text(percentage).css("background-color", setColor));
                                 }
                             });
                         });
@@ -294,7 +294,7 @@ and open the template in the editor.
                 <?php
             }
             ?>
-                <button style="width:32px; height:33px" id="div" class="btn btn-primary" >A</button>&nbsp;
+            <button style="width:32px; height:33px" id="div" class="btn btn-primary" >A</button>&nbsp;
 
 
         </div>
@@ -309,18 +309,14 @@ and open the template in the editor.
         <hr/>
 
 
-        <div id="attendance-view" class="container table-wrapper">
+        <div id="attendance-view" class="container">
 
-            <table  id="attendance-table" class="record_table table-bordered"  style=" width:98.5%">        
+            <table  id="attendance-table" class="record_table sticky">        
                 <thead>
-                </thead>
+                </thead> 
+                <tbody id="body">
+                </tbody> 
             </table>
-            <div class="table-scroll">
-                <table  id="attendance-table" class="record_table">  
-                    <tbody id="body">
-                    </tbody> 
-                </table>
-            </div>
         </div>
 
         <!--modal html.....................................................-->
@@ -349,7 +345,7 @@ and open the template in the editor.
                     </div>
 
                     <!--        particular division-->
-                    <div class="mymodal-container d-flex justify-content-center" id="mdivPrt" style="justify-content: center;">
+                    <div class="mymodal-container" id="mdivPrt" style="justify-content: center;">
                         <label style="color: gray; font-family: inherit;">Select Date:</label>
                         <input id="dateSingle" placeholder="Select Date..">
                         <br>

@@ -14,12 +14,36 @@ and open the template in the editor.
 .record_table tr:hover {
     background: #eee;
 }
-.record_table td {
+.record_table td,th {
     border: 1px solid #eee;
 }
 .highlight_row {
     background: #eee;
 }
+
+/*sticky header css..........................................................*/
+* {box-sizing: border-box} /* for th's width; display purpose */
+
+table {
+    width: 100%;
+}
+
+thead {
+    display: table; /* to take the same width as tr */
+    width: calc(100% - 17px); /* -17px because of the scrollbar width */
+}
+
+tbody {
+    display: block; /* to enable vertical scrolling */
+    max-height: 400px; /* e.g. */
+    overflow-y: scroll; /* keeps the scrollbar even if it doesn't need it; display purpose */
+}
+
+/*sticky css for normal view*/
+
+
+/*sticky css for percentage view*/
+
 
 /*modal css...................................................................*/
 body {font-family: Arial, Helvetica, sans-serif;}
@@ -184,36 +208,4 @@ span.psw {
 
 #my-highlight, .my-highlight {
     background-color: blue;
-}
-
-/*sticky header css..........................................................*/
-.header-fixed {
-    position: fixed;
-    top: 0px; display:none;
-}
-.table-wrapper {
-    position:relative;
-}
-
-.table-scroll {
-    height:450px;
-    overflow:auto;  
-    margin-top:20px;
-}
-
-.table-wrapper table {
-    width:100%;
-}
-
-.table-wrapper table * {
-    color:black;
-}
-
-.table-wrapper table thead th .text {
-    position:absolute;   
-    top:-20px;
-    z-index:2;
-    height:20px;
-    width:35%;
-    border:1px solid red;
 }
