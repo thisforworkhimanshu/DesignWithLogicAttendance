@@ -22,28 +22,9 @@ and open the template in the editor.
 }
 
 /*sticky header css..........................................................*/
-* {box-sizing: border-box} /* for th's width; display purpose */
+/*th, td { white-space: nowrap; }
 
-table {
-    width: 100%;
-}
-
-thead {
-    display: table; /* to take the same width as tr */
-    width: calc(100% - 17px); /* -17px because of the scrollbar width */
-}
-
-tbody {
-    display: block; /* to enable vertical scrolling */
-    max-height: 400px; /* e.g. */
-    overflow-y: scroll; /* keeps the scrollbar even if it doesn't need it; display purpose */
-}
-
-/*sticky css for normal view*/
-
-
-/*sticky css for percentage view*/
-
+tr { height: 50px; }*/
 
 /*modal css...................................................................*/
 body {font-family: Arial, Helvetica, sans-serif;}

@@ -10,12 +10,14 @@ and open the template in the editor.
         <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="custom.css">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.css"> <!-- jquery-ui css -->
+        <link rel="stylesheet" href="../bootstrap-4.1.1-dist/css/bootstrap.min.css"> <!-- bootstrap css -->
+        <link rel="stylesheet" href="../DataTables/datatables.min.css"> <!-- datatables api css -->
+
+        <script src="../bootstrap-4.1.1-dist/js/bootstrap.min.js"></script> <!-- bootstrap js -->
+        <script src="../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
+        <script src="../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> <!-- jquery-ui css -->
+        <script src="../DataTables/datatables.min.js"></script> <!-- datatables api js -->
         <script src="excelexportjs.js"></script> 
 
         <script type="text/javascript">
@@ -171,9 +173,8 @@ and open the template in the editor.
                     if ($("#view").val() === 'normal') {
                         //create table header, normal view
                         $("#attendance-table > thead").append($('<tr>'), $('<tr>'));
-                        $("#attendance-table > thead tr:first-child").append(wi = $('<th>').attr("colspan", 2)).css('width', '45%');
-                        console.log(wi);
-                        $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text('enrolment').css('width', '15%'), $('<th>').text('name').css('width', '30%'));
+                        $("#attendance-table > thead tr:first-child").append($('<th>').attr("colspan", 2));
+                        $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text('enrolment'), $('<th>').text('name'));
                         $.each(jsonData[0], function (i, row) {
                             if (i != 'name' && i != 'enrolment') {
                                 $("#attendance-table > thead tr:first-child").append($('<th>').attr("colspan", 2).text(i).css('text-align', 'center'));
@@ -187,9 +188,9 @@ and open the template in the editor.
                             var $tr = $("#attendance-table > tbody tr:last-child");
                             $.each(jsonData[i], function (j, value) {
                                 if (j == 'name') {
-                                    $($tr).append($('<td>').text(value).css('width', '30%'));
+                                    $($tr).append($('<td>').text(value));
                                 } else if (j == 'enrolment') {
-                                    $($tr).append($('<td>').html('<input type="checkbox"/>' + value).css('width', '15%'));
+                                    $($tr).append($('<td>').html('<input type="checkbox"/>' + value));
                                 } else {
                                     if (parseInt(value.total) == 0) {
                                         percentage = 0;
@@ -242,6 +243,13 @@ and open the template in the editor.
                             });
                         });
                     }
+
+                    //datatables api test
+                    $("#attendance-table").DataTable({
+                        fixedHeader: true,
+                        autoWidth: false,
+                        heightMatch: 'none'
+                    });
                 }
 
                 //script: modal section-----------------------------------------
@@ -266,7 +274,6 @@ and open the template in the editor.
                 $("#mbtnCancel").click(function () {
                     $("#modal").css("display", "none");
                 });
-
             });
         </script>
     </head>
@@ -309,9 +316,9 @@ and open the template in the editor.
         <hr/>
 
 
-        <div id="attendance-view" class="container">
+        <div id="attendance-view" class="container-fluid">
 
-            <table  id="attendance-table" class="record_table sticky">        
+            <table  id="attendance-table">        
                 <thead>
                 </thead> 
                 <tbody id="body">
