@@ -7,17 +7,15 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>SIM: admin attendance view</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="custom.css">
         <link rel="stylesheet" href="../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.css"> <!-- jquery-ui css -->
         <link rel="stylesheet" href="../bootstrap-4.1.1-dist/css/bootstrap.min.css"> <!-- bootstrap css -->
-        <link rel="stylesheet" href="../DataTables/datatables.min.css"> <!-- datatables api css -->
 
         <script src="../bootstrap-4.1.1-dist/js/bootstrap.min.js"></script> <!-- bootstrap js -->
         <script src="../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
         <script src="../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> <!-- jquery-ui css -->
-        <script src="../DataTables/datatables.min.js"></script> <!-- datatables api js -->
         <script src="excelexportjs.js"></script> 
 
         <script type="text/javascript">
@@ -52,7 +50,7 @@ and open the template in the editor.
                     }
                 });
 
-                //script:button for view, showing attendance in persentage
+                //script:button for view, showing attendance in percentage
                 $("#view").click(function () {
                     $(this).val(function (i, value) {
                         return value === "normal" ? "percentage" : "normal";
@@ -243,13 +241,6 @@ and open the template in the editor.
                             });
                         });
                     }
-
-                    //datatables api test
-                    $("#attendance-table").DataTable({
-                        fixedHeader: true,
-                        autoWidth: false,
-                        heightMatch: 'none'
-                    });
                 }
 
                 //script: modal section-----------------------------------------
@@ -318,7 +309,7 @@ and open the template in the editor.
 
         <div id="attendance-view" class="container-fluid">
 
-            <table  id="attendance-table">        
+            <table  id="attendance-table" class="record_table">        
                 <thead>
                 </thead> 
                 <tbody id="body">
