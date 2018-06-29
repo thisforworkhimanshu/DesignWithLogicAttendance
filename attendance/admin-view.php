@@ -95,6 +95,13 @@ and open the template in the editor.
 
                 });
 
+                //script:button for type selection
+                $("#type").click(function () {
+                    $(this).text(function (i, text) {
+                        return text === "Theory" ? "Practical" : "Theory";
+                    });
+                });
+
                 //script:button print export table to excel
                 $("#print").click(function () {
                     $("#attendance-table [type=checkbox]").remove();
@@ -291,7 +298,7 @@ and open the template in the editor.
     </head>
     <body>
         <?php require_once '../master-layout/admin/master-page-admin.php'; ?>
-        <div style=" margin-left: 5px; margin-top:5px; " >
+        <div class="p-2 mt-1">
             <?php
             include '../Connection.php';
             $conn = new Connection();
@@ -300,39 +307,61 @@ and open the template in the editor.
             $rgetSemester = $db->query($sgetSemester);
             if ($rgetSemester->num_rows > 0) {
                 ?>
-
-                <select style="width:190px; height:27px;" name="semester" id="semester">
-                    <option >Select Semester</option>
-                    <?php
-                    while ($row = $rgetSemester->fetch_assoc()) {
-                        ?>
-                        <option value="<?php echo $row['student_semester'] ?>"><?php echo $row['student_semester'] ?></option>
+                <div class="form-row form-group">
+                    <div class="col-md-2">
+                        <select name="semester" id="semester" class="form-control">
+                            <option >Select Semester</option>
+                            <?php
+                            while ($row = $rgetSemester->fetch_assoc()) {
+                                ?>
+                                <option value="<?php echo $row['student_semester'] ?>"><?php echo $row['student_semester'] ?></option>
+                                <?php
+                            }
+                            ?>
+                        </select>
                         <?php
                     }
                     ?>
-                </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                <?php
-            }
-            ?>
-            <button style="width:32px; height:33px" id="div" class="btn btn-primary" >A</button>&nbsp;
-
-
-        </div>
-        <div style=" margin-left: 5px;  margin-top: 3px; margin-bottom:3px; ">
-            <input style="width:190px; height:27px; " id="search" type="text" placeholder="Search in table..." disabled="true">
-            <input style="width:190px; height:27px; margin-left:20px;" type="text" id="dateFrom" disabled="true" placeholder="for date"> -from to-
-            <input style="width:190px; height:27px;" type="text" id="dateTo" disabled="true" placeholder="last date">&nbsp;&nbsp;&nbsp;&nbsp;
-            <button  style=" margin-left:250px;"  id="view" value="normal" class="btn btn-primary" style="width:40px; margin-left:5px;">a|t</button>&nbsp;
-            <button id="print" class="btn btn-success" ><span class="glyphicon glyphicon-magnet" aria-hidden="true"></span>&nbsp Export</button>&nbsp;
-            <button id="openmodal" class="btn btn-primary" >update attendance</button>
+                </div>
+                <div style="width: 3%">
+                    <button id="div" class="btn btn-block btn-outline-primary" >A</button>
+                </div>
+                <div class="col-md-1">
+                    <button id="type" class="btn btn-block btn-outline-primary">Theory</button>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-3">
+                    <input id="search" type="text" placeholder="Search in table..." disabled="true" class="form-control">
+                </div>
+                <div class="col-md-5 form-inline">
+                    <input type="text" id="dateFrom" disabled="true" placeholder="for date" class="form-control"> -from to-
+                    <input type="text" id="dateTo" disabled="true" placeholder="last date" class="form-control">
+                </div>
+                <div class="form-inline ml-md-auto ml-sm-5">
+                    <button id="openmodal" class="btn btn-primary mr-1" >update attendance</button>
+                    <button id="print" class="btn btn-success mr-1" ><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
+                    <div class="dropdown show">
+                        <i class="material-icons crossRotate" href="#" style="cursor: pointer" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">settings</i>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                            <li class="ml-1">
+                                <label for="criteria" class="col-form-label col-form-label-sm float-left mr-1">1. adjust criteria:</label>
+                                <input id="criteria" type="text" class="form-control form-control-sm col-3 m-1">%
+                            </li>
+                            <li class="ml-1">
+                                 <label for="view" class="col-form-label col-form-label-sm float-left mr-1">2. change view:</label>
+                                 <button id="view" value="normal" class="btn btn-sm col-3 btn-outline-primary m-2">a|t</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>     
         </div>
         <hr/>
-
-
-        <div id="attendance-view" class="container" style="height: 520px">
+        <div id="attendance-view" class="container" style="height: 510px">
 
             <table  id="attendance-table" class="record_table">        
-                <thead>
+                <thead class="bg-light">
                 </thead> 
                 <tbody id="body">
                 </tbody> 

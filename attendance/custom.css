@@ -21,8 +21,12 @@ and open the template in the editor.
     background: #eee;
 }
 
-/*sticky header css..........................................................*/
-
+/*admin view setting button..........................................................*/
+.crossRotate:active {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+}
 
 /*modal css...................................................................*/
 body {font-family: Arial, Helvetica, sans-serif;}
