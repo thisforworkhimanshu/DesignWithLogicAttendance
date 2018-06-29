@@ -38,38 +38,43 @@ if(!isset($_SESSION['aid'])){
                 $(document).ready(function(){
                    $("#btnSubmit").click(function(){
                        var enrol = $("#enrolment").val();
-                       if(enrol===""){
+                       var cenrol = $("#cenrolment").val();
+                       if(enrol===""||cenrol===""){
                            alert('Input Enrolment Please');
                            return false;
                        }else{
-                           $.ajax({
-                                type: 'POST',
-                                url: "ajax-detain-stud.php",
-                                data: {enrolment:enrol},
-                                beforeSend: function (xhr) {
-                                    $("#msgerr").hide();
-                                    $("#msgsuccess").hide();
-                                },
-                                success: function (data) {
-                                    if(data==="norecord"){
-                                        $("#msgsuccess").hide();
-                                        $("#msgerr").show();
-                                        $("#msgerr").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">No Record Found</div>');
-                                    }else if(data==="already"){
-                                        $("#msgsuccess").hide();
-                                        $("#msgerr").show();
-                                        $("#msgerr").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Already Detain</div>');
-                                    }else if(data==="success"){
+                           if(enrol===cenrol){
+                               $.ajax({
+                                    type: 'POST',
+                                    url: "ajax-detain-stud.php",
+                                    data: {enrolment:enrol},
+                                    beforeSend: function (xhr) {
                                         $("#msgerr").hide();
-                                        $("#msgsuccess").show();
-                                        $("#msgsuccess").html('<div class="alert alert-success"> <span class="glyphicon glyphicon-info-sign">Successfully Detain</div>');
-                                    }else if(data==="failed"){
-                                        $("#msgsuccess").show();
-                                        $("#msgerr").hide();
-                                        $("#msgsuccess").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Operation Failed</div>');
+                                        $("#msgsuccess").hide();
+                                    },
+                                    success: function (data) {
+                                        if(data==="norecord"){
+                                            $("#msgsuccess").hide();
+                                            $("#msgerr").show();
+                                            $("#msgerr").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">No Record Found</div>');
+                                        }else if(data==="already"){
+                                            $("#msgsuccess").hide();
+                                            $("#msgerr").show();
+                                            $("#msgerr").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Already Detain</div>');
+                                        }else if(data==="success"){
+                                            $("#msgerr").hide();
+                                            $("#msgsuccess").show();
+                                            $("#msgsuccess").html('<div class="alert alert-success"> <span class="glyphicon glyphicon-info-sign">Successfully Detain</div>');
+                                        }else if(data==="failed"){
+                                            $("#msgsuccess").show();
+                                            $("#msgerr").hide();
+                                            $("#msgsuccess").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Operation Failed</div>');
+                                        }
                                     }
-                                }
-                            });
+                                });
+                           }else{
+                                alert('Bother Enrolment Should Match');
+                           }
                        }
                        return false;
                    });
@@ -81,6 +86,11 @@ if(!isset($_SESSION['aid'])){
                     <div class="col-lg-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="enrolment" placeholder="Enrolment Number" name="enrolment" required="required"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cenrolment" placeholder="Confirm Enrolment Number" name="enrolment" required="required"/>
                         </div>
                     </div>
                     <div class="col-lg-2">
@@ -110,41 +120,46 @@ if(!isset($_SESSION['aid'])){
                 $(document).ready(function(){
                    $("#btnSubmitReg").click(function(){
                        var enrol = $("#enrolmentReg").val();
+                       var cenrol = $("#cenrolmentReg").val();
                        var batchyear = $("#batchyear").val();
                        
-                       if(enrol===""||batchyear===""){
+                       if(enrol===""||batchyear===""||cenrol===""){
                            alert('Input All Details Please');
                            return false;
                        }else{
-                            $.ajax({
-                                type: 'POST',
-                                url: "ajax-regularized-detain-student.php",
-                                data: {enrolment:enrol,batchyear:batchyear},
-                                beforeSend: function (xhr) {
-                                    $("#msgerrR").hide();
-                                    $("#msgsuccessR").hide();
-                                },
-                                success: function (data) {
-                                    console.log(data);
-                                    if(data==="norecord"){
-                                        $("#msgsuccessR").hide();
-                                        $("#msgerrR").show();
-                                        $("#msgerrR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">No Record Found</div>');
-                                    }else if(data==="notvalid"){
-                                        $("#msgsuccessR").hide();
-                                        $("#msgerrR").show();
-                                        $("#msgerrR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Batch Year Not Valid</div>');
-                                    }else if(data==="success"){
+                           if(enrol===cenrol){
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "ajax-regularized-detain-student.php",
+                                    data: {enrolment:enrol,batchyear:batchyear},
+                                    beforeSend: function (xhr) {
                                         $("#msgerrR").hide();
-                                        $("#msgsuccessR").show();
-                                        $("#msgsuccessR").html('<div class="alert alert-success"> <span class="glyphicon glyphicon-info-sign">Successfully Regularised</div>');
-                                    }else if(data==="failed"){
-                                        $("#msgsuccessR").show();
-                                        $("#msgerrR").hide();
-                                        $("#msgsuccessR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Operation Failed</div>');
+                                        $("#msgsuccessR").hide();
+                                    },
+                                    success: function (data) {
+                                        console.log(data);
+                                        if(data==="norecord"){
+                                            $("#msgsuccessR").hide();
+                                            $("#msgerrR").show();
+                                            $("#msgerrR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">No Record Found</div>');
+                                        }else if(data==="notvalid"){
+                                            $("#msgsuccessR").hide();
+                                            $("#msgerrR").show();
+                                            $("#msgerrR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Batch Year Not Valid</div>');
+                                        }else if(data==="success"){
+                                            $("#msgerrR").hide();
+                                            $("#msgsuccessR").show();
+                                            $("#msgsuccessR").html('<div class="alert alert-success"> <span class="glyphicon glyphicon-info-sign">Successfully Regularised</div>');
+                                        }else if(data==="failed"){
+                                            $("#msgsuccessR").show();
+                                            $("#msgerrR").hide();
+                                            $("#msgsuccessR").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Operation Failed</div>');
+                                        }
                                     }
-                                }
-                            });
+                                });
+                           }else{
+                                alert('Both Enrolment Should Be Equal');
+                           }
                        }
                        return false;
                    });
@@ -156,6 +171,11 @@ if(!isset($_SESSION['aid'])){
                     <div class="col-lg-3">
                         <div class="form-group">
                             <input type="text" class="form-control" id="enrolmentReg" placeholder="Enrolment Number" name="enrolment"/>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="cenrolmentReg" placeholder="Confirm Enrolment Number" name="enrolment"/>
                         </div>
                     </div>
                     <div class="col-lg-3">

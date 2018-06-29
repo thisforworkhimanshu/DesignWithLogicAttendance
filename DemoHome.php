@@ -9,14 +9,16 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title></title>
         <link rel="stylesheet" href="css/circle.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1">        
+
+        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
         <link rel="stylesheet" href="bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css"/>
         <!-- jQuery library -->
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
-         
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         <!-- Popper JS -->
@@ -95,7 +97,7 @@ and open the template in the editor.
                                                     window.location.href="welcomefaculty.php";
                                                     $body.removeClass("loading");
                                                 },4000);
-                                                
+
                                             }else{
                                                 $("#error").fadeIn(1000, function(){
                                                     $body.removeClass("loading");
@@ -117,66 +119,16 @@ and open the template in the editor.
                 <div class="col"></div>
             </div>
         </div>
-        
+
         <div class="modal"></div>-->
+          
 
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">Management</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Task
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Check My Subject Allocation</a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Marks
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Marks Entry</a>
-                    <a class="dropdown-item" href="#">Change Marks</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">View Marks</a>
-                  </div>
-                </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Attendance
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Fill Attendance</a>
-                    <a class="dropdown-item" href="#">View Attendance</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Change Attendance</a>
-                  </div>
-                </li>
-            
-            </ul>
-            <ul class="navbar-nav navbar-right">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Profile</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Logout</a>
-                    </div>
-                  </li>
-            </ul>
-        </div>
-      </nav>
-</div>
+        <div class="onoffswitch">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+        <label class="onoffswitch-label" for="myonoffswitch">
+            <span class="onoffswitch-inner"></span>
+            <span class="onoffswitch-switch"></span>
+        </label>
+    </div>
     </body>
 </html>

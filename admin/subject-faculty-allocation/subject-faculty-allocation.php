@@ -107,6 +107,7 @@ if (!isset($_SESSION['aid'])) {
                                     </select>
                                 </div>
                                 <script>
+
                                     $(document).ready(function () {
                                         $("#subject").change(function () {
                                             if (this.selectedIndex === 0) {
@@ -124,6 +125,26 @@ if (!isset($_SESSION['aid'])) {
                                                             $("#faculty").prop("disabled", false);
                                                             $("#faculty").html(response);
                                                         }).fail(function () {
+
+                                    $(document).ready(function() {
+                                        $("#subject").change(function(){
+                                            if(this.selectedIndex===0){
+                                                $("#faculty").prop("disabled",true);
+                                                $("#chooselecture").prop("disabled",true);
+                                                $("#choosediv").prop("disabled",true);
+                                                $("#choosebatch").prop("disabled",true);
+                                                $("#btnSubmit").prop("disabled",true);
+                                                $("#lecture_hours").prop("disabled",true);
+                                                $("#lecture_total").prop("disabled",true);
+                                            }else{
+                                                var subName  = $("#subject").val();
+                                                var semester = $("#semester").val();
+                                                $.post('ajax-processFaculty.php',{subject:subName,semester:semester},
+                                                    function(response) {
+                                                        $("#faculty").prop("disabled",false);
+                                                        $("#faculty").html(response);
+                                                }).fail(function(){
+
 
                                                 });
                                             }
@@ -354,7 +375,11 @@ if (!isset($_SESSION['aid'])) {
                                             var lecturetotal = $("#lecture_total").val();
                                             var stat = "";
                                             var div = $("#choosediv").val();
+
                                             if (div == "") {
+
+                                            if(div=="null"){
+
                                                 stat = $("#choosebatch").val();
                                             } else {
                                                 stat = div;

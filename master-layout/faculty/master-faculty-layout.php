@@ -39,11 +39,18 @@
             </ul>
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item dropdown">
+
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons" style="vertical-align: middle;padding-right: 2px; font-size: 12pt">person</i><?= $_SESSION['f_name'] ?></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Profile</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/sessionDestroy.php">Logout</a>
+
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="../../sessionDestroy.php">Logout</a>
+
                     </div>
                 </li>
             </ul>

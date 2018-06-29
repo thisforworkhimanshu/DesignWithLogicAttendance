@@ -77,6 +77,7 @@ if (!isset($_SESSION['aid'])) {
                             <input type="submit" class="form-control btn btn-danger" name="btnSubmit" id="btnSubmit"/>
                         </div>
                     </div>
+
                 </form>
                 <?php
             }
@@ -95,6 +96,36 @@ if (!isset($_SESSION['aid'])) {
     }
 }
 ?>
+
+                </div>
+            </form>
+                        <?php
+                }else{
+                    ?>
+            <div class="text-center" style="margin-top: 3%;">
+                <h5>No Faculty Detail Available</h5>
+            </div>
+                        <?php
+                }
+                
+                if(isset($_POST['faculty']) && $_POST['faculty']!="")
+                {
+                    $sql = "delete from faculty where faculty_id=".$_POST['faculty'];
+                    if(mysqli_query($conn, $sql))
+                    {
+                        ?>
+            <div class="alert alert-success">Record Delete Sucessfully...Redirecting</div>
+            <script>
+                setTimeout(function(){
+                    window.location.href='faculty-delete.php';
+                },1000);
+            </script>
+            <?php
+                    }
+                    
+                }
+            ?>
+
         </div>
     </body>
 </html>

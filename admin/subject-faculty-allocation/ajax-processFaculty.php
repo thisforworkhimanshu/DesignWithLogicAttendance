@@ -16,9 +16,14 @@ if(isset($_POST['subject'])){
     session_start();
 
     $dept_id = $_SESSION['a_dept_id'];
-
-    $sql = "SELECT * FROM faculty where dept_id  = $dept_id";
-
+    $sem = $_POST['semester'];
+    
+    if($sem==1||$sem==2){
+        $sql = "SELECT * FROM faculty where dept_id  in ($dept_id,1)";
+    } else {
+        $sql = "SELECT * FROM faculty where dept_id  = $dept_id";
+    }
+    
     $result = mysqli_query($conn, $sql);
 
     if(mysqli_num_rows($result)>0){

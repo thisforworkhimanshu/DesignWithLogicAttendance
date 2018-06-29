@@ -79,7 +79,7 @@ and open the template in the editor.
                         </div>
                         <div class="row form-group">
                             <div class="col-sm-7"></div>
-                            <div class="col-sm-auto"><a href="" class="btn-link" style="color: red;">Forgot Password?</a></div>
+                            <div class="col-sm-auto"><a href="student-forget-password/forget-password.php" class="btn-link" style="color: red;">Forgot Password?</a></div>
                         </div>
                         <div id="error"></div>
                         <div class="form-group">

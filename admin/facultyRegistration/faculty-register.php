@@ -199,6 +199,7 @@ if (!isset($_SESSION['aid'])) {
                                             },
                                             success: function (result) {
                                                 var res = result.substring(2);
+
                                                 var response = result.substring(0, 2);
                                                 if (response === "ok") {
                                                     $("#btnSubmit").html('<span class="glyphicon glyphicon-transfer"></span> Successfully Registered with ID: ' + res);
@@ -208,6 +209,13 @@ if (!isset($_SESSION['aid'])) {
 
                                                 } else {
                                                     $("#error").fadeIn(1000, function () {
+
+                                                var response = result.substring(0,2);
+                                                if(response==="ok"){
+                                                    $("#btnSubmit").html('<span class="glyphicon glyphicon-transfer"></span> Successfully Registered with ID: '+res);
+                                                }else{
+                                                    $("#error").fadeIn(1000, function(){
+
                                                         $(":submit").attr("disabled", false);
                                                         $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span>   ' + result + ' !</div>');
                                                         $("#btnSubmit").html('<span class="glyphicon glyphicon-log-in"></span>   Submit');

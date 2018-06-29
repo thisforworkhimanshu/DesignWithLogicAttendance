@@ -23,7 +23,6 @@ $resultYear = mysqli_query($conn, $sqlgetYear);
 $row = mysqli_fetch_object($resultYear);
 $_SESSION['batch_year'] = $row->batch_year;
 
-
 $sql = "SELECT subject_code,subject_name FROM subject where semester = $sem and dept_id = $dept_id";
 
 $result = mysqli_query($conn, $sql);

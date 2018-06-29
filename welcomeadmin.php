@@ -26,6 +26,7 @@ if (isset($_SESSION['aid'])) {
             <!-- Popper JS -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 
+
             <!-- Latest compiled JavaScript -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
@@ -35,6 +36,24 @@ if (isset($_SESSION['aid'])) {
         </body>
     </html>
     <?php
+
+                        </ul>
+                        <ul class="navbar-nav navbar-right">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <a class="dropdown-item" href="sessionDestroy.php">Logout</a>
+                                </div>
+                              </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>    
+        </div> <!--End of Container-->
+    </body>
+</html>
+<?php
+
 } else {
     header("Location: index.php");
 }
