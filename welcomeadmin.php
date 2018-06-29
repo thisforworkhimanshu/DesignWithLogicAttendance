@@ -26,13 +26,15 @@ if (isset($_SESSION['aid'])) {
             <!-- Popper JS -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 
-
             <!-- Latest compiled JavaScript -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 
         </head>
         <body>
-            <?php require_once './master-layout/admin/master-page-admin.php'; ?>
+            <div class="container">
+                <?php require_once './master-layout/admin/master-page-admin.php'; ?>
+            </div>
+            
         </body>
     </html>
 <?php

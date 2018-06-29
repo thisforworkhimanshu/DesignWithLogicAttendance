@@ -32,8 +32,8 @@ if (isset($_SESSION['fid'])) {
 
         </head>
         <body>
-            <?php include './master-layout/faculty/master-faculty-layout.php'; ?>
             <div class="container">
+                <?php include './master-layout/faculty/master-faculty-layout.php'; ?>
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">

@@ -29,7 +29,7 @@ if(!isset($_SESSION['aid'])){
             
             <div class="badge-light" style="margin-top: 1%;">
                 <div class="text-center">
-                    <h5>Subject Entry Into Department</h5>
+                    <h5>Past Subject Allocation</h5>
                 </div>
             </div>
             <form action="subjectAllocationHistory.php" method="post">
@@ -82,44 +82,46 @@ if(!isset($_SESSION['aid'])){
                         
                         $sqlSub = "select * from duplicate_subject_faculty_allocation where faculty_id = $fac_id and batch_year = $batch_year and semester = $sem and dept_id = $dept_id";
                         $rsqlSub = mysqli_query($conn,$sqlSub);
-                        ?>
-            <div class="table-responsive">
-                <table class="table-sm table-bordered">
-                    <tr>
-                        <th colspan="3">Faculty Name : <?php echo $fac_name ?></th>
-                        <th colspan="1">Semester : <?php echo $sem?></th>
-                        <th>Department Id: <?php echo $dept_id?></th>
-                        <th>Category : Past Subject Allocation</th>
-                    </tr>
-                    <tr>
-                        <th>Subject Code</th>
-                        <th>Subject Name</th>
-                        <th>Theory/Practical</th>
-                        <th>Division/Batch</th>
-                        <th>Hours Allocated</th>
-                        <th>Approx. Total Theory/Practical in Term</th>
-                    </tr>
-                
-                            <?php
-                        while($rowSub = mysqli_fetch_assoc($rsqlSub)){
-                            $sub_code = $rowSub['subject_code'];
-                            $subName = "select subject_name from subject where subject_code = $sub_code and dept_id = $dept_id and semester = $sem";
-                            $rSubject = mysqli_query($conn, $subName);
-                            
-                            $rowSubject = mysqli_fetch_assoc($rSubject);
-                            $subject_name = $rowSubject['subject_name'];
-                            
+                        if(mysqli_num_rows($rsqlSub)>0){
                             ?>
-                    <tr>
-                        <td><?php echo $sub_code?></td>
-                        <td><?php echo $subject_name?></td>
-                        <td><?php echo $rowSub['lecture_type']?></td>
-                        <td><?php echo $rowSub['type']?></td>
-                        <td><?php echo $rowSub['total_hours']?></td>
-                        <td><?php echo $rowSub['expected_total_lecture']?></td>
-                    </tr>
-                                <?php
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th colspan="3" style="width: 50%;">Faculty Name : <?php echo $fac_name ?></th>
+                                    <th colspan="1" style="width: 10%;">Semester : <?php echo $sem?></th>
+                                    <th style="width: 15%;">Department Id: <?php echo $dept_id?></th>
+                                    <th style="width: 20%;">Category : Past Subject Allocation</th>
+                                </tr>
+                                <tr>
+                                    <th style="width: 12%;">Subject Code</th>
+                                    <th>Subject Name</th>
+                                    <th style="width: 5%;">Theory/Practical</th>
+                                    <th>Division/Batch</th>
+                                    <th>Hours Allocated</th>
+                                    <th>Approx. Total Theory/Practical in Term</th>
+                                </tr>
+                                        <?php
+                                    while($rowSub = mysqli_fetch_assoc($rsqlSub)){
+                                        $sub_code = $rowSub['subject_code'];
+                                        $subName = "select subject_name from subject where subject_code = $sub_code and dept_id = $dept_id and semester = $sem";
+                                        $rSubject = mysqli_query($conn, $subName);
+
+                                        $rowSubject = mysqli_fetch_assoc($rSubject);
+                                        $subject_name = $rowSubject['subject_name'];
+
+                                        ?>
+                                <tr>
+                                    <td><?php echo $sub_code?></td>
+                                    <td><?php echo $subject_name?></td>
+                                    <td><?php echo $rowSub['lecture_type']?></td>
+                                    <td><?php echo $rowSub['type']?></td>
+                                    <td><?php echo $rowSub['total_hours']?></td>
+                                    <td><?php echo $rowSub['expected_total_lecture']?></td>
+                                </tr>
+                                            <?php
+                                    }
                         }
+                        
                     }
                 }
                 ?>
