@@ -17,6 +17,7 @@ and open the template in the editor.
         <script src="../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
         <script src="../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> <!-- jquery-ui css -->
         <script src="excelexportjs.js"></script> 
+        <script src="../jquery/tableHeadFixer.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function () {
@@ -241,6 +242,10 @@ and open the template in the editor.
                             });
                         });
                     }
+
+                    $("#attendance-table").tableHeadFixer({
+                        head:true
+                    });
                 }
 
                 //script: modal section-----------------------------------------
@@ -307,7 +312,7 @@ and open the template in the editor.
         <hr/>
 
 
-        <div id="attendance-view" class="container-fluid">
+        <div id="attendance-view" class="container" style="height: 520px">
 
             <table  id="attendance-table" class="record_table">        
                 <thead>
