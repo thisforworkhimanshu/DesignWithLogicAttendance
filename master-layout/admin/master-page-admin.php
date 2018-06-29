@@ -67,7 +67,14 @@
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/move-to-passout/getBatchDetails.php">Move Batch To Passout</a>
                     </div>
                 </li>
-
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        History
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/history-subject-faculty-allocation/subjectAllocationHistory.php">Past Subject Allocation</a>
+                    </div>
+                </li>
             </ul>
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item dropdown">

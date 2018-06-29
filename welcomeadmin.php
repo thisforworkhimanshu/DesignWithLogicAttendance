@@ -34,7 +34,6 @@ if (isset($_SESSION['aid'])) {
             <div class="container">
                 <?php require_once './master-layout/admin/master-page-admin.php'; ?>
             </div>
-            
         </body>
     </html>
 <?php

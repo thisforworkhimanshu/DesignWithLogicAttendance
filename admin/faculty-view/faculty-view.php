@@ -23,6 +23,7 @@ if (!isset($_SESSION['aid'])) {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        
         <script>
             $(document).ready(function () {
                 //script:highlight the active link in navigation bar
@@ -37,12 +38,8 @@ if (!isset($_SESSION['aid'])) {
                         }
                     })
                 });
-
+        </script>
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../../Paginathing/paginathing.js"></script>
         <script>
             $(document).ready(function(){
