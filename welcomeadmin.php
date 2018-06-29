@@ -35,25 +35,7 @@ if (isset($_SESSION['aid'])) {
             <?php require_once './master-layout/admin/master-page-admin.php'; ?>
         </body>
     </html>
-    <?php
-
-                        </ul>
-                        <ul class="navbar-nav navbar-right">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="sessionDestroy.php">Logout</a>
-                                </div>
-                              </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>    
-        </div> <!--End of Container-->
-    </body>
-</html>
 <?php
-
 } else {
     header("Location: index.php");
 }

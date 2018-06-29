@@ -79,26 +79,6 @@ if (!isset($_SESSION['aid'])) {
                     </div>
 
                 </form>
-                <?php
-            }
-
-            if (isset($_POST['faculty']) && $_POST['faculty'] != "") {
-                $sql = "delete from faculty where faculty_id=" . $_POST['faculty'];
-                if (mysqli_query($conn, $sql)) {
-                    ?>
-                    <div class="alert alert-success">Record Delete Sucessfully...Redirecting</div>
-                    <script>
-                        setTimeout(function () {
-                            window.location.href = 'faculty-delete.php';
-                        }, 1000);
-                    </script>
-        <?php
-    }
-}
-?>
-
-                </div>
-            </form>
                         <?php
                 }else{
                     ?>
@@ -108,12 +88,12 @@ if (!isset($_SESSION['aid'])) {
                         <?php
                 }
                 
-                if(isset($_POST['faculty']) && $_POST['faculty']!="")
-                {
-                    $sql = "delete from faculty where faculty_id=".$_POST['faculty'];
-                    if(mysqli_query($conn, $sql))
-                    {
-                        ?>
+        if(isset($_POST['faculty']) && $_POST['faculty']!="")
+        {
+            $sql = "delete from faculty where faculty_id=".$_POST['faculty'];
+            if(mysqli_query($conn, $sql))
+            {
+                ?>
             <div class="alert alert-success">Record Delete Sucessfully...Redirecting</div>
             <script>
                 setTimeout(function(){
@@ -123,7 +103,7 @@ if (!isset($_SESSION['aid'])) {
             <?php
                     }
                     
-                }
+        }
             ?>
 
         </div>

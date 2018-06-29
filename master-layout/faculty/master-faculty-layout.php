@@ -50,7 +50,6 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" href="../../sessionDestroy.php">Logout</a>
-
                     </div>
                 </li>
             </ul>
