@@ -7,22 +7,37 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>SIM: admin attendance view</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="custom.css">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.css"> <!-- jquery-ui css -->
+        <link rel="stylesheet" href="../bootstrap-4.1.1-dist/css/bootstrap.min.css"> <!-- bootstrap css -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="../bootstrap-4.1.1-dist/js/bootstrap.min.js"></script> <!-- bootstrap js -->
+        <script src="../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
+        <script src="../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> <!-- jquery-ui css -->
         <script src="excelexportjs.js"></script>
-
-
-
+        <script src="../jquery/tableHeadFixer.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function () {
+
+                //script:highlight the active link in navigation bar
+                $(document).ready(function () {
+                    var current = location.pathname;
+                    $('#nav li a').each(function () {
+                        var $this = $(this);
+                        // if the current path is like this link, make it active
+                        if ($this.attr('href').indexOf(current) !== -1) {
+                            $this.addClass('active');
+                            return false;
+                        }
+                    })
+                });
+
                 var sel = []; //store selected student from table 
 
                 //script:event table click event and selection
@@ -52,7 +67,7 @@ and open the template in the editor.
                     }
                 });
 
-                //script:button for view, showing attendance in persentage
+                //script:button for view, showing attendance in percentage
                 $("#view").click(function () {
                     $(this).val(function (i, value) {
                         return value === "normal" ? "percentage" : "normal";
@@ -177,13 +192,13 @@ and open the template in the editor.
                         $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text('enrolment'), $('<th>').text('name'));
                         $.each(jsonData[0], function (i, row) {
                             if (i != 'name' && i != 'enrolment') {
-                                $("#attendance-table > thead tr:first-child").append($('<th>').attr("colspan", 2).text(i));
-                                $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text('attend'), $('<th>').text('total'));
+                                $("#attendance-table > thead tr:first-child").append($('<th>').attr("colspan", 2).text(i).css('text-align', 'center'));
+                                $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text('attend').css('text-align', 'center'), $('<th>').text('total').css('text-align', 'center'));
                             }
                         });
-
                         //create table body, normal view
                         $.each(jsonData, function (i, row) {
+
                             $("#attendance-table > tbody:last-child").append($('<tr>'));
                             var $tr = $("#attendance-table > tbody tr:last-child");
                             $.each(jsonData[i], function (j, value) {
@@ -196,7 +211,7 @@ and open the template in the editor.
                                         percentage = 0;
                                         $($tr).append($('<td>').text('-').css("background-color", "#f2f2f2"), $('<td>').text('-').css("background-color", "#f2f2f2"));
                                     } else {
-                                        percentage = Math.round(parseInt(value.attend) * 100 / parseInt(value.total));
+                                        percentage = parseInt(value.attend) * 100 / parseInt(value.total);
                                         var setColor = 'transparent';
                                         if (percentage < 75) {
                                             setColor = '#ffcccc';
@@ -209,11 +224,12 @@ and open the template in the editor.
                         });
                     } else {
                         //create table header, percentage view
-                        $("#attendance-table > thead").append($('<tr>'));
-                        $("#attendance-table > thead tr:first-child").append($('<th>').text('enrolment'), $('<th>').text('name'));
+
+                        $("#attendance-table > thead").append($('<tr>'), $('<tr>'));
+                        $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text('enrolment'), $('<th>').text('name'));
                         $.each(jsonData[0], function (i, row) {
                             if (i != 'name' && i != 'enrolment') {
-                                $("#attendance-table > thead tr:first-child").append($('<th>').text(i));
+                                $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text(i));
                             }
                         });
 
@@ -242,12 +258,17 @@ and open the template in the editor.
                             });
                         });
                     }
+
+                    $("#attendance-table").tableHeadFixer({
+                        head: true
+                    });
                 }
 
                 //script: modal section-----------------------------------------
 
-                //script:button open change attendance modal
+                //script:button open update attendance modal
                 $("#openmodal").click(function () {
+                    $("#mdivShowEnroll").text(sel);
                     $("#modal").css("display", "block");
                     $("#mdivBulk").hide();
                     $("#mdivPrt").show();
@@ -265,64 +286,12 @@ and open the template in the editor.
                 $("#mbtnCancel").click(function () {
                     $("#modal").css("display", "none");
                 });
-
-                // Multiple date picker script starts from here
-                var dates = new Array();
-
-                function addDate(date) {
-                    console.log(dates);
-                    if ($.inArray(date, dates) < 0)
-                        dates.push(date);
-                }
-
-                function removeDate(index) {
-                    dates.splice(index, 1);
-                }
-
-                function printArray() {
-                    var printArr = new String;
-                    dates.forEach(function (val) {
-                        printArr += '<h4>' + val + '</h4>';
-                    });
-                    $('#print-array').html(printArr);
-                }
-                
-                // Adds a date if we don't have it yet, else remove it
-                function addOrRemoveDate(date) {
-                    var index = $.inArray(date, dates);
-                    if (index >= 0)
-                        removeDate(index);
-                    else
-                        addDate(date);
-                    printArray();
-                }
-
-                $("#bulckDate").datepicker({
-                    onSelect: function (dateText, inst) {
-                        addOrRemoveDate(dateText);
-                    },
-                    beforeShowDay: function (date) {
-                        var year = date.getFullYear();
-                        // months and days are inserted into the array in the form, e.g "01/01/2009", but here the format is "1/1/2009"
-                        var month = date.getMonth() + 1;
-                        var day = date.getDate();
-                        // This depends on the datepicker's date format
-                        var dateString = month + "/" + day + "/" + year;
-
-                        var gotDate = $.inArray(dateString, dates);
-                        if (gotDate >= 0) {
-                            // Enable date so it can be deselected. Set style to be highlighted
-                            return [true, "ui-state-highlight"];
-                        }
-                        // Dates not in the array are left enabled, but with no extra style
-                        return [true, ""];
-                    }
-                });
             });
         </script>
     </head>
     <body>
-        <div>
+        <?php require_once '../master-layout/admin/master-page-admin.php'; ?>
+        <div style=" margin-left: 5px; margin-top:5px; " >
             <?php
             include '../Connection.php';
             $conn = new Connection();
@@ -331,7 +300,8 @@ and open the template in the editor.
             $rgetSemester = $db->query($sgetSemester);
             if ($rgetSemester->num_rows > 0) {
                 ?>
-                <select name="semester" id="semester">
+
+                <select style="width:190px; height:27px;" name="semester" id="semester">
                     <option >Select Semester</option>
                     <?php
                     while ($row = $rgetSemester->fetch_assoc()) {
@@ -340,31 +310,33 @@ and open the template in the editor.
                         <?php
                     }
                     ?>
-                </select>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php
             }
             ?>
-            <button id="div">A</button>
-            <button id="view" value="normal">a|t</button>
+            <button style="width:32px; height:33px" id="div" class="btn btn-primary" >A</button>&nbsp;
+
+
         </div>
-        <div>
-            <input id="search" type="text" placeholder="Search in table..." disabled="true">
-            <input type="text" id="dateFrom" disabled="true"> -from to-
-            <input type="text" id="dateTo" disabled="true">
-            <button id="print">export to excel!</button>
-            <button id="openmodal" class="btn btn-dark">open modal</button>
+        <div style=" margin-left: 5px;  margin-top: 3px; margin-bottom:3px; ">
+            <input style="width:190px; height:27px; " id="search" type="text" placeholder="Search in table..." disabled="true">
+            <input style="width:190px; height:27px; margin-left:20px;" type="text" id="dateFrom" disabled="true" placeholder="for date"> -from to-
+            <input style="width:190px; height:27px;" type="text" id="dateTo" disabled="true" placeholder="last date">&nbsp;&nbsp;&nbsp;&nbsp;
+            <button  style=" margin-left:250px;"  id="view" value="normal" class="btn btn-primary" style="width:40px; margin-left:5px;">a|t</button>&nbsp;
+            <button id="print" class="btn btn-success" ><span class="glyphicon glyphicon-magnet" aria-hidden="true"></span>&nbsp Export</button>&nbsp;
+            <button id="openmodal" class="btn btn-primary" >update attendance</button>
         </div>
         <hr/>
-        <div id="attendance-view" class="container">
-            <table id="attendance-table" class="record_table">
+
+
+        <div id="attendance-view" class="container" style="height: 520px">
+
+            <table  id="attendance-table" class="record_table">        
                 <thead>
-
-                </thead>
+                </thead> 
                 <tbody id="body">
-
-                </tbody>
+                </tbody> 
             </table>
-
         </div>
 
         <!--modal html.....................................................-->
@@ -373,31 +345,32 @@ and open the template in the editor.
             <div class="mymodal-content animate">
 
                 <div class="" style="text-align: center">
-                    <label style="color: gray">Update Attedance</label>
+                    <label style="color: gray; font-family: inherit; font-size: 25px;">Update Attedance</label>
                 </div>
-                <div style="text-align: center">
-                    <button value="bulk" id="mbtnBulk">change in bulk</button>
+                <div style="text-align: center" class="my-tab">
                     <button value="single" id="mbtnPrt">single subject</button>
+                    <button value="bulk" id="mbtnBulk">change in bulk</button>                    
                 </div>
-                <div class=" mymodal-container border border-primary rounded" style="margin: 1%">
+                <div id="mdivShowEnroll" class=" mymodal-container border border-primary rounded" style="margin: 1%;overflow: auto">
                     enrollments will be shown here
                 </div>
 
                 <div class="mymodal-container">
                     <!--       Bulk division-->  
-                    <div class="mymodal-container" id="mdivBulk">
-                        <label>select dates</label>
+                    <div class="mymodal-container" id="mdivBulk" style="justify-content: center;">
+                        <label style="color: gray; font-family: inherit; font-size: 17px;">Select Dates</label>
                         <br>
                         <div id="bulckDate"></div>
+                        <div id="print-array"></div>
                     </div>
 
                     <!--        particular division-->
-                    <div class="mymodal-container" id="mdivPrt">
-                        <label>select date</label>
-                        <br>
+                    <div class="mymodal-container" id="mdivPrt" style="justify-content: center;">
+                        <label style="color: gray; font-family: inherit;">Select Date:</label>
                         <input id="dateSingle" placeholder="Select Date..">
                         <br>
                         <br>
+                        <label style="color: gray; font-family: inherit;">Select Faculty:</label>
                         <input list="faculty" placeholder="Select Faculty..">
                         <datalist id="faculty">
                             <option value="Internet Explorer">
@@ -408,6 +381,7 @@ and open the template in the editor.
                         </datalist>
                         <br>
                         <br>
+                        <label style="color: gray; font-family: inherit;">Select Subject:</label>
                         <input list="subject" placeholder="Select Subject">
                         <datalist id="subject">
                             <option value="Internet Explorer">
