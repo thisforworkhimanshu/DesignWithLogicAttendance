@@ -64,6 +64,7 @@ and open the template in the editor.
                     var sendData = {'lec_type': 'theory'};
                     callAjax(sendData, "div");
                 });
+                
                 $("#practical").click(function () {
                     $("#lec_type").val($(this).val());
                     $("#division").prop("disabled", false);
@@ -88,6 +89,7 @@ and open the template in the editor.
                         data: sendData,
                         success: function (data, textStatus, jqXHR) {
                             if (type == 'div') {
+                                console.log(data);
                                 appendDivision(data);
                             } else {
                                 console.log(data);
