@@ -139,9 +139,15 @@ if(!isset($_SESSION['aid'])){
                                                 $resultMark = mysqli_query($conn, $sqlGetMark);
                                                 if(mysqli_num_rows($resultMark)>0){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
-                                                    ?>
+                                                    if($rowmark['mid']!=""){
+                                                        ?>
                                             <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>"/>
                                                         <?php
+                                                    }else{
+                                                        ?>
+                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>" disabled/>
+                                                        <?php
+                                                    }
                                                 }else{
                                                     echo 'N.A.';
                                                 }
@@ -150,9 +156,16 @@ if(!isset($_SESSION['aid'])){
                                                 $resultMark = mysqli_query($conn, $sqlGetMark);
                                                 if(mysqli_num_rows($resultMark)>0){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
-                                                    ?>
+                                                    if($rowmark['viva']!=""){
+                                                            ?>
                                             <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>"/>
                                                         <?php
+                                                    }else{
+                                                            ?>
+                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>" disabled/>
+                                                        <?php
+                                                    }
+                                                
                                                 }else{
                                                     echo 'N.A.';
                                                 }
@@ -161,9 +174,16 @@ if(!isset($_SESSION['aid'])){
                                                 $resultMark = mysqli_query($conn, $sqlGetMark);
                                                 if(mysqli_num_rows($resultMark)>0){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
-                                                    ?>
+                                                    if($rowmark['remid']!=""){
+                                                        ?>
                                             <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>"/>
                                                         <?php
+                                                    }else{
+                                                        ?>
+                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>" disabled/>
+                                                        <?php
+                                                    }
+                                                    
                                                 }else{
                                                     echo 'N.A.';
                                                 }
