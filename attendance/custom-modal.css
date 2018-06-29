@@ -14,15 +14,12 @@ and open the template in the editor.
 .record_table tr:hover {
     background: #eee;
 }
-.record_table td,th {
+.record_table td {
     border: 1px solid #eee;
 }
 .highlight_row {
     background: #eee;
 }
-
-/*sticky header css..........................................................*/
-
 
 /*modal css...................................................................*/
 body {font-family: Arial, Helvetica, sans-serif;}
