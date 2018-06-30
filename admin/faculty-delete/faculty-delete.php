@@ -34,7 +34,7 @@ if (!isset($_SESSION['aid'])) {
                             $this.addClass('active');
                             return false;
                         }
-                    })
+                    });
                 });
             });
         </script>

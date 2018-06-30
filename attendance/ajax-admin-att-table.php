@@ -5,10 +5,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+include '../Connection.php';
+$conn = new Connection();
+$db = $conn->createConnection();
 if (isset($_POST['semester']) && isset($_POST['div'])) {
-    include '../Connection.php';
-    $conn = new Connection();
-    $db = $conn->createConnection();
+
     $sem = $_POST['semester'];
     $div = $_POST['div'];
     $dept_id = 16;
@@ -69,4 +70,13 @@ if (isset($_POST['semester']) && isset($_POST['div'])) {
     echo json_encode($uploadJson);
 }
 
+//for criteria adjust setting store
+
+if (isset($_POST['criteria'])) {
+    $criteria = $_POST['criteria'];
+    $sSetCriteria = "UPDATE basic_settings SET setting_value = $criteria WHERE setting_key = 'criteria'";
+    if ($db->query($sSetCriteria) === TRUE) {
+        echo $criteria;
+    }
+}
     

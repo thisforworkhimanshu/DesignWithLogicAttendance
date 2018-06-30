@@ -1,3 +1,20 @@
+<?php
+session_start();
+if (!isset($_SESSION['aid'])) {
+    header('location:/DesignWithLogicAttendance/index.php');
+    return;
+}
+
+include '../Connection.php';
+$conn = new Connection();
+$db = $conn->createConnection();
+
+//get criteria adjust store in setting
+$sGetCriteria = "SELECT * FROM basic_settings WHERE setting_key = 'criteria' LIMIT 1";
+$rGetCriteria = $db->query($sGetCriteria);
+$obj = mysqli_fetch_object($rGetCriteria);
+$criteria = $obj->setting_value;
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -24,7 +41,6 @@ and open the template in the editor.
 
         <script type="text/javascript">
             $(document).ready(function () {
-
                 //script:highlight the active link in navigation bar
                 $(document).ready(function () {
                     var current = location.pathname;
@@ -35,10 +51,10 @@ and open the template in the editor.
                             $this.addClass('active');
                             return false;
                         }
-                    })
+                    });
                 });
-                var sel = []; //store selected student from table 
 
+                var sel = []; //store selected student from table 
                 //script:event table click event and selection
                 $(document).on("click", ".record_table tr", function (event) {
                     if (event.target.type !== 'checkbox') {
@@ -65,6 +81,29 @@ and open the template in the editor.
                         $(this).closest('tr').removeClass("highlight_row");
                     }
                 });
+
+                //script: criteria adjust setting
+                $('#criteria').change(function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: "ajax-admin-att-table.php",
+                        data: {criteria: $(this).val()},
+                        datetype: 'json',
+                        success: function (data) {
+                            $('#dialog-span').text(data);
+                            $("#dialog-message").dialog({
+                                modal: true,
+                                buttons: {
+                                    Ok: function () {
+                                        $(this).dialog("close");
+                                        location.reload();
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+
                 //script:button for view, showing attendance in percentage
                 $("#btnview").click(function () {
                     $(this).val(function (i, value) {
@@ -183,6 +222,7 @@ and open the template in the editor.
                 }
 
                 function showTable(data) {
+                    var criteria = parseInt($('#criteria').val());
                     jsonData = $.parseJSON(data);
                     //empty table
                     $("#attendance-table > thead").empty();
@@ -214,9 +254,9 @@ and open the template in the editor.
                                         percentage = 0;
                                         $($tr).append($('<td>').text('-').css("background-color", "#f2f2f2"), $('<td>').text('-').css("background-color", "#f2f2f2"));
                                     } else {
-                                        percentage = parseInt(value.attend) * 100 / parseInt(value.total);
+                                        percentage = Math.round(parseInt(value.attend) * 100 / parseInt(value.total));
                                         var setColor = 'transparent';
-                                        if (percentage < 75) {
+                                        if (percentage <= criteria) {
                                             setColor = '#ffcccc';
                                         }
                                         $($tr).append($('<td>').text(value.attend).css("background-color", setColor), $('<td>').text(value.total));
@@ -251,7 +291,7 @@ and open the template in the editor.
                                         setColor = '#f2f2f2';
                                     } else {
                                         percentage = Math.round(parseInt(value.attend) * 100 / parseInt(value.total));
-                                        if (percentage < 75) {
+                                        if (percentage <= criteria) {
                                             setColor = '#ffcccc';
                                         }
                                     }
@@ -294,9 +334,6 @@ and open the template in the editor.
         <?php require_once '../master-layout/admin/master-page-admin.php'; ?>
         <div class="p-2 mt-1">
             <?php
-            include '../Connection.php';
-            $conn = new Connection();
-            $db = $conn->createConnection();
             $sgetSemester = "Select DISTINCT student_semester from student";
             $rgetSemester = $db->query($sgetSemester);
             if ($rgetSemester->num_rows > 0) {
@@ -340,7 +377,7 @@ and open the template in the editor.
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                             <li class="ml-1">
                                 <label for="criteria" class="col-form-label col-form-label-sm float-left mr-1">1. adjust criteria:</label>
-                                <input id="criteria" type="text" class="form-control form-control-sm col-3 m-1">%
+                                <input id="criteria" type="text" class="form-control form-control-sm col-3 m-1" value="<?= $criteria ?>">%
                             </li>
                             <li class="ml-1">
                                 <label for="btnview" class="col-form-label col-form-label-sm float-left mr-1">2. change view:</label>
@@ -352,7 +389,7 @@ and open the template in the editor.
             </div>     
         </div>
         <hr/>
-        <div id="attendance-view" class="container" style="height: 510px">
+        <div id="attendance-view" class="container" style="height: 86vh">
             <div id="attendance-info" class="alert alert-info">
                 <i class="material-icons" style="vertical-align: bottom">error_outline</i>&nbspNothing to dispaly here :(
             </div>
@@ -362,6 +399,17 @@ and open the template in the editor.
                 <tbody id="body">
                 </tbody> 
             </table>
+        </div>
+
+        <!--jquery dialog.........................................................-->
+        <div id="dialog-message" title="Setting Change" style="display: none">
+            <p>
+                <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+                Your criteria setting is successfully changed to <span id="dialog-span"></span>.
+            </p>
+            <p style="color: red">
+                page is going to reload.
+            </p>
         </div>
 
         <!--modal html.....................................................-->
