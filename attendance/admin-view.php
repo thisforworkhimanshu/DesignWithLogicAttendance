@@ -310,6 +310,8 @@ and open the template in the editor.
 
                 //script:button open update attendance modal
                 $("#btnopenmodal").click(function () {
+                    $('#mListShowEnroll').empty();
+                    console.log(sel);
                     sel.sort();
                     for (var i = 0; i < sel.length; i++) {
                         $('#mListShowEnroll').append($('<li>').text(sel[i]).addClass('list-group-item'));
@@ -448,8 +450,8 @@ and open the template in the editor.
                         </div>
                     </div>
                     <div class="col-md-2"></div>
-                    <div class=" mymodal-container border border-primary rounded col-md-3" style="margin: 1%; overflow-y: auto">
-                        <ul id="mListShowEnroll" class="list-group list-group-flush"></ul>
+                    <div class=" mymodal-container border border-primary rounded col-md-3" style="margin: 1%; height: inherit; overflow-y: auto">
+                        <ul id="mListShowEnroll" class="list-group list-group-flush small"></ul>
                     </div>
                 </div>
                 <div class="mymodal-container">
