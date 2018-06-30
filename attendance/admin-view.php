@@ -454,14 +454,14 @@ and open the template in the editor.
                         <ul id="mListShowEnroll" class="list-group list-group-flush small"></ul>
                     </div>
                 </div>
-                <div class="mymodal-container">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="present" id="mrpresent" value="1">
-                        <label class="form-check-label" for="mpresent">present</label>
+                <div class="mymodal-container m-1">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="mPresent" name="selAction" class="custom-control-input">
+                        <label class="custom-control-label" for="mPresent">Present</label>
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="present" id="mrabsent" value="0">
-                        <label class="form-check-label" for="mrabsent">absent</label>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="mAbsent" name="selAction" class="custom-control-input">
+                        <label class="custom-control-label" for="mAbsent">Absent</label>
                     </div>
                 </div>
                 <div class="mymodal-container" style="border-top: lightgray solid 0.5pt">
