@@ -149,6 +149,7 @@ and open the template in the editor.
                     changeMonth: true,
                     changeYear: true,
                     dateFormat: 'yy-mm-dd',
+                    maxDate: $('#dateTo'),
                     onSelect: function (date, instance) {
                         sendData = {semester: $("#cbsemester").val(),
                             dateFrom: $("#dateFrom").val(),
@@ -162,6 +163,7 @@ and open the template in the editor.
                     changeYear: true,
                     defaultDate: '',
                     dateFormat: 'yy-mm-dd',
+                     minDate: $('#dateFrom'),
                     onSelect: function (date, instance) {
                         sendData = {semester: $("#cbsemester").val(),
                             dateFrom: $("#dateFrom").val(),
@@ -332,6 +334,7 @@ and open the template in the editor.
                     defaultDate: '',
                     dateFormat: 'yy-mm-dd',
                     yearRange: '2018:2028',
+                    maxDate: 0,
                     onSelect: function (date, instance) {
                     }
 
@@ -339,14 +342,52 @@ and open the template in the editor.
 
                 //script: multiple date selection
                 var dates = [];
+
+                function addDate(date) {
+                    if (jQuery.inArray(date, dates) < 0)
+                        dates.push(date);
+                }
+                function removeDate(index) {
+                    dates.splice(index, 1);
+                }
+                function addOrRemoveDate(date) {
+                    var index = jQuery.inArray(date, dates);
+                    if (index >= 0)
+                        removeDate(index);
+                    else
+                        addDate(date);
+                }
+                // Takes a 1-digit number and inserts a zero before it
+                function padNumber(number) {
+                    var ret = new String(number);
+                    if (ret.length == 1)
+                        ret = "0" + ret;
+                    return ret;
+                }
                 $('#mMultiDate').datepicker({
                     changeMonth: true,
                     changeYear: true,
                     defaultDate: '',
                     dateFormat: 'yy-mm-dd',
                     yearRange: '2018:2028',
+                    maxDate: 0,
                     onSelect: function (date, instance) {
-                        
+                        addOrRemoveDate(date);
+                    },
+                    beforeShowDay: function (date) {
+                        var year = date.getFullYear();
+                        // months and days are inserted into the array in the form, e.g "01/01/2009", but here the format is "1/1/2009"
+                        var month = padNumber(date.getMonth() + 1);
+                        var day = padNumber(date.getDate());
+                        // This depends on the datepicker's date format
+                        var dateString = year + "-" + month + "-" + day;
+                        var gotDate = jQuery.inArray(dateString, dates);
+                        if (gotDate >= 0) {
+                            // Enable date so it can be deselected. Set style to be highlighted
+                            return [true, "ui-state-highlight"];
+                        }
+                        // Dates not in the array are left enabled, but with no extra style
+                        return [true, ""];
                     }
                 });
             });
@@ -392,7 +433,7 @@ and open the template in the editor.
                     <input type="text" id="dateTo" disabled="true" placeholder="last date" class="form-control">
                 </div>
                 <div class="form-inline ml-md-auto ml-sm-5">
-                    <button id="btnopenmodal" class="btn btn-primary mr-1">update attendance</button>
+                    <button id="btnopenmodal" class="btn btn-primary mr-1" disabled="true">update attendance</button>
                     <button id="btnprint" class="btn btn-success mr-1" disabled="true"><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
                     <div class="dropdown show">
                         <i class="material-icons crossRotate" href="#" style="cursor: pointer" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">settings</i>
@@ -435,7 +476,7 @@ and open the template in the editor.
         </div>
 
         <!--modal html.....................................................-->
-        <div id="modal" class="mymodal">
+        <div id="modal" class="mymodal" style="display: none">
 
             <div class="mymodal-content animate">
 

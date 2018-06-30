@@ -28,6 +28,17 @@ and open the template in the editor.
     -ms-transform: rotate(45deg);
 }
 
+/*multple date selector css....................................................*/
+.ui-state-highlight{
+    border: 1px solid white  !important;
+    background-color: #007bff !important;
+}
+
+.ui-datepicker-today .ui-state-highlight{
+    border: none !important;
+    background: #f8f9fa !important
+}
+
 /*modal css...................................................................*/
 body {font-family: Arial, Helvetica, sans-serif;}
 
