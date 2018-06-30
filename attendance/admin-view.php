@@ -310,6 +310,7 @@ and open the template in the editor.
 
                 //script:button open update attendance modal
                 $("#btnopenmodal").click(function () {
+                    $("body").addClass("modal-open");
                     $('#mListShowEnroll').empty();
                     console.log(sel);
                     sel.sort();
@@ -319,16 +320,34 @@ and open the template in the editor.
                     $("#modal").css("display", "block");
                 });
                 //script:button modal buttons
-                $("#mbtnBulk").click(function () {
-                    $("#mdivPrt").hide();
-                    $("#mdivBulk").show();
-                });
-                $("#mbtnPrt").click(function () {
-                    $("#mdivBulk").hide();
-                    $("#mdivPrt").show();
-                });
                 $("#mbtnCancel").click(function () {
                     $("#modal").css("display", "none");
+                    $("body").removeClass("modal-open");
+                });
+
+                //script: modal single date selection 
+                $("#mSingleDate").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    defaultDate: '',
+                    dateFormat: 'yy-mm-dd',
+                    yearRange: '2018:2028',
+                    onSelect: function (date, instance) {
+                    }
+
+                });
+
+                //script: multiple date selection
+                var dates = [];
+                $('#mMultiDate').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    defaultDate: '',
+                    dateFormat: 'yy-mm-dd',
+                    yearRange: '2018:2028',
+                    onSelect: function (date, instance) {
+                        
+                    }
                 });
             });
         </script>
@@ -433,28 +452,49 @@ and open the template in the editor.
                     </li>
                 </ul>
                 <div class="row p-3" style="height: 50vh">
-                    <div class="col-md-6 border border-primary rounded ml-2" style="height: 50vh">
+                    <div class="col-md-6 ml-2" style="height: 50vh">
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane container active" id="single">
+                                <div class="form-group">
+                                    <label class="col-form-label-sm" for="mDateSingle">Select Date:</label>
+                                    <input type="input" class="form-control" id="mSingleDate">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label-sm" for="mSub">Select Subject:</label>
+                                    <select multiple class="form-control" style="height: 80px" id="mSub">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label-sm" for="mFac">Select Lecturer:</label>
+                                    <select multiple class="form-control" style="height: 80px" id="mFac">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="tab-pane container fade" id="bulk">
-                                When showing a new tab, the events fire in the following order:
-
-                                hide.bs.tab (on the current active tab)
-                                show.bs.tab (on the to-be-shown tab)
-                                hidden.bs.tab (on the previous active tab, the same one as for the hide.bs.tab event)
-                                shown.bs.tab (on the newly-active just-shown tab, the same one as for the show.bs.tab event)
-                                If no tab was already active, then the hide.bs.tab and hidden.bs.tab events will not be fired.
+                                <div class="form-group">
+                                    <label class="col-form-label-sm" for="mMultiDate">Select Date:</label>
+                                    <div id="mMultiDate"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-2"></div>
-                    <div class=" mymodal-container border border-primary rounded col-md-3" style="margin: 1%; height: inherit; overflow-y: auto">
+                    <div class="border border-primary rounded col-md-3" style="height: 50vh; overflow-y: auto">
                         <ul id="mListShowEnroll" class="list-group list-group-flush small"></ul>
                     </div>
                 </div>
-                <div class="mymodal-container m-1">
+                <div class="row mt-5 ml-4 pl-3 pb-2">
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" id="mPresent" name="selAction" class="custom-control-input">
                         <label class="custom-control-label" for="mPresent">Present</label>
