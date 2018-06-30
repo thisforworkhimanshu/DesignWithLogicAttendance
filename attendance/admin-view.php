@@ -417,7 +417,7 @@ and open the template in the editor.
 
             <div class="mymodal-content animate">
 
-                <div style="text-align: right">
+                <div style="text-align: center">
                     <label style="color: #007bff; font-size: 12pt;" class="mr-3">Update Attendance</label>
                 </div>
                 <!-- Nav tabs -->
@@ -430,7 +430,7 @@ and open the template in the editor.
                     </li>
                 </ul>
                 <div class="row p-3">
-                    <div class="col">
+                    <div class="col-md-6 border border-primary rounded ml-2 h-25">
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane container active" id="single">
@@ -453,13 +453,25 @@ and open the template in the editor.
                             </div>
                         </div>
                     </div>
-                    <div id="mdivShowEnroll" class=" mymodal-container border border-primary rounded col" style="margin: 1%;overflow: auto">
+                    <div class="col-md-2"></div>
+                    <div id="mdivShowEnroll" class=" mymodal-container border border-primary rounded col-md-3" style="margin: 1%;overflow: auto">
                         enrollments will be shown here
                     </div>
-
                 </div>
-
-
+                <div class="mymodal-container">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="present" id="mrpresent" value="1">
+                        <label class="form-check-label" for="mpresent">present</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="present" id="mrabsent" value="0">
+                        <label class="form-check-label" for="mrabsent">absent</label>
+                    </div>
+                </div>
+                <div class="mymodal-container" style="border-top: lightgray solid 0.5pt">
+                    <button id="mbtnUpdate" class="btn btn-outline-success">Update</button>
+                    <button id="mbtnCancel" class="btn btn-outline-danger" style="float: right">Cancel</button>
+                </div>
 
             </div>
         </div>
