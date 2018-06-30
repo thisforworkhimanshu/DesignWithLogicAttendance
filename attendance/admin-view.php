@@ -310,10 +310,11 @@ and open the template in the editor.
 
                 //script:button open update attendance modal
                 $("#btnopenmodal").click(function () {
-                    $("#mdivShowEnroll").text(sel);
+                    sel.sort();
+                    for (var i = 0; i < sel.length; i++) {
+                        $('#mListShowEnroll').append($('<li>').text(sel[i]).addClass('list-group-item'));
+                    }
                     $("#modal").css("display", "block");
-                    $("#mdivBulk").hide();
-                    $("#mdivPrt").show();
                 });
                 //script:button modal buttons
                 $("#mbtnBulk").click(function () {
@@ -429,18 +430,11 @@ and open the template in the editor.
                         <a class="nav-link" data-toggle="tab" href="#bulk">Change in Bulk</a>
                     </li>
                 </ul>
-                <div class="row p-3">
-                    <div class="col-md-6 border border-primary rounded ml-2 h-25">
+                <div class="row p-3" style="height: 50vh">
+                    <div class="col-md-6 border border-primary rounded ml-2" style="height: 50vh">
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div class="tab-pane container active" id="single">
-                                When showing a new tab, the events fire in the following order:
-
-                                hide.bs.tab (on the current active tab)
-                                show.bs.tab (on the to-be-shown tab)
-                                hidden.bs.tab (on the previous active tab, the same one as for the hide.bs.tab event)
-                                shown.bs.tab (on the newly-active just-shown tab, the same one as for the show.bs.tab event)
-                                If no tab was already active, then the hide.bs.tab and hidden.bs.tab events will not be fired.
                             </div>
                             <div class="tab-pane container fade" id="bulk">
                                 When showing a new tab, the events fire in the following order:
@@ -454,8 +448,8 @@ and open the template in the editor.
                         </div>
                     </div>
                     <div class="col-md-2"></div>
-                    <div id="mdivShowEnroll" class=" mymodal-container border border-primary rounded col-md-3" style="margin: 1%;overflow: auto">
-                        enrollments will be shown here
+                    <div class=" mymodal-container border border-primary rounded col-md-3" style="margin: 1%; overflow-y: auto">
+                        <ul id="mListShowEnroll" class="list-group list-group-flush"></ul>
                     </div>
                 </div>
                 <div class="mymodal-container">
