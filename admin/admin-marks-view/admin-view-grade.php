@@ -19,6 +19,7 @@ if (!isset($_SESSION['aid'])) {
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <!--<script src="../../node_modules/jquery/dist/jquery.min.js"></script>-->
         <script src="../../jquery/jquery-3.3.1.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

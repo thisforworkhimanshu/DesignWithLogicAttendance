@@ -18,10 +18,25 @@ if(!isset($_SESSION['aid'])){
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script>
+            //script:highlight the active link in navigation bar
+            $(document).ready(function () {
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                })
+            });
+        </script>
     </head>
     <body>
         <div class="container">
@@ -120,19 +135,11 @@ if(!isset($_SESSION['aid'])){
                                 </tr>
                                             <?php
                                     }
-                                    $status=true;//Flag to decided whether data present or not
-                        }else{
-                            $status = false;
                         }
                     }
                 }
                 ?>
                 </table>
-                            <?php
-                            if(!$status){
-                                echo 'No Data Present'; //Message to user according to flag value
-                            }
-                            ?>
             </div>
                     <?php
             }

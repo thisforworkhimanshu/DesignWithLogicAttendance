@@ -19,6 +19,7 @@ if (!isset($_SESSION['aid'])) {
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
         <script src="../../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -45,11 +46,15 @@ if (!isset($_SESSION['aid'])) {
             <?php
                 require_once '../../master-layout/admin/master-page-admin.php';
             ?>
+            <div class="badge-light" style="margin-top: 1%;">
+                <div class="text-center">
+                    <h5>Faculty Registration</h5>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6">
                     <form>
-                        <h4 class="text-center">Faculty Registration</h4>
                         <div class="form-group">
                             <label for="firstName" class="control-label">Full Name</label>
                             <div>
@@ -187,6 +192,8 @@ if (!isset($_SESSION['aid'])) {
                                             }); 
                                         });
                                     }else{
+                                        $body = $("body");
+                                        $body.addClass("loadingfac");
                                         var dataString = 'firstName='+firstName+'&email='+email+'&cellno='+cellno+'&username='+username+'&password='+password+'&gender='+gender+'&designation='+designation;
                                         $.ajax({
                                             type: 'POST',
@@ -201,8 +208,10 @@ if (!isset($_SESSION['aid'])) {
                                                 var res = result.substring(2);
                                                 var response = result.substring(0,2);
                                                 if(response==="ok"){
+                                                    $body.removeClass("loadingfac");
                                                     $("#btnSubmit").html('<span class="glyphicon glyphicon-transfer"></span> Successfully Registered with ID: '+res);
                                                 }else{
+                                                    $body.removeClass("loadingfac");
                                                     $("#error").fadeIn(1000, function(){
                                                         $(":submit").attr("disabled", false);
                                                         $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span>   '+result+' !</div>');
@@ -231,8 +240,8 @@ if (!isset($_SESSION['aid'])) {
                     </form>
                 </div>
                 <div class="col-lg-3"></div>
-            </div>
+            </div>    
         </div>
-
+        <div class="modalfacreg"></div>
     </body>
 </html>

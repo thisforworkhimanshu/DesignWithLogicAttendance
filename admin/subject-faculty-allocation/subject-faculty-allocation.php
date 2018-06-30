@@ -18,7 +18,7 @@ if (!isset($_SESSION['aid'])) {
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
-
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <script src="../../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
@@ -269,7 +269,7 @@ if (!isset($_SESSION['aid'])) {
                                                                 $("#btnSubmit").prop("disabled",true);
                                                             }else{
                                                                 $("#error").hide();
-                                                                $("#btnSubmit").prop("disabled",false);
+//                                                                $("#btnSubmit").prop("disabled",false);
                                                             }
                                                         }
                                                     });
@@ -293,7 +293,7 @@ if (!isset($_SESSION['aid'])) {
                                                                $("#btnSubmit").prop("disabled",true);
                                                            }else{
                                                                $("#error").hide();
-                                                               $("#btnSubmit").prop("disabled",false);
+//                                                               $("#btnSubmit").prop("disabled",false);
                                                            }
                                                        }
                                                    });   
@@ -357,8 +357,21 @@ if (!isset($_SESSION['aid'])) {
                                 <div id="error"></div>
                                 <script>
                                     $(document).ready(function() {
+                                        
+                                        $("#lecture_total").blur(function(){
+                                           if($(this).val()==0) {
+                                                $("#error").show();
+                                                $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Input Correct Value</div>');
+                                                $("#btnSubmit").prop("disabled",true);
+                                           }else{
+                                                $("#btnSubmit").prop("disabled",false);
+                                           }
+                                        });
+                                        
                                         $("#btnSubmit").prop("disabled",true);   
                                         $("#btnSubmit").click(function() {
+                                            $body = $("body");
+                                            $body.addClass("loadingfac");
                                             var formData = JSON.stringify($("#sub-alloc-form").serializeArray());
                                             var sem = $("#semester").val();
                                             var sub = $("#subject").val();
@@ -375,14 +388,14 @@ if (!isset($_SESSION['aid'])) {
                                             }
                                             var makeData = {"semester":sem,"subject":sub,"faculty":fac,"lecturetype":lectype,"type":stat,"lecture_hour":lechour,"lecture_total":lecturetotal};
                                             var json = JSON.stringify(makeData);
-                                            console.log(formData);
-                                            console.log(json);
-
+//                                            console.log(formData);
+//                                            console.log(json);
                                             $.ajax({
                                                type: 'POST' ,
                                                url: "ajax-subject-faculty-allocation.php",
                                                data: {myData:json},
                                                success: function (data) {
+                                                   $body.removeClass("loadingfac");
                                                    $("#error").show();
                                                    $("#error").html('<div class="alert alert-success"> <span class="glyphicon glyphicon-info-sign">'+data+'</div>');
                                                    $("#btnSubmit").prop("disabled",true);
@@ -403,10 +416,9 @@ if (!isset($_SESSION['aid'])) {
                             </form> <!-- END OF FORM TAG -->
                         </div>            
                     </div>
-                    
                 </div>
-                
             </div>
         </div>       
+        <div class="modalfacreg"></div>
     </body>
 </html>

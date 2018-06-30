@@ -19,6 +19,7 @@ if(!isset($_SESSION['fid'])){
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <!-- jQuery library -->
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -30,6 +31,20 @@ if(!isset($_SESSION['fid'])){
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script>
+            //script:highlight the active link in navigation bar
+            $(document).ready(function () {
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                })
+            });
+        </script>
     </head>
     <body>
         <div class="container">
