@@ -37,7 +37,6 @@ and open the template in the editor.
                         }
                     })
                 });
-
                 var sel = []; //store selected student from table 
 
                 //script:event table click event and selection
@@ -66,44 +65,39 @@ and open the template in the editor.
                         $(this).closest('tr').removeClass("highlight_row");
                     }
                 });
-
                 //script:button for view, showing attendance in percentage
-                $("#view").click(function () {
+                $("#btnview").click(function () {
                     $(this).val(function (i, value) {
                         return value === "normal" ? "percentage" : "normal";
                     });
                     $(this).text(function (i, text) {
                         return text === "a|t" ? "%" : "a|t";
                     });
-                    sendData = {semester: $("#semester").val(),
+                    sendData = {semester: $("#cbsemester").val(),
                         dateFrom: $("#dateFrom").val(),
                         dateTo: $("#dateTo").val(),
-                        div: $("#div").text()};
+                        div: $("#btndiv").text()};
                     callAjax(sendData);
                 });
-
                 //script:button for division selection
-                $("#div").click(function () {
+                $("#btndiv").click(function () {
                     $(this).text(function (i, text) {
                         return text === "A" ? "B" : "A";
                     });
-                    sendData = {semester: $("#semester").val(),
+                    sendData = {semester: $("#cbsemester").val(),
                         dateFrom: $("#dateFrom").val(),
                         dateTo: $("#dateTo").val(),
-                        div: $("#div").text()};
+                        div: $("#btndiv").text()};
                     callAjax(sendData);
-
                 });
-
                 //script:button for type selection
-                $("#type").click(function () {
+                $("#btntype").click(function () {
                     $(this).text(function (i, text) {
                         return text === "Theory" ? "Practical" : "Theory";
                     });
                 });
-
                 //script:button print export table to excel
-                $("#print").click(function () {
+                $("#btnprint").click(function () {
                     $("#attendance-table [type=checkbox]").remove();
                     $("#attendance-table").excelexportjs({
                         containerid: "attendance-table",
@@ -111,17 +105,16 @@ and open the template in the editor.
                     });
                     $("#attendance-table > tbody tr td:first-child").prepend('<input type="checkbox">');
                 });
-
                 // script:input datepicker input selection
                 $("#dateFrom").datepicker({
                     changeMonth: true,
                     changeYear: true,
                     dateFormat: 'yy-mm-dd',
                     onSelect: function (date, instance) {
-                        sendData = {semester: $("#semester").val(),
+                        sendData = {semester: $("#cbsemester").val(),
                             dateFrom: $("#dateFrom").val(),
                             dateTo: $("#dateTo").val(),
-                            div: $("#div").text()};
+                            div: $("#btndiv").text()};
                         callAjax(sendData);
                     }
                 });
@@ -131,16 +124,18 @@ and open the template in the editor.
                     defaultDate: '',
                     dateFormat: 'yy-mm-dd',
                     onSelect: function (date, instance) {
-                        sendData = {semester: $("#semester").val(),
+                        sendData = {semester: $("#cbsemester").val(),
                             dateFrom: $("#dateFrom").val(),
                             dateTo: $("#dateTo").val(),
-                            div: $("#div").text()};
+                            div: $("#btndiv").text()};
                         callAjax(sendData);
                     }
 
                 });
-
                 //script:input search in table
+                $('#search').click(function () {
+                    $(this).val(null);
+                });
                 $("#search").on("keyup", function () {
                     var value = $(this).val().toLowerCase();
                     var i = 0;
@@ -149,38 +144,40 @@ and open the template in the editor.
                         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
                     });
                 });
-
                 //script:combobox semester selection combobox
-                $("#semester").change(function () {
+                $("#cbsemester").change(function () {
                     console.log("semester selection: " + this.selectedIndex);
                     if (this.selectedIndex === 0) {
+                        //disable controls on none selection
                         $("#search").prop("disabled", true);
                         $("#dateFrom").prop("disabled", true);
                         $("#dateTo").prop("disabled", true);
-                        $("#attendance-view").text("nothing to display...");
+                        $('#btnopenmodal').prop('disabled', true);
+                        $('#btnprint').prop('disabled', true);
+                        $('#attendance-table').hide();
+                        $('#attendance-info').show();
                     } else {
-                        sendData = {semester: $("#semester").val(), div: $("#div").text()};
+                        $('#attendance-info').hide();
+                        $('#attendance-table').show();
+                        sendData = {semester: $("#cbsemester").val(), div: $("#btndiv").text()};
                         callAjax(sendData);
                         $("#search").prop("disabled", false);
                         $("#dateFrom").prop("disabled", false);
                         $("#dateTo").prop("disabled", false);
+                        $('#btnopenmodal').prop('disabled', false);
+                        $('#btnprint').prop('disabled', false);
                     }
 
 
                 });
-
                 function callAjax(sendData) {
                     $.ajax({
                         type: 'POST',
                         url: "ajax-admin-att-table.php",
                         data: sendData,
                         datetype: 'json',
-                        beforeSend: function (xhr) {
-//                            $("#attendance-view").hide();
-                        },
                         success: function (data) {
                             showTable(data);
-//                            $("#attendance-view").show();
                         }
                     });
                 }
@@ -190,9 +187,8 @@ and open the template in the editor.
                     //empty table
                     $("#attendance-table > thead").empty();
                     $("#attendance-table > tbody").empty();
-
                     //create normal view and percentage view
-                    if ($("#view").val() === 'normal') {
+                    if ($("#btnview").val() === 'normal') {
                         //create table header, normal view
                         $("#attendance-table > thead").append($('<tr>'), $('<tr>'));
                         $("#attendance-table > thead tr:first-child").append($('<th>').attr("colspan", 2));
@@ -239,7 +235,6 @@ and open the template in the editor.
                                 $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text(i));
                             }
                         });
-
                         //create table body, percentage view
                         $.each(jsonData, function (i, row) {
                             $("#attendance-table > tbody:last-child").append($('<tr>'));
@@ -274,13 +269,12 @@ and open the template in the editor.
                 //script: modal section-----------------------------------------
 
                 //script:button open update attendance modal
-                $("#openmodal").click(function () {
+                $("#btnopenmodal").click(function () {
                     $("#mdivShowEnroll").text(sel);
                     $("#modal").css("display", "block");
                     $("#mdivBulk").hide();
                     $("#mdivPrt").show();
                 });
-
                 //script:button modal buttons
                 $("#mbtnBulk").click(function () {
                     $("#mdivPrt").hide();
@@ -309,7 +303,7 @@ and open the template in the editor.
                 ?>
                 <div class="form-row form-group">
                     <div class="col-md-2">
-                        <select name="semester" id="semester" class="form-control">
+                        <select name="semester" id="cbsemester" class="form-control">
                             <option >Select Semester</option>
                             <?php
                             while ($row = $rgetSemester->fetch_assoc()) {
@@ -324,10 +318,10 @@ and open the template in the editor.
                     ?>
                 </div>
                 <div style="width: 3%">
-                    <button id="div" class="btn btn-block btn-outline-primary" >A</button>
+                    <button id="btndiv" class="btn btn-block btn-outline-primary" >A</button>
                 </div>
                 <div class="col-md-1">
-                    <button id="type" class="btn btn-block btn-outline-primary">Theory</button>
+                    <button id="btntype" class="btn btn-block btn-outline-primary">Theory</button>
                 </div>
             </div>
             <div class="form-row">
@@ -339,8 +333,8 @@ and open the template in the editor.
                     <input type="text" id="dateTo" disabled="true" placeholder="last date" class="form-control">
                 </div>
                 <div class="form-inline ml-md-auto ml-sm-5">
-                    <button id="openmodal" class="btn btn-primary mr-1" >update attendance</button>
-                    <button id="print" class="btn btn-success mr-1" ><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
+                    <button id="btnopenmodal" class="btn btn-primary mr-1" disabled="true" >update attendance</button>
+                    <button id="btnprint" class="btn btn-success mr-1" disabled="true"><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
                     <div class="dropdown show">
                         <i class="material-icons crossRotate" href="#" style="cursor: pointer" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">settings</i>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
@@ -349,8 +343,8 @@ and open the template in the editor.
                                 <input id="criteria" type="text" class="form-control form-control-sm col-3 m-1">%
                             </li>
                             <li class="ml-1">
-                                 <label for="view" class="col-form-label col-form-label-sm float-left mr-1">2. change view:</label>
-                                 <button id="view" value="normal" class="btn btn-sm col-3 btn-outline-primary m-2">a|t</button>
+                                <label for="btnview" class="col-form-label col-form-label-sm float-left mr-1">2. change view:</label>
+                                <button id="btnview" value="normal" class="btn btn-sm col-3 btn-outline-primary m-2">a|t</button>
                             </li>
                         </ul>
                     </div>
@@ -359,7 +353,9 @@ and open the template in the editor.
         </div>
         <hr/>
         <div id="attendance-view" class="container" style="height: 510px">
-
+            <div id="attendance-info" class="alert alert-info">
+                <i class="material-icons" style="vertical-align: bottom">error_outline</i>&nbspNothing to dispaly here :(
+            </div>
             <table  id="attendance-table" class="record_table">        
                 <thead class="bg-light">
                 </thead> 
