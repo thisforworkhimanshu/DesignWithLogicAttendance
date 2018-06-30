@@ -120,12 +120,19 @@ if(!isset($_SESSION['aid'])){
                                 </tr>
                                             <?php
                                     }
+                                    $status=true;//Flag to decided whether data present or not
+                        }else{
+                            $status = false;
                         }
-                        
                     }
                 }
                 ?>
                 </table>
+                            <?php
+                            if(!$status){
+                                echo 'No Data Present'; //Message to user according to flag value
+                            }
+                            ?>
             </div>
                     <?php
             }

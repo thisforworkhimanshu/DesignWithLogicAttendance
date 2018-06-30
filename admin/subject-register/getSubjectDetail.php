@@ -121,8 +121,7 @@ if(!isset($_SESSION['aid'])){
                     <div class="text-center">
                         <h5>Subject Entry Into Department</h5>
                     </div>
-                </div>
-                
+                </div>   
                 <div>
                         <?php
                         if(isset($_GET['status'])){

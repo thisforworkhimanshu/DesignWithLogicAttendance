@@ -22,6 +22,15 @@ if(!isset($_SESSION['aid'])){
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script src="../../jquery/jquery-ui-1.12.1.custom/jquery-ui.css"></script>
+        <script src="../../jquery/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+        <script src="../../jquery/jquery-3.3.1.js"></script>
+        <script src="../../jquery/tableHeadFixer.js"></script>
+        <script>
+            $("#studTb").tableHeadFixer({
+                head: true
+            }); 
+        </script>
     </head>
     <body>
         <div class="container">
