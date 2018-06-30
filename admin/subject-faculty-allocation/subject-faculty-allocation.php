@@ -256,40 +256,52 @@ if (!isset($_SESSION['aid'])) {
                                             var lectype = $("#chooselecture").val();
                                             if(lectype==="theory"){
                                                 var division = $("#choosediv").val();
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    url: "ajax-check-lecture-hours.php",
-                                                    data: {"lecture_hour": lecture_hour, "subcode": subcode,"type":division},
-                                                    success: function(data){
-                                                        if(data==="noteligible"){
-                                                            //alert("You cannot allocated lecture as limit exceeds ");
-                                                            $("#error").show();
-                                                            $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">You cannot allocate lecture as limit reached or exceeds</div>');
-                                                            $("#btnSubmit").prop("disabled",true);
-                                                        }else{
-                                                            $("#error").hide();
-                                                            $("#btnSubmit").prop("disabled",false);
+                                                if(lecture_hour!=0){
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: "ajax-check-lecture-hours.php",
+                                                        data: {"lecture_hour": lecture_hour, "subcode": subcode,"type":division},
+                                                        success: function(data){
+                                                            if(data==="noteligible"){
+                                                                //alert("You cannot allocated lecture as limit exceeds ");
+                                                                $("#error").show();
+                                                                $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">You cannot allocate lecture as limit reached or exceeds</div>');
+                                                                $("#btnSubmit").prop("disabled",true);
+                                                            }else{
+                                                                $("#error").hide();
+                                                                $("#btnSubmit").prop("disabled",false);
+                                                            }
                                                         }
-                                                    }
-                                                });
+                                                    });
+                                                }else{
+                                                    $("#error").show();
+                                                    $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Input Correct Value</div>');
+                                                    $("#btnSubmit").prop("disabled",true);
+                                                }
                                             }else if(lectype==="practical"){
                                                 var batch = $("#choosebatch").val();
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    url: "ajax-check-practical-hours.php",
-                                                    data: {"lecture_hour": lecture_hour, "subcode": subcode,"type":batch},
-                                                    success: function(data){
-                                                        if(data==="noteligible"){
-                                                            //alert("You cannot allocated batch as limit exceeds ");
-                                                            $("#error").show();
-                                                            $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">You cannot allocate batch as limit reached or exceeds</div>');
-                                                            $("#btnSubmit").prop("disabled",true);
-                                                        }else{
-                                                            $("#error").hide();
-                                                            $("#btnSubmit").prop("disabled",false);
-                                                        }
-                                                    }
-                                                });
+                                                if(lecture_hour!=0){
+                                                    $.ajax({
+                                                       type: 'POST',
+                                                       url: "ajax-check-practical-hours.php",
+                                                       data: {"lecture_hour": lecture_hour, "subcode": subcode,"type":batch},
+                                                       success: function(data){
+                                                           if(data==="noteligible"){
+                                                               //alert("You cannot allocated batch as limit exceeds ");
+                                                               $("#error").show();
+                                                               $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">You cannot allocate batch as limit reached or exceeds</div>');
+                                                               $("#btnSubmit").prop("disabled",true);
+                                                           }else{
+                                                               $("#error").hide();
+                                                               $("#btnSubmit").prop("disabled",false);
+                                                           }
+                                                       }
+                                                   });   
+                                                }else{
+                                                    $("#error").show();
+                                                    $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Input Correct Value</div>');
+                                                    $("#btnSubmit").prop("disabled",true);
+                                                }
                                             }
                                        });
                                     });
