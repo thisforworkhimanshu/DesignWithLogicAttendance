@@ -370,7 +370,7 @@ and open the template in the editor.
                     <input type="text" id="dateTo" disabled="true" placeholder="last date" class="form-control">
                 </div>
                 <div class="form-inline ml-md-auto ml-sm-5">
-                    <button id="btnopenmodal" class="btn btn-primary mr-1" disabled="true" >update attendance</button>
+                    <button id="btnopenmodal" class="btn btn-primary mr-1">update attendance</button>
                     <button id="btnprint" class="btn btn-success mr-1" disabled="true"><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
                     <div class="dropdown show">
                         <i class="material-icons crossRotate" href="#" style="cursor: pointer" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">settings</i>
@@ -417,64 +417,50 @@ and open the template in the editor.
 
             <div class="mymodal-content animate">
 
-                <div class="" style="text-align: center">
-                    <label style="color: gray; font-family: inherit; font-size: 25px;">Update Attedance</label>
+                <div style="text-align: right">
+                    <label style="color: #007bff; font-size: 12pt;" class="mr-3">Update Attendance</label>
                 </div>
-                <div style="text-align: center" class="my-tab">
-                    <button value="single" id="mbtnPrt">single subject</button>
-                    <button value="bulk" id="mbtnBulk">change in bulk</button>                    
-                </div>
-                <div id="mdivShowEnroll" class=" mymodal-container border border-primary rounded" style="margin: 1%;overflow: auto">
-                    enrollments will be shown here
-                </div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs m-1">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#single">Single Subject</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#bulk">Change in Bulk</a>
+                    </li>
+                </ul>
+                <div class="row p-3">
+                    <div class="col">
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane container active" id="single">
+                                When showing a new tab, the events fire in the following order:
 
-                <div class="mymodal-container">
-                    <!--       Bulk division-->  
-                    <div class="mymodal-container" id="mdivBulk" style="justify-content: center;">
-                        <label style="color: gray; font-family: inherit; font-size: 17px;">Select Dates</label>
-                        <br>
-                        <div id="bulckDate"></div>
-                        <div id="print-array"></div>
-                    </div>
+                                hide.bs.tab (on the current active tab)
+                                show.bs.tab (on the to-be-shown tab)
+                                hidden.bs.tab (on the previous active tab, the same one as for the hide.bs.tab event)
+                                shown.bs.tab (on the newly-active just-shown tab, the same one as for the show.bs.tab event)
+                                If no tab was already active, then the hide.bs.tab and hidden.bs.tab events will not be fired.
+                            </div>
+                            <div class="tab-pane container fade" id="bulk">
+                                When showing a new tab, the events fire in the following order:
 
-                    <!--        particular division-->
-                    <div class="mymodal-container" id="mdivPrt" style="justify-content: center;">
-                        <label style="color: gray; font-family: inherit;">Select Date:</label>
-                        <input id="dateSingle" placeholder="Select Date..">
-                        <br>
-                        <br>
-                        <label style="color: gray; font-family: inherit;">Select Faculty:</label>
-                        <input list="faculty" placeholder="Select Faculty..">
-                        <datalist id="faculty">
-                            <option value="Internet Explorer">
-                            <option value="Firefox">
-                            <option value="Chrome">
-                            <option value="Opera">
-                            <option value="Safari">
-                        </datalist>
-                        <br>
-                        <br>
-                        <label style="color: gray; font-family: inherit;">Select Subject:</label>
-                        <input list="subject" placeholder="Select Subject">
-                        <datalist id="subject">
-                            <option value="Internet Explorer">
-                            <option value="Firefox">
-                            <option value="Chrome">
-                            <option value="Opera">
-                            <option value="Safari">
-                        </datalist>
-                        <br>
+                                hide.bs.tab (on the current active tab)
+                                show.bs.tab (on the to-be-shown tab)
+                                hidden.bs.tab (on the previous active tab, the same one as for the hide.bs.tab event)
+                                shown.bs.tab (on the newly-active just-shown tab, the same one as for the show.bs.tab event)
+                                If no tab was already active, then the hide.bs.tab and hidden.bs.tab events will not be fired.
+                            </div>
+                        </div>
                     </div>
-                    <div class="mymodal-container">
-                        <input type="radio" value="Present" name="A/P"><label>Present</label>
-                        <input type="radio" value="Absent" name="A/P"><label>Absent</label>
+                    <div id="mdivShowEnroll" class=" mymodal-container border border-primary rounded col" style="margin: 1%;overflow: auto">
+                        enrollments will be shown here
                     </div>
 
                 </div>
-                <div class="mymodal-container" style="border-top: lightgray solid 0.5pt">
-                    <button id="mbtnUpdate" class="btn btn-outline-success">Update</button>
-                    <button id="mbtnCancel" class="btn btn-outline-danger" style="float: right">Cancel</button>
-                </div>
+
+
+
             </div>
         </div>
     </body>
