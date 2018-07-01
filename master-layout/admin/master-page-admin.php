@@ -26,6 +26,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/student-registration/student-registration.php">Student Registration</a>
+                        <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/student-registration/studentindividualregistration.php">Student - Registration Individual</a>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/detain-student-registration/register-into-detain.php">Detain Student</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/student-division-allocation/student-division-allocation.php">Division Allocation</a>
