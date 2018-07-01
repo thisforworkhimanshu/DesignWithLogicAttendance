@@ -156,7 +156,7 @@ if(!isset($_SESSION['aid'])){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
                                                     if($rowmark['mid']!=""){
                                                         ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>"/>
+                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>" required/>
                                                         <?php
                                                     }else{
                                                         ?>
@@ -173,7 +173,7 @@ if(!isset($_SESSION['aid'])){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
                                                     if($rowmark['viva']!=""){
                                                             ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>"/>
+                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>" required/>
                                                         <?php
                                                     }else{
                                                             ?>
@@ -191,7 +191,7 @@ if(!isset($_SESSION['aid'])){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
                                                     if($rowmark['remid']!=""){
                                                         ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>"/>
+                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>" required/>
                                                         <?php
                                                     }else{
                                                         ?>

@@ -88,7 +88,7 @@ if(!isset($_SESSION['aid'])){
                                     }
                                 });
                            }else{
-                                alert('Bother Enrolment Should Match');
+                                alert('Both Enrolment Should Match');
                            }
                        }
                        return false;
