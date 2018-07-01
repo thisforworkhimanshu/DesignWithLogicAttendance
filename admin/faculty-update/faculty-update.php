@@ -231,13 +231,13 @@ if(!isset($_SESSION['aid'])){
                             <div id="error"></div>
                             <div class="form-group">
                                     <div style="margin-left: 36%;">
-                                        <button type="submit" id="btnSubmit" class="btn btn-light btn-outline-primary" disabled>Update</button>
+                                        <button type="submit" id="btnSubmit" class="btn btn-light btn-outline-primary" disabled>Edit</button>
                                     </div>
                             </div>
 
                             <div class="form-group">
                                     <div style="margin-left: 30%;">
-                                        <button type="submit" id="btnSave" class="btn btn-light btn-outline-primary" style="display: none;">Save</button>
+                                        <button type="submit" id="btnSave" class="btn btn-light btn-outline-primary" style="display: none;">Update</button>
                                         <button type="button" id="btnCancle" class="btn btn-light btn-outline-primary" style="display: none;">Cancle</button>
                                     </div>
                             </div>

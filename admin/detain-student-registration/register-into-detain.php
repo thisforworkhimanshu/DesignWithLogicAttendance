@@ -126,7 +126,7 @@ if(!isset($_SESSION['aid'])){
             <hr/>
             <div class="badge-light" style="margin-top: 1%;">
                 <div class="text-center">
-                    <h5>Regularized Detain Student</h5>
+                    <h5>Regularise Detain Student</h5>
                 </div>
             </div>
             <hr/>
@@ -152,7 +152,7 @@ if(!isset($_SESSION['aid'])){
                                         $("#msgsuccessR").hide();
                                     },
                                     success: function (data) {
-                                        console.log(data);
+//                                        console.log(data);
                                         if(data==="norecord"){
                                             $("#msgsuccessR").hide();
                                             $("#msgerrR").show();

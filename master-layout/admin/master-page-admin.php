@@ -32,7 +32,7 @@
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/student-prac-batch-allocation/student-prac-batch-allocation.php">Practical Batch Allocation</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/admin-view-student/admin-view-student.php">View Student</a>
-
+                        <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/detain-student-view/detain-student-view.php">View Detain Student</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -78,7 +78,6 @@
             </ul>
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item dropdown">
-
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons" style="padding-right: 2px; font-size: 12pt">public</i>Admin</a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/sessionDestroy.php">Logout</a>
