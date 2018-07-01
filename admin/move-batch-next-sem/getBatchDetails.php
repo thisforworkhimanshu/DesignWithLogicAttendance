@@ -43,19 +43,25 @@ if(!isset($_SESSION['aid'])){
             <?php
                 require_once '../../master-layout/admin/master-page-admin.php';
             ?>
-            <div class="row" style="margin-top: 2%;">
-                <div class="col-lg-3 form-group">
-                    <input type="text" class="form-control" id="batchyear" placeholder="Batch Year"/>
-                </div>
-                <div class="col-lg-2 form-group">
-                    <input type="submit" id="btnGo" class="form-control btn btn-primary" value="Go"/>
-                </div>
-                <div class="col-lg-5 form-group">
-                    <div id="error" class="alert-danger form-control text-center"></div>
-                    <div id="success" class="alert alert-success form-control text-center"></div>
+            <div class="badge-light" style="margin-top: 1%;">
+                <div class="text-center">
+                    <h5>Move Batch To Next Semester</h5>
                 </div>
             </div>
-            
+            <form>
+                <div class="row" style="margin-top: 2%;">
+                    <div class="col-lg-3 form-group">
+                        <input type="text" class="form-control" id="batchyear" placeholder="Batch Year"/>
+                    </div>
+                    <div class="col-lg-2 form-group">
+                        <input type="submit" id="btnGo" class="form-control btn btn-primary" value="Go"/>
+                    </div>
+                    <div class="col-lg-5 form-group">
+                        <div id="error" class="alert-danger form-control text-center"></div>
+                        <div id="success" class="alert alert-success form-control text-center"></div>
+                    </div>
+                </div>
+            </form>
             <script>
                 $(document).ready(function(){
                    $("#error").hide();
@@ -64,36 +70,42 @@ if(!isset($_SESSION['aid'])){
                    $("#batchyear").focus();
                    $("#btnGo").click(function(){
                        var batchyear = $("#batchyear").val();
-                       $.ajax({
-                           type: 'POST',
-                           url: "ajax-check-batch-year.php",
-                           data: {batchyear:batchyear},
-                           success: function (data) {
-                               console.log(data);
-                               if(data==="notpresent"){
-                                   $("#success").hide();
-                                   $("#error").show();
-                                   $("#error").html("Not Such Batch Year");
-                               }else if(data==="notnow"){
-                                   $("#success").hide();
-                                   $("#error").show();
-                                   $("#error").html("This Batch's Term Is Not Completed Yet");
-                               }
-                               var jsonObj = JSON.parse(data);
-                               var msg = jsonObj.status;
-                               if(msg==="present"){
-                                   var sem = jsonObj.sem;
-                                   sem = +sem + +1;
-                                   $("#givedate").html("Enter Starting and Ending date of semester "+sem+" of Batch Year "+batchyear);
-                                   $("#success").show();
-                                   $("#error").hide();
-                                   $("#batchyear").prop("disabled",true);
-                                   $("#btnGo").prop("disabled",true);
-                                   $("#success").html("Present Go Ahead and Enter Dates");
-                                   $("#showfordate").show();
-                               }
-                           }
-                       });
+                       if(batchyear===""){
+                            alert('Please Enter Batch Year');
+                            return false;
+                       }else{
+                            $.ajax({
+                                type: 'POST',
+                                url: "ajax-check-batch-year.php",
+                                data: {batchyear:batchyear},
+                                success: function (data) {
+                                    console.log(data);
+                                    if(data==="notpresent"){
+                                        $("#success").hide();
+                                        $("#error").show();
+                                        $("#error").html("Not Such Batch Year");
+                                    }else if(data==="notnow"){
+                                        $("#success").hide();
+                                        $("#error").show();
+                                        $("#error").html("This Batch's Term Is Not Completed Yet");
+                                    }
+                                    var jsonObj = JSON.parse(data);
+                                    var msg = jsonObj.status;
+                                    if(msg==="present"){
+                                        var sem = jsonObj.sem;
+                                        sem = +sem + +1;
+                                        $("#givedate").html("Enter Starting and Ending date of semester "+sem+" of Batch Year "+batchyear);
+                                        $("#success").show();
+                                        $("#error").hide();
+                                        $("#batchyear").prop("disabled",true);
+                                        $("#btnGo").prop("disabled",true);
+                                        $("#success").html("Present Go Ahead and Enter Dates");
+                                        $("#showfordate").show();
+                                    }
+                                }
+                            });
+                       }
+                       return false;
                    });
                 });
             </script>
