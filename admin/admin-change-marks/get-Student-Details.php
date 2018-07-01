@@ -174,7 +174,7 @@ if(!isset($_SESSION['aid'])){
                         </script>
                         
                         <div class="form-group">
-                            <input type="text" name="marks" id="marks" class="form-control" placeholder="Your Marks will appear Here"/>
+                            <input type="text" name="marks" id="marks" class="form-control" placeholder="Click Here To Show Marks"/>
                         </div>
                         
                         <script>
