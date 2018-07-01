@@ -358,12 +358,13 @@ if (!isset($_SESSION['aid'])) {
                                 <script>
                                     $(document).ready(function() {
                                         
-                                        $("#lecture_total").blur(function(){
+                                        $("#lecture_total").on('input',function(){
                                            if($(this).val()==0) {
                                                 $("#error").show();
                                                 $("#error").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign">Input Correct Value</div>');
                                                 $("#btnSubmit").prop("disabled",true);
                                            }else{
+                                                $("#error").hide();
                                                 $("#btnSubmit").prop("disabled",false);
                                            }
                                         });

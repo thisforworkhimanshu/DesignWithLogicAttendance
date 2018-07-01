@@ -65,27 +65,38 @@ if (!isset($_SESSION['aid'])) {
                         <script>
                             $(document).ready(function(){
                                 $("#email").blur(function(){
-                                   var valuname = $(this).val();
-                                   $.ajax({
-                                       type: 'POST',
-                                       url: "ajax-check-email.php",
-                                       data: {email:valuname},
-                                       success: function (data) {
-                                           if(data==="ok"){
-                                               $("#emailerror").show();
-                                                $("#emailerror").fadeIn(1000,function() {
-                                                    $("#emailerror").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> Email Already Exists</div>');
-                                                    $("#btnSubmit").prop("disabled",true);
-                                                    $("#emailerror").fadeOut(4000,function() {
-                                                        $("#emailerror").hide();
-                                                    }); 
-                                                });
-                                           }else if(data==="notok"){
-                                                $("#btnSubmit").prop("disabled",false);
-                                                $("#emailerror").hide();
-                                           }
-                                       }
-                                   });
+                                   var email = $("#email").val();
+                                    var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+                                    if (!filter.test(email)) {
+                                        $("#emailerror").html("<div class='alert alert-danger'>Invalid Email Address</div>");
+                                        $("#btnSubmit").attr("disabled", true);
+                                    } else {
+                                        $("#btnSubmit").attr("disabled", false);
+                                        $("#emailerror").empty();
+                                        $("#emailerror").hide();
+                                        
+                                        var valuname = $(this).val();
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: "ajax-check-email.php",
+                                            data: {email:valuname},
+                                            success: function (data) {
+                                                if(data==="ok"){
+                                                    $("#emailerror").show();
+                                                     $("#emailerror").fadeIn(1000,function() {
+                                                         $("#emailerror").html('<div class="alert alert-danger"> <span class="glyphicon glyphicon-info-sign"></span> Email Already Exists</div>');
+                                                         $("#btnSubmit").prop("disabled",true);
+                                                         $("#emailerror").fadeOut(4000,function() {
+                                                             $("#emailerror").hide();
+                                                         }); 
+                                                     });
+                                                }else if(data==="notok"){
+                                                     $("#btnSubmit").prop("disabled",false);
+                                                     $("#emailerror").hide();
+                                                }
+                                            }
+                                        });
+                                    }
                                 });
                             });
                         </script>
@@ -138,6 +149,11 @@ if (!isset($_SESSION['aid'])) {
                                 <div id="uerror"></div>
                             </div>
                         </div>
+                        <script>
+                            $(document).ready(function(){
+                                
+                            });
+                        </script>
                         <div class="form-group">
                             <label for="password" class="control-label">Password</label>
                             <div>
