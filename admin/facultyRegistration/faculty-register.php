@@ -65,7 +65,7 @@ if (!isset($_SESSION['aid'])) {
                         <script>
                             $(document).ready(function(){
                                 $("#email").blur(function(){
-                                   var email = $("#email").val();
+                                    var email = $("#email").val();
                                     var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
                                     if (!filter.test(email)) {
                                         $("#emailerror").html("<div class='alert alert-danger'>Invalid Email Address</div>");

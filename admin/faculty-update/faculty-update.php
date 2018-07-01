@@ -64,6 +64,7 @@ if(!isset($_SESSION['aid'])){
                                     <select name="faculty" id="faculty" autofocus class="form-control">
                                         <option selected value="">--Select Faculty--</option>
                                         <?php
+                                            $conn->where('dept_id',$dept_id);
                                             $faculty = $conn->get("faculty");
                                             if($conn->count>0){
                                                 foreach ($faculty as $fac) {
@@ -206,11 +207,29 @@ if(!isset($_SESSION['aid'])){
                                 <label class="control-label">Password</label>
                                 <input type="password" id="faculty_pass" disabled name="faculty_pass" class="form-control" required/>
                             </div>
-
+                            
+                            <script>
+                                $(document).ready(function(){
+                                    $("#faculty_email").blur(function(){
+                                        var email = $("#faculty_email").val();
+                                        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+                                        if (!filter.test(email)) {
+                                            $("#emailerror").html("<div class='alert alert-danger'>Invalid Email Address</div>");
+                                            $("#btnSave").attr("disabled", true);
+                                        } else {
+                                            $("#btnSave").attr("disabled", false);
+                                            $("#emailerror").empty();
+                                            $("#emailerror").hide();
+                                        }
+                                    });
+                                });
+                            </script>
+                            
                             <div class="form-group">
                                 <label class="control-label">Email</label>
                                 <input type="email" id="faculty_email" disabled name="faculty_email" class="form-control" required/>
                             </div>
+                            <div id="emailerror"></div>
 
                             <div class="form-group">
                                 <label class="control-label">Mobile Number</label>
