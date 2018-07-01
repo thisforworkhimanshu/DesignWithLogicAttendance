@@ -79,6 +79,7 @@ if(!isset($_SESSION['aid'])){
                         $resultStud = mysqli_query($conn, $sql);
                         if(mysqli_num_rows($resultStud)>0){
                             $rowStud = mysqli_fetch_assoc($resultStud);
+                            $semester = $rowStud['student_semester'];
                             ?>
                 <div class="table-responsive-sm">
                     <table class="table table-hover table-light">
@@ -95,7 +96,10 @@ if(!isset($_SESSION['aid'])){
                     </table>
                     
                     <?php
-                        for($i=1;$i<=8;$i++){
+                        if($semester==0){
+                            $semester=8;
+                        }
+                        for($i=1;$i<=$semester;$i++){
                             $sqlGetSubject = "select * from subject where semester = $i and dept_id = $dept_id";
                             $resultSubject = mysqli_query($conn, $sqlGetSubject);
                             if(mysqli_num_rows($resultSubject)>0){
