@@ -42,7 +42,6 @@ and open the template in the editor.
         <script type="text/javascript">
             $(document).ready(function () {
                 //script:highlight the active link in navigation bar
-                $(document).ready(function () {
                     var current = location.pathname;
                     $('#nav li a').each(function () {
                         var $this = $(this);
@@ -52,7 +51,6 @@ and open the template in the editor.
                             return false;
                         }
                     });
-                });
 
                 var sel = []; //store selected student from table 
                 //script:event table click event and selection
@@ -149,7 +147,6 @@ and open the template in the editor.
                     changeMonth: true,
                     changeYear: true,
                     dateFormat: 'yy-mm-dd',
-                    maxDate: $('#dateTo'),
                     onSelect: function (date, instance) {
                         sendData = {semester: $("#cbsemester").val(),
                             dateFrom: $("#dateFrom").val(),
@@ -163,7 +160,6 @@ and open the template in the editor.
                     changeYear: true,
                     defaultDate: '',
                     dateFormat: 'yy-mm-dd',
-                     minDate: $('#dateFrom'),
                     onSelect: function (date, instance) {
                         sendData = {semester: $("#cbsemester").val(),
                             dateFrom: $("#dateFrom").val(),
@@ -433,8 +429,8 @@ and open the template in the editor.
                     <input type="text" id="dateTo" disabled="true" placeholder="last date" class="form-control">
                 </div>
                 <div class="form-inline ml-md-auto ml-sm-5">
-                    <button id="btnopenmodal" class="btn btn-primary mr-1" disabled="true">update attendance</button>
-                    <button id="btnprint" class="btn btn-success mr-1" disabled="true"><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
+                    <button id="btnopenmodal" class="btn btn-success mr-1" disabled="true">update attendance</button>
+                    <button id="btnprint" class="btn btn-info mr-1" disabled="true"><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
                     <div class="dropdown show">
                         <i class="material-icons crossRotate" href="#" style="cursor: pointer" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">settings</i>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">

@@ -16,19 +16,31 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>SIM: faculty attendance view</title>
 
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href='../custom.css'>
+        <link rel="stylesheet" href="../custom.css">
+        <link rel="stylesheet" href="../../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.css"> <!-- jquery-ui css -->
+        <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css"> <!-- bootstrap css -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script src="../excelexportjs.js"></script>
+        <script src="../../bootstrap-4.1.1-dist/js/bootstrap.min.js"></script> <!-- bootstrap js -->
+        <script src="../../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
+        <script src="../../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> <!-- jquery-ui css -->
+        <script src="excelexportjs.js"></script>
+        <script src="../../jquery/tableHeadFixer.js"></script>
 
         <script>
             $(document).ready(function () {
+                //script:highlight the active link in navigation bar
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                });
 
                 var sel = []; //store selected student from table 
 
@@ -232,6 +244,8 @@ and open the template in the editor.
                     $("#search").prop("disabled", false);
                     $("#dateFrom").prop("disabled", false);
                     $("#dateTo").prop("disabled", false);
+                    
+                    $("#attendance-table").tableHeadFixer({"left" : 1});
                 }
 
                 function appendDivision(data) {
@@ -282,7 +296,7 @@ and open the template in the editor.
             <button id="print" class="btn btn-info">export to excel!</button>
         </div>
         <hr/>
-        <div id="attendance-view" class="container">
+        <div id="attendance-view" class="container" style="height: 86vh">
             <table id="attendance-table" class="record_table">
                 <thead>
 
