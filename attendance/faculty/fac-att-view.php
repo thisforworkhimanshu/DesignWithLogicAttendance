@@ -26,7 +26,7 @@ and open the template in the editor.
         <script src="../../bootstrap-4.1.1-dist/js/bootstrap.min.js"></script> <!-- bootstrap js -->
         <script src="../../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
         <script src="../../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> <!-- jquery-ui css -->
-        <script src="excelexportjs.js"></script>
+        <script src="../excelexportjs.js"></script>
         <script src="../../jquery/tableHeadFixer.js"></script>
 
         <script>

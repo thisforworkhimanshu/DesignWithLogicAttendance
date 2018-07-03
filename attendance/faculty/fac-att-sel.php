@@ -40,6 +40,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title>SIM: faculty attendance</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css"> <!-- bootstrap css -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
@@ -130,28 +131,30 @@ and open the template in the editor.
         <div id="navbar">
             <?php include '../../master-layout/faculty/master-faculty-layout.php'; ?>
         </div>
-        <div class="row mt-2">
-            <div class="col"></div>
-            <div class="col">
-                <form action="#" method="GET">
-                    <div class="btn-group form-group d-flex justify-content-center" role="group" aria-label="selection" style="align-items: ">
-                        <button type="button" class="btn btn-outline-primary" id="theory" value="theory">Theory</button>
-                        <button type="button" class="btn btn-outline-primary" id="practical" value="practical">Practical</button>
-                    </div>
-                    <input type="hidden" id="lec_type" name="lec_type" value="">
-                    <div>
-                        <select class="form-control form-group" id="division" name="division">
-                            <option>--Select division--</option>
-                        </select>
-                        <select class="form-control form-group" id="subject" name="subject">
-                            <option>--Select subject--</option>
-                        </select>
-                    </div>
+        <div class="container">
+            <div class="row mt-2">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <form action="#" method="GET">
+                        <div class="btn-group form-group d-flex justify-content-center" role="group" aria-label="selection" style="align-items: ">
+                            <button type="button" class="btn btn-outline-primary" id="theory" value="theory">Theory</button>
+                            <button type="button" class="btn btn-outline-primary" id="practical" value="practical">Practical</button>
+                        </div>
+                        <input type="hidden" id="lec_type" name="lec_type" value="">
+                        <div>
+                            <select class="form-control form-group" id="division" name="division">
+                                <option>--Select division--</option>
+                            </select>
+                            <select class="form-control form-group" id="subject" name="subject">
+                                <option>--Select subject--</option>
+                            </select>
+                        </div>
 
-                    <div class="d-flex justify-content-center"><button type="submit" value="submit" class="btn btn-primary">NEXT &raquo;</button></div>
-                </form>
+                        <div class="d-flex justify-content-center"><button type="submit" value="submit" class="btn btn-primary">NEXT &raquo;</button></div>
+                    </form>
+                </div>
+                <div class="col-sm-4"></div>
             </div>
-            <div class="col"></div>
         </div>
     </body>
 </html>
