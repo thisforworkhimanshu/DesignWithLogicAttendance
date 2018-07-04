@@ -61,12 +61,12 @@ if(!isset($_SESSION['fid'])){
                                     require_once '../../Connection.php';
                                     $connection = new Connection();
                                     $conn = $connection->createConnection("college");
-                                    $sqlSem = "select semester from subject_faculty_allocation where faculty_id = $fac_id and dept_id = $dept_id";
+                                    $sqlSem = "SELECT DISTINCT(semester) as sem FROM subject_faculty_allocation WHERE dept_id = $dept_id and faculty_id=$fac_id ORDER BY semester DESC";
                                     $resultSem = mysqli_query($conn, $sqlSem);
                                     if(mysqli_num_rows($resultSem)>0){
                                         while($row= mysqli_fetch_assoc($resultSem)){
                                             ?>
-                                <option value="<?php echo $row['semester']?>"><?php echo $row['semester']?></option>
+                                <option value="<?php echo $row['sem']?>"><?php echo $row['sem']?></option>
                                                 <?php
                                         }
                                     }

@@ -31,20 +31,6 @@ if(!isset($_SESSION['fid'])){
 
         <!-- Latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        <script>
-            //script:highlight the active link in navigation bar
-            $(document).ready(function () {
-                var current = location.pathname;
-                $('#nav li a').each(function () {
-                    var $this = $(this);
-                    // if the current path is like this link, make it active
-                    if ($this.attr('href').indexOf(current) !== -1) {
-                        $this.addClass('active');
-                        return false;
-                    }
-                })
-            });
-        </script>
     </head>
     <body>
         <div class="container">
