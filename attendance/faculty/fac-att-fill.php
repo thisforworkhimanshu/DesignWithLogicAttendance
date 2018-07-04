@@ -65,20 +65,18 @@ and open the template in the editor.
                                 sel.splice(index, 1);
                             }
                         }
-
                     }
-
                     if (sel.length != 0 && $("#cbbtn").val() == 'c') {
                         $("#cbbtn").val('u').html('<i class="material-icons" style="vertical-align: bottom; padding-right:2px">check_box_outline_blank</i>Uncheck All');
                     } else if (sel.length == 0 && $("#cbbtn").val() == 'u') {
                         $("#cbbtn").val('c').html('<i class="material-icons" style="vertical-align: bottom; padding-right:2px">check_box</i>Check All');
                     }
                 });
-                $(document).on("change", "#attendance-table input[type='checkbox']", function (event) {
+                $(document).on("change", ".record_table input[type='checkbox']", function (event) {
                     if ($(this).is(":checked")) {
-                        $(this).closest('tr').addClass("highlight_row");
+                        $(this).closest('tr').css('background', '#ffcccc');
                     } else {
-                        $(this).closest('tr').removeClass("highlight_row");
+                        $(this).closest('tr').css('background', '');
                     }
                 });
 
@@ -87,27 +85,28 @@ and open the template in the editor.
                     if ($(this).val() == 'c') {
                         $(".record_table input[type='checkbox']").prop("checked", true);
                         $(this).val("u").html('<i class="material-icons" style="vertical-align: bottom; padding-right:2px">check_box_outline_blank</i>Uncheck All');
+                        $('.record_table tbody tr').css('background', '#ffcccc');
                     } else {
                         $(".record_table input[type='checkbox']").prop("checked", false);
                         $(this).val('c').html('<i class="material-icons" style="vertical-align: bottom; padding-right:2px">check_box</i>Check All');
+                        $('.record_table tbody tr').css('background', '');
                     }
                 });
 
                 //script:button, make attendance
                 $("#make").click(function () {
-                    $("#make").text('Submitted :)').prop("disabled", true);
-//                    var sendData = {lec_id: $("#lec_id").val(), div: $("#div").val(), sem: $("#sem").val(), lec_type: $("#lec_type").val(), enrolment: sel};
-//                    $.ajax({
-//                        url: 'ajax-faculty-make-att.php',
-//                        type: 'POST',
-//                        data: {jsonData: JSON.stringify(sendData)},
-//                        success: function (data, textStatus, jqXHR) {
-//                            $("#count").append(data);
-//                            $("#info").css("display", "block").fadeIn(2000);
-//                            $("#make").text('Submitted :)').prop("disabled", true);
-//
-//                        }
-//                    });
+                    var sendData = {lec_id: $("#lec_id").val(), div: $("#div").val(), sem: $("#sem").val(), lec_type: $("#lec_type").val(), enrolment: sel};
+                    $.ajax({
+                        url: 'ajax-faculty-make-att.php',
+                        type: 'POST',
+                        data: {jsonData: JSON.stringify(sendData)},
+                        success: function (data, textStatus, jqXHR) {
+                            $("#count").append(data);
+                            $("#info").css("display", "block").fadeIn(2000);
+                            $("#make").text('Submitted :)').prop("disabled", true);
+
+                        }
+                    });
                 });
             });
         </script>
@@ -176,7 +175,7 @@ and open the template in the editor.
                     echo '</div>';
                 } else {
                     ?>
-                    <div class="alert alert-info" role="alert" style="margin: 1%">
+                    <div class="alert alert-info m-1" role="alert">
                         <b>Info! &nbsp;</b>it seems, you try to reloading page or any error occur...<br/> 
                         Would you like to fill attendance?&nbsp;<a href="fac-att-sel.php" class="alert-link">click here</a> <br/> 
                         or go to <a href="../../welcomefaculty.php" class="alert-link">home page</a> <br/>
