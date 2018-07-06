@@ -244,8 +244,8 @@ and open the template in the editor.
                     $("#search").prop("disabled", false);
                     $("#dateFrom").prop("disabled", false);
                     $("#dateTo").prop("disabled", false);
-                    
-                    $("#attendance-table").tableHeadFixer({"left" : 1});
+
+                    $("#attendance-table").tableHeadFixer({"left": 2});
                 }
 
                 function appendDivision(data) {
@@ -263,40 +263,48 @@ and open the template in the editor.
                         $("#subject").append($("<option>").text(item.short_name).val(item.subject_code));
                     });
                 }
-
-
-
             });
         </script>
 
     </head>
     <body>
         <?php include '../../master-layout/faculty/master-faculty-layout.php'; ?>
-        <div class="form-inline">
-            <div class="btn-group form-group d-flex justify-content-center form-group mb-2" role="group" aria-label="selection" style="float: left;padding: 5px">
-                <button type="button" class="btn btn-outline-primary" id="theory" value="theory">Theory</button>
-                <button type="button" class="btn btn-outline-primary" id="practical" value="practical">Practical</button>
+        <div class=" container-fluid mt-2">
+            <div class="form-row form-group">
+                <div class="col-2">
+                    <div class="btn-group" role="group" aria-label="selection">
+                        <button type="button" class="btn btn-outline-primary" id="theory" value="theory">Theory</button>
+                        <button type="button" class="btn btn-outline-primary" id="practical" value="practical">Practical</button>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <select class="form-control" id="subject" name="subject" disabled="true">
+                        <option>--Select subject--</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <select class="form-control" id="division" name="division"disabled="true">
+                        <option>--Select division--</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group mx-sm-3 mb-2">
-                <select class="form-control-sm border border-primary" id="subject" name="subject" style="margin: 5px" disabled="true">
-                    <option>--Select subject--</option>
-                </select>
-                <select class="form-control-sm border border-primary" id="division" name="division" style="margin: 5px" disabled="true">
-                    <option>--Select division--</option>
-                </select>
+            <div class="form-row">
+                <div class="col-md-3">
+                    <input id="search" type="text" placeholder="Search in table..." disabled="true" class="form-control">
+                </div>
+                <div class="col-md-5 form-inline">
+                    <input type="text" id="dateFrom" disabled="true" placeholder="for date" class="form-control"> -from to-
+                    <input type="text" id="dateTo" disabled="true" placeholder="last date" class="form-control">
+                </div>
+                <div class="form-inline ml-md-auto ml-sm-5">
+                    <button id="btnopenmodal" class="btn btn-success mr-1" disabled="true">update attendance</button>
+                    <button id="btnprint" class="btn btn-info mr-1" disabled="true"><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
+                </div>
             </div>
+        </div>
 
-        </div>
-        <br/>
-        <div>
-            <input type="text" id="search" placeholder="search in table" disabled="true">
-            <input type="text" id="dateFrom" disabled="true"> -from to-
-            <input type="text" id="dateTo"  disabled="true">
-            <button type="button" class="btn btn-success" id="modal">change</button>
-            <button id="print" class="btn btn-info">export to excel!</button>
-        </div>
         <hr/>
-        <div id="attendance-view" class="container" style="height: 86vh">
+        <div id="attendance-view" class="container" style="height: 87vh; width: 87vw">
             <table id="attendance-table" class="record_table">
                 <thead>
 
