@@ -62,6 +62,8 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/subject-register/getSubjectDetail.php">Add Subject</a>
+                        <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/subject-delete/subject-delete.php">Delete Subject</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/rollno-to-enrolment/roll-to-enrolment.php">Transfer Roll No. To Enrolment No.</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/move-batch-next-sem/getBatchDetails.php">Move Batch To Next Semester</a>
