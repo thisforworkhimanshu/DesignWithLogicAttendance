@@ -12,6 +12,7 @@ if (isset($_POST['semester']) && isset($_POST['div'])) {
 
     $sem = $_POST['semester'];
     $div = $_POST['div'];
+    $lec_type = $_POST['lec_type'];
     $dept_id = 16;
     $appendSql = '';
     if (isset($_POST['dateFrom']) && isset($_POST['dateTo'])) {
@@ -25,7 +26,13 @@ if (isset($_POST['semester']) && isset($_POST['div'])) {
     }
 
     $uploadJson = array();
-    $qStudDetail = "SELECT student_enrolment,student_name FROM student WHERE student_semester = $sem AND student_division= '$div'";
+    $appendSql2 = '';
+    if ($lec_type == 'theory') {
+        $appendSql2 = " AND student_division = '$div'";
+    } else {
+        $appendSql2 = " AND student_batch = '$div'";
+    }
+    $qStudDetail = "SELECT student_enrolment,student_name FROM student WHERE student_semester = $sem" . $appendSql2;
     $rStudDetail = $db->query($qStudDetail);
 
     $sSubjects = "SELECT * FROM subject WHERE semester = $sem";

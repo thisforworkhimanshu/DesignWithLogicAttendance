@@ -42,15 +42,15 @@ and open the template in the editor.
         <script type="text/javascript">
             $(document).ready(function () {
                 //script:highlight the active link in navigation bar
-                    var current = location.pathname;
-                    $('#nav li a').each(function () {
-                        var $this = $(this);
-                        // if the current path is like this link, make it active
-                        if ($this.attr('href').indexOf(current) !== -1) {
-                            $this.addClass('active');
-                            return false;
-                        }
-                    });
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                });
 
                 var sel = []; //store selected student from table 
                 //script:event table click event and selection
@@ -113,25 +113,49 @@ and open the template in the editor.
                     sendData = {semester: $("#cbsemester").val(),
                         dateFrom: $("#dateFrom").val(),
                         dateTo: $("#dateTo").val(),
+                        lec_type: $("#btnType").text(),
                         div: $("#btndiv").text()};
                     callAjax(sendData);
                 });
+
                 //script:button for division selection
-                $("#btndiv").click(function () {
-                    $(this).text(function (i, text) {
-                        return text === "A" ? "B" : "A";
-                    });
+                $(document).on('click', 'a.dropdown-item', function (event) {
+                    $('#btndiv').text($(this).text());
                     sendData = {semester: $("#cbsemester").val(),
                         dateFrom: $("#dateFrom").val(),
                         dateTo: $("#dateTo").val(),
+                        lec_type: $("#btnType").text(),
                         div: $("#btndiv").text()};
                     callAjax(sendData);
                 });
+
                 //script:button for type selection
-                $("#btntype").click(function () {
+                $("#btnType").click(function () {
                     $(this).text(function (i, text) {
-                        return text === "Theory" ? "Practical" : "Theory";
+                        if (text == 'theory') {
+                            $('#dropDiv').empty().append(
+                                    $('<a>').text('B1').addClass('dropdown-item'),
+                                    $('<a>').text('B2').addClass('dropdown-item'),
+                                    $('<a>').text('B3').addClass('dropdown-item'),
+                                    $('<a>').text('B4').addClass('dropdown-item'),
+                                    $('<a>').text('B5').addClass('dropdown-item'),
+                                    $('<a>').text('B6').addClass('dropdown-item'));
+                            $('#btndiv').text('B1');
+                        } else {
+                            $('#dropDiv').empty().append(
+                                    $('<a>').text('A').addClass('dropdown-item'),
+                                    $('<a>').text('B').addClass('dropdown-item'));
+                            $('#btndiv').text('A');
+                        }
+                        return text === "theory" ? "practical" : "theory";
                     });
+
+                    sendData = {semester: $("#cbsemester").val(),
+                        dateFrom: $("#dateFrom").val(),
+                        dateTo: $("#dateTo").val(),
+                        lec_type: $("#btnType").text(),
+                        div: $("#btndiv").text()};
+                    callAjax(sendData);
                 });
                 //script:button print export table to excel
                 $("#btnprint").click(function () {
@@ -151,6 +175,7 @@ and open the template in the editor.
                         sendData = {semester: $("#cbsemester").val(),
                             dateFrom: $("#dateFrom").val(),
                             dateTo: $("#dateTo").val(),
+                            lec_type: $("#btnType").text(),
                             div: $("#btndiv").text()};
                         callAjax(sendData);
                     }
@@ -164,6 +189,7 @@ and open the template in the editor.
                         sendData = {semester: $("#cbsemester").val(),
                             dateFrom: $("#dateFrom").val(),
                             dateTo: $("#dateTo").val(),
+                            lec_type: $("#btnType").text(),
                             div: $("#btndiv").text()};
                         callAjax(sendData);
                     }
@@ -196,7 +222,7 @@ and open the template in the editor.
                     } else {
                         $('#attendance-info').hide();
                         $('#attendance-table').show();
-                        sendData = {semester: $("#cbsemester").val(), div: $("#btndiv").text()};
+                        sendData = {semester: $("#cbsemester").val(), lec_type: $("#btnType").text(), div: $("#btndiv").text()};
                         callAjax(sendData);
                         $("#search").prop("disabled", false);
                         $("#dateFrom").prop("disabled", false);
@@ -208,12 +234,14 @@ and open the template in the editor.
 
                 });
                 function callAjax(sendData) {
+                    console.log(sendData);
                     $.ajax({
                         type: 'POST',
                         url: "ajax-admin-att-table.php",
                         data: sendData,
                         datetype: 'json',
                         success: function (data) {
+                            console.log(data);
                             showTable(data);
                         }
                     });
@@ -413,11 +441,18 @@ and open the template in the editor.
                     }
                     ?>
                 </div>
-                <div style="width: 3%">
-                    <button id="btndiv" class="btn btn-block btn-outline-primary" >A</button>
-                </div>
-                <div class="col-md-1">
-                    <button id="btntype" class="btn btn-block btn-outline-primary">Theory</button>
+                <div class="ml-2 col-2">
+                    <div class="btn-group" role="group">
+                        <button id="btnType" class="btn btn-outline-primary">theory</button>
+
+                        <div class="btn-group" role="group">
+                            <button id="btndiv" type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">A</button>
+                            <div id="dropDiv" class="dropdown-menu" aria-labelledby="btnDiv">
+                                <a class="dropdown-item" href="#">A</a>
+                                <a class="dropdown-item" href="#">B</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="form-row">
