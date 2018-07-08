@@ -45,8 +45,11 @@ if (isset($_POST['jsonData'])) {
             $db->close();
             $db2 = $conn->createConnection();
             if ($db2->multi_query($sInsertAbsent) === TRUE) {
-                echo $i;
+                echo 'absent count: '.$i;
                 unset($_SESSION['lec_id']);
+                unset($_SESSION['division']);
+                unset($_SESSION['lec_type']);
+                unset($_SESSION['subject']);
             } else {
                 echo $db2->error;
             }

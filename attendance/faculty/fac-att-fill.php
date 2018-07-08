@@ -25,13 +25,14 @@ and open the template in the editor.
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="../../bootstrap-4.1.1-dist/js/bootstrap.min.js"></script> <!-- bootstrap js -->
         <script src="../../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
+        <script src="../../bootstrap-4.1.1-dist/js/bootstrap.min.js"></script> <!-- bootstrap js -->
         <script src="../../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> <!-- jquery-ui css -->
         <script src="../../Paginathing/paginathing.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function () {
+
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                     $(document).tooltip();
                 } else {
@@ -58,12 +59,13 @@ and open the template in the editor.
                             if (!sel.includes(temp)) {
                                 sel.push(temp);
                             }
-
+                            console.log('clk check: ' + sel);
                         } else {
                             var index = sel.indexOf(temp);
                             if (index > -1) {
                                 sel.splice(index, 1);
                             }
+                            console.log('clk uncheck: ' + sel);
                         }
                     }
                     if (sel.length != 0 && $("#cbbtn").val() == 'c') {
@@ -86,10 +88,20 @@ and open the template in the editor.
                         $(".record_table input[type='checkbox']").prop("checked", true);
                         $(this).val("u").html('<i class="material-icons" style="vertical-align: bottom; padding-right:2px">check_box_outline_blank</i>Uncheck All');
                         $('.record_table tbody tr').css('background', '#ffcccc');
+
+                        $('.record_table > tbody tr td:first-child').each(function (i, item) {
+                            if (!sel.includes($(item).text())) {
+                                sel.push($(item).text());
+                            }
+                        });
+                        console.log('check: ' + sel);
                     } else {
                         $(".record_table input[type='checkbox']").prop("checked", false);
                         $(this).val('c').html('<i class="material-icons" style="vertical-align: bottom; padding-right:2px">check_box</i>Check All');
                         $('.record_table tbody tr').css('background', '');
+                        sel = [];
+                        console.log('uncheck: ' + sel);
+
                     }
                 });
 
@@ -101,10 +113,11 @@ and open the template in the editor.
                         type: 'POST',
                         data: {jsonData: JSON.stringify(sendData)},
                         success: function (data, textStatus, jqXHR) {
-                            $("#count").append(data);
                             $("#info").css("display", "block").fadeIn(2000);
                             $("#make").text('Submitted :)').prop("disabled", true);
-
+                            $('#subMsg').text(data).fadeIn('slow');
+                            $('.record_table tbody tr').prop("disabled", true);
+                            $('#cbbtn').prop("disabled", true);
                         }
                     });
                 });
@@ -169,8 +182,9 @@ and open the template in the editor.
                     ?>
                     <div class="row pl-1 pr-1  justify-content-center"><nav id="page"></nav></div>
                     <div class="row pl-1 pr-1 mb-2">
-                        <div class="col-lg-4 col-6"><button id="make" class="btn btn-block btn-primary">Make Attendance</button></div>
-                    </div>
+                        <div class="col-6 col-md-6"><button id="make" class="btn btn-block btn-primary">Make Attendance</button></div>
+                        <div id="subMsg" class="border rounded border-danger col-6 col-md-6" style="display: none;text-align: center; color: red"></div>
+                    </div> 
                     <?php
                     echo '</div>';
                 } else {
