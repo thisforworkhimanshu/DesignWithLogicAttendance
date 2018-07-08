@@ -124,14 +124,14 @@ if(!isset($_SESSION['aid'])){
                         
                         
                         if(mysqli_num_rows($resultSubject)>0){
-                            
+                            $btnSubmitStat = TRUE;
                             ?>
                 <form action="change-my-marks.php" method="post">
                     <div class="row">
                         <div class="col-lg-3"></div>
                         <div class="col-lg-6">
                             <div class="table-responsive">
-                                <table class="table-lg table-striped">
+                                <table id="mark-table" class="table-lg table-striped">
                                     <tr>
                                         <th>Subject Code</th>
                                         <th>Subject Name</th>
@@ -159,12 +159,14 @@ if(!isset($_SESSION['aid'])){
                                             <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>" required/>
                                                         <?php
                                                     }else{
+                                                        $btnSubmitStat = false;
                                                         ?>
                                             <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>" disabled/>
                                                         <?php
                                                     }
                                                 }else{
                                                     echo 'N.A.';
+                                                    $btnSubmitStat = false;
                                                 }
                                             }else if($examtype==="v"){
                                                 $sqlGetMark = "select ".$subject_code."_v as viva from sem".$semester."_".$dept_id." where enrolment = $enrolment";
@@ -176,6 +178,7 @@ if(!isset($_SESSION['aid'])){
                                             <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>" required/>
                                                         <?php
                                                     }else{
+                                                        $btnSubmitStat = false;
                                                             ?>
                                             <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>" disabled/>
                                                         <?php
@@ -183,6 +186,7 @@ if(!isset($_SESSION['aid'])){
                                                 
                                                 }else{
                                                     echo 'N.A.';
+                                                    $btnSubmitStat = false;
                                                 }
                                             }else if($examtype==="r"){
                                                 $sqlGetMark = "select ".$subject_code."_r as remid from sem".$semester."_".$dept_id."_r where enrolment = $enrolment";
@@ -194,6 +198,7 @@ if(!isset($_SESSION['aid'])){
                                             <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>" required/>
                                                         <?php
                                                     }else{
+                                                        $btnSubmitStat = false;
                                                         ?>
                                             <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>" disabled/>
                                                         <?php
@@ -201,6 +206,7 @@ if(!isset($_SESSION['aid'])){
                                                     
                                                 }else{
                                                     echo 'N.A.';
+                                                    $btnSubmitStat = false;
                                                 }
                                             }
                                             ?>
@@ -215,8 +221,26 @@ if(!isset($_SESSION['aid'])){
                     </div>
                     <div class="row" style="margin-top: 2%;">
                         <div class="col-lg-4"></div>
+                        
+                            <?php
+                                if($btnSubmitStat){
+                                    ?>
                         <div class="col-lg-4">
                             <input type="submit" name="submit" id="submit" class="form-control btn btn-primary" value="Update"/>
+                                        <?php
+                                }else{
+                                    ?>
+                            <div class="col-lg-5">
+                            <script>
+                                $(document).ready(function(){
+                                    $("#mark-table").remove();
+                                });
+                            </script>
+                            <label class="alert alert-warning">All Marks First Should be Entered By Faculty.</label>
+                                        <?php
+                                }
+                            ?>
+                            
                         </div>
                     </div>
                 </form>

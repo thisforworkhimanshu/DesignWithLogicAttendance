@@ -54,15 +54,24 @@ if(!isset($_SESSION['aid'])){
             <form id="form-detain" method="post">
                 <div class="row" style="margin-top: 1%;">
                     <div class="col-lg-4"></div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <input type="text" name="admyr" id="admyr" class="form-control" placeholder="Admission Year"/>
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="submit" value="View" name="btnView" id="btnView" class="btn btn-success"/>
                     </div>
                 </div>
             </form>
             <script>
                 $(document).ready(function(){
-                   $("#admyr").blur(function(){
-                      $("#form-detain").submit();
+                   $("#btnView").click(function(){
+                      if($("#admyr").val()==""){
+                          alert('Please Input Admission Year');
+                          $("#admyr").focus();
+                          return false;
+                      }else{
+                          return true;
+                      }
                    });
                 });
             </script>
