@@ -4,6 +4,8 @@ if (!isset($_SESSION['fid'])) {
     header("location:/DesignWithLogicAttendance/facultyLogin.php");
     return;
 }
+
+$bool = FALSE;
 if (isset($_GET['division']) && isset($_GET['subject']) && isset($_GET['lec_type'])) {
     $div = $_GET['division'];
     $sub_code = $_GET['subject'];
@@ -15,17 +17,23 @@ if (isset($_GET['division']) && isset($_GET['subject']) && isset($_GET['lec_type
     $conn = new Connection();
     $db = $conn->createConnection();
 
-    if (!isset($_SESSION['lec_id'])) {
-        $sGenrateLectID = "INSERT INTO lecture_tb_$dept_id (date,faculty_id,subject_code,type,division) "
-                . "VALUES ('$today',$fid,$sub_code,'$lec_type','$div')";
-        $rGenrateLectID = $db->query($sGenrateLectID);
-        if ($rGenrateLectID === TRUE) {
-            $lec_id = $db->insert_id;
-            $_SESSION['lec_id'] = $lec_id;
-            $_SESSION['division'] = $div;
-            $_SESSION['lec_type'] = $lec_type;
-            $_SESSION['subject'] = $_GET['subject'];
-            header("location:fac-att-fill.php");
+    $sCheckLec = "SELECT lecture_id FROM lecture_tb_$dept_id WHERE date='$today' AND faculty_id = $fid AND subject_code = $sub_code AND type = '$lec_type' AND division = '$div' LIMIT 1";
+    $rCheckLec = $db->query($sCheckLec);
+    if ($rCheckLec->num_rows > 0) {
+        $bool = TRUE;
+    } else {
+        if (!isset($_SESSION['lec_id'])) {
+            $sGenrateLectID = "INSERT INTO lecture_tb_$dept_id (date,faculty_id,subject_code,type,division) "
+                    . "VALUES ('$today',$fid,$sub_code,'$lec_type','$div')";
+            $rGenrateLectID = $db->query($sGenrateLectID);
+            if ($rGenrateLectID === TRUE) {
+                $lec_id = $db->insert_id;
+                $_SESSION['lec_id'] = $lec_id;
+                $_SESSION['division'] = $div;
+                $_SESSION['lec_type'] = $lec_type;
+                $_SESSION['subject'] = $_GET['subject'];
+                header("location:fac-att-fill.php");
+            }
         }
     }
 }
@@ -149,7 +157,15 @@ and open the template in the editor.
                                 <option>--Select subject--</option>
                             </select>
                         </div>
-
+                        <?php
+                        if ($bool) {
+                            ?> 
+                            <div class="alert alert-info" style="display: block">
+                                <i class="material-icons" style="vertical-align: text-bottom;padding-right: 2px; font-size: 16pt">error_outline</i>Please Note:
+                                <br/>Today's attendance for selected subject has been made early
+                            </div>
+                        <?php }
+                        ?>
                         <div class="d-flex justify-content-center"><button type="submit" value="submit" class="btn btn-primary">NEXT &raquo;</button></div>
                     </form>
                 </div>

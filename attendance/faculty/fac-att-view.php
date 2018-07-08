@@ -204,7 +204,7 @@ and open the template in the editor.
                 //script: apppend table data on subject seletion
                 function appendTable(data) {
                     var jsonData = $.parseJSON(data);
-
+                    console.log(jsonData);
                     //empty table
                     $("#attendance-table > thead").empty();
                     $("#attendance-table > tbody").empty();
