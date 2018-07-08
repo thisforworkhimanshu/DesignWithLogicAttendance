@@ -47,7 +47,7 @@ if(!isset($_SESSION['aid'])){
                     <h5>Past Subject Allocation</h5>
                 </div>
             </div>
-            <form action="subjectAllocationHistory.php" method="post">
+            <form action="subjectAllocationHistory.php" method="get">
                 <div class="row" style="margin-top: 2%;">
                     <div class="col-lg-3 form-group">
                         <input type="text" placeholder="Batch Year" id="batchyear" name="batchyear" class="form-control"/>
@@ -74,13 +74,13 @@ if(!isset($_SESSION['aid'])){
             
             <?php
             
-            if(isset($_POST['batchyear'])&&$_POST['semester']){
+            if(isset($_GET['batchyear'])&&$_GET['semester']){
                 require_once '../../Connection.php';
                 $connection = new Connection();
                 $conn = $connection->createConnection("college");
                 $dept_id = $_SESSION['a_dept_id'];
-                $sem = $_POST['semester'];
-                $batch_year = $_POST['batchyear'];
+                $sem = $_GET['semester'];
+                $batch_year = $_GET['batchyear'];
                 
                 if($sem==1||$sem==2){
                     $sql = "SELECT * FROM faculty where dept_id  in ($dept_id,1)";
@@ -91,6 +91,7 @@ if(!isset($_SESSION['aid'])){
                 $result = mysqli_query($conn, $sql);
                 
                 if(mysqli_num_rows($result)>0){
+                    $allocationstat = TRUE;
                     while($rowFac = mysqli_fetch_assoc($result)){
                         $fac_id = $rowFac['faculty_id'];
                         $fac_name = $rowFac['faculty_fname'];
@@ -135,8 +136,15 @@ if(!isset($_SESSION['aid'])){
                                 </tr>
                                             <?php
                                     }
+                        }else{
+                            $allocationstat = false;
                         }
                     }
+                    if(!$allocationstat){
+                        echo 'No Such Data Present';
+                    }
+                }else{
+                    echo 'No Faculty Present';
                 }
                 ?>
                 </table>
