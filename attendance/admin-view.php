@@ -379,20 +379,15 @@ and open the template in the editor.
 
                 //script:button update button modal
                 $('#mbtnUpdate').click(function () {
-                    var sendData = {singleDate: date, lec_type: $("#btnType").text(), div: $("#btndiv").text(), action: $('input[name=selAction]:checked').val(), sel: sel};
+                    var sendData = {singleDate: $('#mSingleDate').val(), fac_id: $('#mFac').val() ,lec_type: $("#btnType").text(), div: $("#btndiv").text(), action: $('input[name=selAction]:checked').val(), sel: sel};
+
                     $.ajax({
                         type: 'POST',
                         url: "ajax-admin-update-single.php",
-                        data: sendData,
+                        data: {sendData: JSON.stringify(sendData)},
                         datetype: 'json',
                         success: function (data) {
-                            jsonData = JSON.parse(data);
-                            $('#mSub').empty();
-                            $('#mFac').empty();
-                            $.each(jsonData, function (i, item) {
-                                $('#mSub').append($('<option>').text(item.sub_name).val(item.sub_code));
-
-                            });
+                            alert(data);
                         }
                     });
                 });
@@ -592,11 +587,11 @@ and open the template in the editor.
                 </div>
                 <div class="row mt-5 ml-4 pl-3 pb-2">
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="mPresent" name="selAction" class="custom-control-input">
+                        <input type="radio" id="mPresent" name="selAction" class="custom-control-input" value="1">
                         <label class="custom-control-label" for="mPresent">Present</label>
                     </div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="mAbsent" name="selAction" class="custom-control-input">
+                        <input type="radio" id="mAbsent" name="selAction" class="custom-control-input" value="0">
                         <label class="custom-control-label" for="mAbsent">Absent</label>
                     </div>
                 </div>

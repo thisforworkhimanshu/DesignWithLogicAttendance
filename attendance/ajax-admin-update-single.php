@@ -35,9 +35,12 @@ if (isset($_POST['singleDate']) && isset($_POST['lec_type']) && isset($_POST['di
 
 if (isset($_POST['sendData'])) {
     $data = json_decode($_POST['sendData']);
-    $date = $data->date;
+    $date = $data->singleDate;
     $lec_type = $data->lec_type;
     $div = $data->div;
     $sel = $data->sel;
+    $fac_id = $data->fac_id
     $action = $data->action;
+    
+    
 }
