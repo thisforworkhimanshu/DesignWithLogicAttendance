@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,7 +13,7 @@ if (isset($_POST['semester']) && isset($_POST['div'])) {
     $sem = $_POST['semester'];
     $div = $_POST['div'];
     $lec_type = $_POST['lec_type'];
-    $dept_id = 16;
+    $dept_id = $_SESSION['a_dept_id'];
     $appendSql = '';
     if (isset($_POST['dateFrom']) && isset($_POST['dateTo'])) {
         if ($_POST['dateFrom'] != '' && $_POST['dateTo'] != '') {

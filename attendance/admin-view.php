@@ -51,7 +51,6 @@ and open the template in the editor.
                         return false;
                     }
                 });
-
                 var sel = []; //store selected student from table 
                 //script:event table click event and selection
                 $(document).on("click", ".record_table tr", function (event) {
@@ -79,7 +78,6 @@ and open the template in the editor.
                         $(this).closest('tr').removeClass("highlight_row");
                     }
                 });
-
                 //script: criteria adjust setting
                 $('#criteria').change(function () {
                     $.ajax({
@@ -101,7 +99,6 @@ and open the template in the editor.
                         }
                     });
                 });
-
                 //script:button for view, showing attendance in percentage
                 $("#btnview").click(function () {
                     $(this).val(function (i, value) {
@@ -117,7 +114,6 @@ and open the template in the editor.
                         div: $("#btndiv").text()};
                     callAjax(sendData);
                 });
-
                 //script:button for division selection
                 $(document).on('click', 'a.dropdown-item', function (event) {
                     $('#btndiv').text($(this).text());
@@ -128,7 +124,6 @@ and open the template in the editor.
                         div: $("#btndiv").text()};
                     callAjax(sendData);
                 });
-
                 //script:button for type selection
                 $("#btnType").click(function () {
                     $(this).text(function (i, text) {
@@ -149,7 +144,6 @@ and open the template in the editor.
                         }
                         return text === "theory" ? "practical" : "theory";
                     });
-
                     sendData = {semester: $("#cbsemester").val(),
                         dateFrom: $("#dateFrom").val(),
                         dateTo: $("#dateTo").val(),
@@ -209,7 +203,6 @@ and open the template in the editor.
                 });
                 //script:combobox semester selection combobox
                 $("#cbsemester").change(function () {
-                    console.log("semester selection: " + this.selectedIndex);
                     if (this.selectedIndex === 0) {
                         //disable controls on none selection
                         $("#search").prop("disabled", true);
@@ -234,14 +227,12 @@ and open the template in the editor.
 
                 });
                 function callAjax(sendData) {
-                    console.log(sendData);
                     $.ajax({
                         type: 'POST',
                         url: "ajax-admin-att-table.php",
                         data: sendData,
                         datetype: 'json',
                         success: function (data) {
-                            console.log(data);
                             showTable(data);
                         }
                     });
@@ -293,7 +284,6 @@ and open the template in the editor.
                         });
                     } else {
                         //create table header, percentage view
-
                         $("#attendance-table > thead").append($('<tr>'), $('<tr>'));
                         $("#attendance-table > thead tr:nth-child(2)").append($('<th>').text('enrolment'), $('<th>').text('name'));
                         $.each(jsonData[0], function (i, row) {
@@ -338,7 +328,6 @@ and open the template in the editor.
                 $("#btnopenmodal").click(function () {
                     $("body").addClass("modal-open");
                     $('#mListShowEnroll').empty();
-                    console.log(sel);
                     sel.sort();
                     for (var i = 0; i < sel.length; i++) {
                         $('#mListShowEnroll').append($('<li>').text(sel[i]).addClass('list-group-item'));
@@ -350,7 +339,6 @@ and open the template in the editor.
                     $("#modal").css("display", "none");
                     $("body").removeClass("modal-open");
                 });
-
                 //script: modal single date selection 
                 $("#mSingleDate").datepicker({
                     changeMonth: true,
@@ -360,13 +348,57 @@ and open the template in the editor.
                     yearRange: '2018:2028',
                     maxDate: 0,
                     onSelect: function (date, instance) {
+                        $.ajax({
+                            type: 'POST',
+                            url: "ajax-admin-update-single.php",
+                            data: {singleDate: date, lec_type: $("#btnType").text(), div: $("#btndiv").text()},
+                            datetype: 'json',
+                            success: function (data) {
+                                jsonData = JSON.parse(data);
+                                $('#mSub').empty();
+                                $('#mFac').empty();
+                                $.each(jsonData, function (i, item) {
+                                    $('#mSub').append($('<option>').text(item.sub_name).val(item.sub_code));
+
+                                });
+                            }
+                        });
                     }
 
+                });
+                //scrpit: dropdown select subject msub
+                $('#mSub').change(function () {
+                    var sub = $('#mSub').val();
+                    $('#mFac').empty();
+                    $.each(jsonData, function (i, item) {
+                        if (sub == item.sub_code) {
+                            $('#mFac').append($('<option>').text(item.fac_name).val(item.fac_id));
+                        }
+                    });
+                });
+
+                //script:button update button modal
+                $('#mbtnUpdate').click(function () {
+                    var sendData = {singleDate: date, lec_type: $("#btnType").text(), div: $("#btndiv").text(), action: $('input[name=selAction]:checked').val(), sel: sel};
+                    $.ajax({
+                        type: 'POST',
+                        url: "ajax-admin-update-single.php",
+                        data: sendData,
+                        datetype: 'json',
+                        success: function (data) {
+                            jsonData = JSON.parse(data);
+                            $('#mSub').empty();
+                            $('#mFac').empty();
+                            $.each(jsonData, function (i, item) {
+                                $('#mSub').append($('<option>').text(item.sub_name).val(item.sub_code));
+
+                            });
+                        }
+                    });
                 });
 
                 //script: multiple date selection
                 var dates = [];
-
                 function addDate(date) {
                     if (jQuery.inArray(date, dates) < 0)
                         dates.push(date);
@@ -464,7 +496,7 @@ and open the template in the editor.
                     <input type="text" id="dateTo" disabled="true" placeholder="last date" class="form-control">
                 </div>
                 <div class="form-inline ml-md-auto ml-sm-5">
-                    <button id="btnopenmodal" class="btn btn-success mr-1" disabled="true">update attendance</button>
+                    <button id="btnopenmodal" class="btn btn-success mr-1">update attendance</button>
                     <button id="btnprint" class="btn btn-info mr-1" disabled="true"><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
                     <div class="dropdown show">
                         <i class="material-icons crossRotate" href="#" style="cursor: pointer" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">settings</i>
@@ -535,21 +567,13 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label class="col-form-label-sm" for="mSub">Select Subject:</label>
                                     <select multiple class="form-control" style="height: 80px" id="mSub">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label-sm" for="mFac">Select Lecturer:</label>
                                     <select multiple class="form-control" style="height: 80px" id="mFac">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+
                                     </select>
                                 </div>
                             </div>
