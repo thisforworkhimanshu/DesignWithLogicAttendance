@@ -1,6 +1,7 @@
 <?php
 
 session_start();
+$dept_id = $_SESSION['a_dept_id'];
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,7 +14,6 @@ if (isset($_POST['singleDate']) && isset($_POST['lec_type']) && isset($_POST['di
     $date = $_POST['singleDate'];
     $lec_type = $_POST['lec_type'];
     $div = $_POST['div'];
-    $dept_id = $_SESSION['a_dept_id'];
 
     $sGetSub = "SELECT l.date,l.subject_code,s.short_name,f.faculty_id,f.faculty_uname FROM lecture_tb_$dept_id as l INNER JOIN subject as s ON l.subject_code = s.subject_code INNER JOIN faculty as f ON l.faculty_id = f.faculty_id WHERE l.date = '$date' AND l.type = '$lec_type' AND l.division= '$div'";
     $rGetSub = $db->query($sGetSub);
@@ -35,12 +35,31 @@ if (isset($_POST['singleDate']) && isset($_POST['lec_type']) && isset($_POST['di
 
 if (isset($_POST['sendData'])) {
     $data = json_decode($_POST['sendData']);
+    echo $_POST['sendData'];
     $date = $data->singleDate;
     $lec_type = $data->lec_type;
     $div = $data->div;
     $sel = $data->sel;
-    $fac_id = $data->fac_id
+    $fac_id = $data->fac_id;
+    $sub_code = $data->sub_code;
     $action = $data->action;
-    
-    
+    $lec_id;
+    $sCheckLec = "SELECT lecture_id FROM lecture_tb_$dept_id WHERE date='$date' AND faculty_id = $fac_id AND subject_code = $sub_code AND type = '$lec_type' AND division = '$div' LIMIT 1";
+    $rCheckLec = $db->query($sCheckLec);
+    if ($rCheckLec->num_rows > 0) {
+        $obj = mysqli_fetch_object($rCheckLec);
+        $lec_id = $obj->lecture_id;
+
+        $sUpdateAction = '';
+        $i = 0;
+        for ($i; $i < count($sel); $i++) {
+            $enrol = $sel[$i];
+            $sUpdateAction .= "UPDATE attendance_of_$dept_id SET is_present = $action WHERE enrolment = $enrol AND lecture_id = $lec_id;";
+        }
+        if ($db->multi_query($sUpdateAction) === TRUE) {
+                echo 'change count: '.$i;
+            } else {
+                echo $db->error;
+            }
+    }
 }

@@ -356,6 +356,7 @@ and open the template in the editor.
                             success: function (data) {
                                 jsonData = JSON.parse(data);
                                 $('#mSub').empty();
+                                $('#mSub').append($('<option>').text("sel"));
                                 $('#mFac').empty();
                                 $.each(jsonData, function (i, item) {
                                     $('#mSub').append($('<option>').text(item.sub_name).val(item.sub_code));
@@ -368,8 +369,9 @@ and open the template in the editor.
                 });
                 //scrpit: dropdown select subject msub
                 $('#mSub').change(function () {
-                    var sub = $('#mSub').val();
+                    sub = $(this).val();
                     $('#mFac').empty();
+                    $('#mFac').append($('<option>').text("sel"));
                     $.each(jsonData, function (i, item) {
                         if (sub == item.sub_code) {
                             $('#mFac').append($('<option>').text(item.fac_name).val(item.fac_id));
@@ -379,7 +381,7 @@ and open the template in the editor.
 
                 //script:button update button modal
                 $('#mbtnUpdate').click(function () {
-                    var sendData = {singleDate: $('#mSingleDate').val(), fac_id: $('#mFac').val() ,lec_type: $("#btnType").text(), div: $("#btndiv").text(), action: $('input[name=selAction]:checked').val(), sel: sel};
+                    var sendData = {singleDate: $('#mSingleDate').val(), sub_code: sub, fac_id: $('#mFac').val(), lec_type: $("#btnType").text(), div: $("#btndiv").text(), action: $('input[name=selAction]:checked').val(), sel: sel};
 
                     $.ajax({
                         type: 'POST',
@@ -388,6 +390,7 @@ and open the template in the editor.
                         datetype: 'json',
                         success: function (data) {
                             alert(data);
+                            sel = [];
                         }
                     });
                 });
@@ -561,13 +564,13 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label-sm" for="mSub">Select Subject:</label>
-                                    <select multiple class="form-control" style="height: 80px" id="mSub">
-
+                                    <select class="form-control" style="height: 80px" id="mSub">
+                                        
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label-sm" for="mFac">Select Lecturer:</label>
-                                    <select multiple class="form-control" style="height: 80px" id="mFac">
+                                    <select class="form-control" style="height: 80px" id="mFac">
 
                                     </select>
                                 </div>
