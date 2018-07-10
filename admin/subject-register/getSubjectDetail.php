@@ -284,26 +284,11 @@ if(!isset($_SESSION['aid'])){
                                             $(document).ready(function(){
                                                $("#subject_sem").blur(function(){
                                                   var sem = $(this).val();
-                                                  var dept_id = $("#dept_id").val();
                                                   if(sem>=9 || sem<=0){
                                                       alert('Semester Should be in between 1 to 8');
                                                       $("#theory_hour").prop("disabled",true);
                                                   }else{
-                                                      if(sem>2){
-                                                        if(dept_id!==1){
-                                                            $("#theory_hour").prop("disabled",false);
-                                                        }else{
-                                                            alert('Semester should be in between 3 to 8');
-                                                            $("#theory_hour").prop("disabled",true);
-                                                        }
-                                                    }else if(sem<3){
-                                                        if(dept_id===1){
-                                                            $("#theory_hour").prop("disabled",false);
-                                                        }else{
-                                                            alert('Semester should be in between 3 to 8');
-                                                            $("#theory_hour").prop("disabled",true);
-                                                        }
-                                                    }
+                                                      $("#theory_hour").prop("disabled",false);
                                                   }
                                                });
                                             });
