@@ -77,7 +77,12 @@ and open the template in the editor.
                 <hr style="border-color: greenyellow;"/>
             </div>
             <div class="container">
-                <div class="row" style="margin-top: 10%;">
+                <marquee onmouseover="this.stop();" onmouseout="this.start();" direction="left" behavior="alternate" >
+                    <label>We are working on, currently facility available only to Information and Technology Department. We will notify any other are available.</label>
+                </marquee>
+            </div>
+            <div class="container">
+                <div class="row" style="margin-top: 7%;">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-4">
                         <form>

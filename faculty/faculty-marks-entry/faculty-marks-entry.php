@@ -33,10 +33,10 @@ if(!isset($_SESSION['fid'])){
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <?php
+            require_once '../../master-layout/faculty/master-faculty-layout.php';
+        ?>
         <div class="container">
-            <?php
-                require_once '../../master-layout/faculty/master-faculty-layout.php';
-            ?>
             <div class="badge-light" style="margin-top: 0.5%;">
                 <div class="text-center">
                     <h5>Marks Entry</h5>

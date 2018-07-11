@@ -52,10 +52,11 @@ if(!isset($_SESSION['fid'])){
         
     </head>
     <body>
+        <?php
+            require_once '../../master-layout/faculty/master-faculty-layout.php';
+        ?>
         <div class="container">
-            <?php
-                require_once '../../master-layout/faculty/master-faculty-layout.php';
-            ?>
+            
             <div class="badge-light" style="margin-top: 1%;">
                 <div class="text-center">
                     <h5>Change Marks</h5>

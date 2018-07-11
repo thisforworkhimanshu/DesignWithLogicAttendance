@@ -47,10 +47,10 @@ if(!isset($_SESSION['fid'])){
         </script>
     </head>
     <body>
+        <?php
+            require_once '../../master-layout/faculty/master-faculty-layout.php';
+        ?>
         <div class="container">
-            <?php
-                require_once '../../master-layout/faculty/master-faculty-layout.php';
-            ?>
             <div style="margin-top: 2%;">
                 <form class="form" method="get" action="faculty-view-marks.php">
                 <div class="row">
