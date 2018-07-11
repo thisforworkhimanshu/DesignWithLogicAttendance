@@ -112,6 +112,9 @@ and open the template in the editor.
                         url: 'ajax-faculty-make-att.php',
                         type: 'POST',
                         data: {jsonData: JSON.stringify(sendData)},
+                        beforeSend: function (xhr) {
+                            $("#make").text('Processing...').prop("disabled", true);
+                        },
                         success: function (data, textStatus, jqXHR) {
                             $("#info").css("display", "block").fadeIn(2000);
                             $("#make").text('Submitted :)').prop("disabled", true);

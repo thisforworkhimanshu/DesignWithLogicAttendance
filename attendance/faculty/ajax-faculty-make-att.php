@@ -19,6 +19,10 @@ if (isset($_POST['jsonData'])) {
     include '../../Connection.php';
     $conn = new Connection();
     $db = $conn->createConnection();
+    $db->autocommit(FALSE);
+    $db->begin_transaction();
+    $transactionStatus = TRUE;
+
     $appendSql = '';
     if ($lec_type == 'theory') {
         $appendSql = " AND student_division = '$div'";
@@ -36,23 +40,40 @@ if (isset($_POST['jsonData'])) {
             $sInsertEnrol .= "INSERT INTO attendance_of_$dept_id (enrolment,lecture_id,is_present) VALUES ($enrolment,$lec_id,1);";
         }
         if ($db->multi_query($sInsertEnrol) === TRUE) {
+            while ($db->next_result()) {
+                ;
+            } // flush multi_queries
+
             $sInsertAbsent = '';
             $i = 0;
             for ($i; $i < count($abenrol); $i++) {
                 $enrolment = $abenrol[$i];
                 $sInsertAbsent .= "UPDATE attendance_of_$dept_id SET is_present = 0 WHERE enrolment = $enrolment AND lecture_id = $lec_id ;";
             }
-            $db->close();
-            $db2 = $conn->createConnection();
-            if ($db2->multi_query($sInsertAbsent) === TRUE) {
-                echo 'absent count: '.$i;
+
+            if ($db->multi_query($sInsertAbsent) === TRUE) {
+                while ($db->next_result()) {
+                    ;
+                } // flush multi_queries
+                echo 'absent count: ' . $i;
                 unset($_SESSION['lec_id']);
                 unset($_SESSION['division']);
                 unset($_SESSION['lec_type']);
                 unset($_SESSION['subject']);
             } else {
-                echo $db2->error;
+                $transactionStatus = FALSE;
             }
+        } else {
+            $transactionStatus = FALSE;
         }
     }
-}
+    if ($transactionStatus) {
+        echo ' commit: ' . $db->commit();
+    } else {
+        $db->rollback();
+        $db2 = $conn->createConnection();
+        $sDelLecId = "DELETE FROM lecture_tb_$dept_id WHERE lecture_id = $lec_id";
+        $rDelLecId = $db2->query($sDelLecId);
+        echo 'error occur in processing.';
+    }
+}   
