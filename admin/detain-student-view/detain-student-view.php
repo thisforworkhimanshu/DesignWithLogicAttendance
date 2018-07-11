@@ -37,6 +37,15 @@ if(!isset($_SESSION['aid'])){
                 })
             });
         </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -55,7 +64,7 @@ if(!isset($_SESSION['aid'])){
                 <div class="row" style="margin-top: 1%;">
                     <div class="col-lg-4"></div>
                     <div class="col-lg-3">
-                        <input type="text" name="admyr" id="admyr" class="form-control" placeholder="Admission Year"/>
+                        <input type="number" name="admyr" id="admyr" class="form-control" placeholder="Admission Year"/>
                     </div>
                     <div class="col-lg-2">
                         <input type="submit" value="View" name="btnView" id="btnView" class="btn btn-success"/>

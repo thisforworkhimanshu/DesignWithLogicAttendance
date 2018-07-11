@@ -40,6 +40,15 @@ if (!isset($_SESSION['aid'])) {
                 });
             });
         </script>
+         <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -111,7 +120,7 @@ if (!isset($_SESSION['aid'])) {
                         <div class="form-group">
                             <label for="cellno" class="control-label">Mobile Number</label>
                             <div>
-                                <input type="text" id="cellno" placeholder="Mobile Number" class="form-control" required="required">
+                                <input type="number" id="cellno" placeholder="Mobile Number" class="form-control" required="required">
                             </div>
                         </div>
                         <script>

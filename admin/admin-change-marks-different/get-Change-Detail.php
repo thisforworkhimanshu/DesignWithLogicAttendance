@@ -38,6 +38,16 @@ if(!isset($_SESSION['aid'])){
                 })
             });
         </script>
+        
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -74,7 +84,7 @@ if(!isset($_SESSION['aid'])){
                         </select>
                     </div>
                     <div class="col-lg-4 form-group">
-                        <input type="text" id="enrolment" name="enrolment" class="form-control" placeholder="Enrolment Number" required/>
+                        <input type="number" id="enrolment" name="enrolment" class="form-control" placeholder="Enrolment Number" required/>
                     </div>
                 </div>
 
@@ -156,12 +166,12 @@ if(!isset($_SESSION['aid'])){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
                                                     if($rowmark['mid']!=""){
                                                         ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>" required/>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>" required/>
                                                         <?php
                                                     }else{
                                                         $btnSubmitStat = false;
                                                         ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>" disabled/>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>" disabled/>
                                                         <?php
                                                     }
                                                 }else{
@@ -175,12 +185,12 @@ if(!isset($_SESSION['aid'])){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
                                                     if($rowmark['viva']!=""){
                                                             ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>" required/>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>" required/>
                                                         <?php
                                                     }else{
                                                         $btnSubmitStat = false;
                                                             ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>" disabled/>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>" disabled/>
                                                         <?php
                                                     }
                                                 
@@ -195,12 +205,12 @@ if(!isset($_SESSION['aid'])){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
                                                     if($rowmark['remid']!=""){
                                                         ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>" required/>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>" required/>
                                                         <?php
                                                     }else{
                                                         $btnSubmitStat = false;
                                                         ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>" disabled/>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>" disabled/>
                                                         <?php
                                                     }
                                                     

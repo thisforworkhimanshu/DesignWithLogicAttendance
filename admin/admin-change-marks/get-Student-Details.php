@@ -37,6 +37,15 @@ if(!isset($_SESSION['aid'])){
                 })
             });
         </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -135,7 +144,7 @@ if(!isset($_SESSION['aid'])){
                         </div>
                         
                         <div class="form-group">
-                            <input type="text" name="enrolment" id="enrolment" class="form-control" placeholder="Enrolment" required/>
+                            <input type="number" name="enrolment" id="enrolment" class="form-control" placeholder="Enrolment" required/>
                         </div>
                         
                         <script>
@@ -174,7 +183,7 @@ if(!isset($_SESSION['aid'])){
                         </script>
                         
                         <div class="form-group">
-                            <input type="text" name="marks" id="marks" class="form-control" placeholder="Click Here To Show Marks"/>
+                            <input type="number" name="marks" id="marks" class="form-control" placeholder="Click Here To Show Marks"/>
                         </div>
                         
                         <script>

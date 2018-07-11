@@ -52,9 +52,18 @@ and open the template in the editor.
                });
             });
         </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
-        <div class="container">
+        <div>
             <div class="bg-light text-center">
                 <hr style="border-color: greenyellow; margin-top: 0%;"/>
                 <div>
@@ -67,25 +76,27 @@ and open the template in the editor.
                 </div>
                 <hr style="border-color: greenyellow;"/>
             </div>
-            <div class="row" style="margin-top: 10%;">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-4">
-                    <form>
-                        <div class="form-group">
-                            <input type="text" id="enrolment" name="enrolment" class="form-control" placeholder="Enrolment" autofocus/>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-sm-7"></div>
-                            <div class="col-sm-auto"><a href="student-forget-password/forget-password.php" class="btn-link" style="color: red;">Forgot Password?</a></div>
-                        </div>
-                        <div id="error"></div>
-                        <div class="form-group">
-                            <input type="submit" id="btnSubmit" value="Jump In" class="form-control btn-outline-success btn-light"/>
-                        </div>
-                    </form>
+            <div class="container">
+                <div class="row" style="margin-top: 10%;">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                        <form>
+                            <div class="form-group">
+                                <input type="number" id="enrolment" name="enrolment" class="form-control" placeholder="Enrolment" autofocus/>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-sm-7"></div>
+                                <div class="col-sm-auto"><a href="student-forget-password/forget-password.php" class="btn-link" style="color: red;">Forgot Password?</a></div>
+                            </div>
+                            <div id="error"></div>
+                            <div class="form-group">
+                                <input type="submit" id="btnSubmit" value="Jump In" class="form-control btn-outline-success btn-light"/>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

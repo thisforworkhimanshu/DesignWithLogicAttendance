@@ -32,6 +32,15 @@ if (!isset($_SESSION['aid'])) {
                 })
             });
         </script>
+         <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -50,7 +59,7 @@ if (!isset($_SESSION['aid'])) {
                         <div class="form-group">
                             <label for="enrolment_no" class="control-label">Enrolment No</label>
                             <div>
-                                <input type="text" id="enrolment_no" placeholder="Enrolment No" class="form-control" autofocus required="required">
+                                <input type="number" id="enrolment_no" placeholder="Enrolment No" class="form-control" autofocus required="required">
                             </div>
                         </div>
 
@@ -81,21 +90,21 @@ if (!isset($_SESSION['aid'])) {
                         <div class="form-group">
                             <label for="student_dept_id" class="control-label">Department Id</label>
                             <div>
-                                <input type="text" id="student_dept_id" placeholder="Student Department Id" class="form-control" autofocus required="required">
+                                <input type="number" id="student_dept_id" placeholder="Student Department Id" class="form-control" autofocus required="required">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="student_adm_yr" class="control-label">Admission Year</label>
                             <div>
-                                <input type="text" id="student_adm_yr" placeholder="Student Admission Year" class="form-control" autofocus required="required">
+                                <input type="number" id="student_adm_yr" placeholder="Student Admission Year" class="form-control" autofocus required="required">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="student_batch_year" class="control-label">Batch Year</label>
                             <div>
-                                <input type="text" id="student_batch_year" placeholder="Student Batch Year" class="form-control" autofocus required="required">
+                                <input type="number" id="student_batch_year" placeholder="Student Batch Year" class="form-control" autofocus required="required">
                             </div>
                         </div>
 
@@ -135,7 +144,7 @@ if (!isset($_SESSION['aid'])) {
                         <div class="form-group">
                             <label for="student_cellno" class="control-label">Cell No</label>
                             <div>
-                                <input type="text" id="student_cellno" placeholder="Student Mobile Number" class="form-control" required="required">
+                                <input type="number" id="student_cellno" placeholder="Student Mobile Number" class="form-control" required="required">
                             </div>
                         </div>
 

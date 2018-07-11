@@ -38,6 +38,15 @@ if(!isset($_SESSION['aid'])){
                 })
             });
         </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -54,7 +63,7 @@ if(!isset($_SESSION['aid'])){
                     <div class="row form-group">
                         <div class="col-lg-4"></div>
                         <div class="col-lg-4">
-                            <input type="text" class="form-control" placeholder="Enrolment Number" name="enrol" required autofocus/>
+                            <input type="number" class="form-control" placeholder="Enrolment Number" name="enrol" required autofocus/>
                         </div>
                     </div>
                     <div class="row form-group">

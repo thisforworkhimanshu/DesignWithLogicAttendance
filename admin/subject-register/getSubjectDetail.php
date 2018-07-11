@@ -37,6 +37,16 @@ if(!isset($_SESSION['aid'])){
                 })
             });
         </script>
+        
+        <style>
+            input[name=subject_code]::-webkit-inner-spin-button, 
+                input[name=subject_code]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <?php
@@ -159,7 +169,7 @@ if(!isset($_SESSION['aid'])){
                                     <table class="table">
                                         <tr>
                                             <th>Subject Code</th>
-                                            <td><input type="text" name="subject_code" id="subject_code" class="form-control" required></td>
+                                            <td><input type="number" min="0" name="subject_code" id="subject_code" class="form-control" required></td>
                                         </tr>
                                         <script>
                                             $(document).ready(function(){
@@ -170,6 +180,7 @@ if(!isset($_SESSION['aid'])){
                                                $("#theory_hour").prop("disabled",true);
                                                $("#practical_hour").prop("disabled",true);
                                                $("#btnSubmit").prop("disabled",true);
+                                               $("#btnReset").prop("disabled",true);
                                                
                                                $("#subject_code").keyup(function(){
                                                   var subject_code = $(this).val();
@@ -252,8 +263,10 @@ if(!isset($_SESSION['aid'])){
                                                   var practical_hour = $(this).val();
                                                   if(practical_hour===""){
                                                       $("#btnSubmit").prop("disabled",true);
+                                                      $("#btnReset").prop("disabled",true);
                                                   }else{
                                                       $("#btnSubmit").prop("disabled",false);
+                                                      $("#btnReset").prop("disabled",false);
                                                   }
                                                });
                                                
@@ -262,6 +275,7 @@ if(!isset($_SESSION['aid'])){
                                                   if(practical_hour===""){
                                                       alert('Please Input Practical Hours');
                                                       $("#btnSubmit").prop("disabled",true);
+                                                      $("#btnReset").prop("disabled",true);
                                                   }
                                                });
                                                
@@ -277,32 +291,34 @@ if(!isset($_SESSION['aid'])){
                                         </tr>
                                         <tr>
                                             <th>Subject Semester</th>
-                                            <td><input type="text" name="subject_sem" id="subject_sem" class="form-control" required></td>
+                                            <td><input type="number" min="1" max="8" name="subject_sem" id="subject_sem" class="form-control" required></td>
                                         </tr>
                                         
                                         <script>
                                             $(document).ready(function(){
                                                $("#subject_sem").blur(function(){
-                                                  var sem = $(this).val();
-                                                  if(sem>=9 || sem<=0){
-                                                      alert('Semester Should be in between 1 to 8');
-                                                      $("#theory_hour").prop("disabled",true);
-                                                  }else{
-                                                      $("#theory_hour").prop("disabled",false);
-                                                  }
+                                                    var sem = $(this).val();
+                                                    if(sem>=9 || sem<=0){
+                                                        alert('Semester Should be in between 1 to 8');
+                                                        $("#theory_hour").prop("disabled",true);
+                                                    }else{
+                                                        $("#theory_hour").prop("disabled",false);
+                                                    }
+                                                  
                                                });
                                             });
                                         </script>
                                         <tr>
                                             <th>No of Theory Hours</th>
-                                            <td><input type="text" name="theory_hour" id="theory_hour" class="form-control" required></td>
+                                            <td><input type="number" min="0" name="theory_hour" id="theory_hour" class="form-control" required></td>
                                         </tr>
                                         <tr>
                                             <th>No of Practical Hours</th>
-                                            <td><input type="text" name="practical_hour" id="practical_hour" class="form-control" required></td>
+                                            <td><input type="number" min="0" name="practical_hour" id="practical_hour" class="form-control" required></td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2"><input type="submit" id="btnSubmit" class="btn btn-primary" style="margin-left: 44%;" value="Submit"></td>
+                                            <td align="right"><input type="submit" id="btnSubmit" class="btn btn-primary" value="Submit"></td>
+                                            <td><input type="reset" id="btnReset" class="btn btn-primary" value="Reset"></td>
                                         </tr>
                                     </table>
                                 </div>

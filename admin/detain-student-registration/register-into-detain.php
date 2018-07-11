@@ -37,6 +37,15 @@ if(!isset($_SESSION['aid'])){
                 })
             });
         </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -100,12 +109,12 @@ if(!isset($_SESSION['aid'])){
                 <div class="row" style="margin-top: 3%;">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="enrolment" placeholder="Enrolment Number" name="enrolment" required="required"/>
+                            <input type="number" class="form-control" id="enrolment" placeholder="Enrolment Number" name="enrolment" required="required"/>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="cenrolment" placeholder="Confirm Enrolment Number" name="enrolment" required="required"/>
+                            <input type="number" class="form-control" id="cenrolment" placeholder="Confirm Enrolment Number" name="enrolment" required="required"/>
                         </div>
                     </div>
                     <div class="col-lg-2">
@@ -185,17 +194,17 @@ if(!isset($_SESSION['aid'])){
                 <div class="row" style="margin-top: 3%;">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="enrolmentReg" placeholder="Enrolment Number" name="enrolment"/>
+                            <input type="number" class="form-control" id="enrolmentReg" placeholder="Enrolment Number" name="enrolment"/>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="cenrolmentReg" placeholder="Confirm Enrolment Number" name="enrolment"/>
+                            <input type="number" class="form-control" id="cenrolmentReg" placeholder="Confirm Enrolment Number" name="enrolment"/>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="batchyear" placeholder="Batch Year" name="enrolment"/>
+                            <input type="number" class="form-control" id="batchyear" placeholder="Batch Year" name="enrolment"/>
                         </div>
                     </div>
                     <div class="col-lg-2">

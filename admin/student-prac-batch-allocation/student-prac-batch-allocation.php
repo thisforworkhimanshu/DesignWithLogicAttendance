@@ -37,6 +37,15 @@ if(!isset($_SESSION['aid'])){
                 })
             });
         </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -204,7 +213,7 @@ if(!isset($_SESSION['aid'])){
             <div class="division-allocation" style="margin-top: 2%;">
                 <div class="row form-group">
                     <div class="col-lg-2">
-                        <input type="text" name="batchyear" placeholder="Batch Year" id="batchyear" class="form-control"/>
+                        <input type="number" name="batchyear" placeholder="Batch Year" id="batchyear" class="form-control"/>
                     </div>
                     <div id="totalcountdiv" class="col-lg-4 text-center form-control alert-success" style="display: none;"></div>
                 </div>
@@ -287,12 +296,12 @@ if(!isset($_SESSION['aid'])){
                         <div class="row">
                                 <div class="col-lg-2 text-center">Enrolment From:</div>
                                 <div class="col-lg-3">
-                                    <input type="text" class="form-control" id="fromenrolinp" required/> 
+                                    <input type="number" class="form-control" id="fromenrolinp" required/> 
                                 </div>
 
                                 <div class="col-lg-2 text-center">Enrolment To:</div>
                                 <div class="col-lg-3">
-                                    <input type="text" class="form-control" id="toenrolinp" required/> 
+                                    <input type="number" class="form-control" id="toenrolinp" required/> 
                                 </div>
                         </div>
                         <div class="row" style="margin-top: 3%;">

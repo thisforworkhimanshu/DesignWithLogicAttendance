@@ -40,6 +40,15 @@ if (!isset($_SESSION['aid'])) {
                 });
             });
         </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -346,12 +355,12 @@ if (!isset($_SESSION['aid'])) {
                                 </div>
                                 <div class="form-group">
                                     <div id="inputlecturehours">
-                                        <input type="text" class="form-control" placeholder="No of Hours" name="lecture_hours" id="lecture_hours" />
+                                        <input type="number" class="form-control" placeholder="No of Hours" name="lecture_hours" id="lecture_hours" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div id="inputlecturetotal">
-                                        <input type="text" class="form-control" placeholder="Expected Total No. of Lecture In Term" name="lecture_total" id="lecture_total" />
+                                        <input type="number" class="form-control" placeholder="Expected Total No. of Lecture In Term" name="lecture_total" id="lecture_total" />
                                     </div>
                                 </div>
                                 <div id="error"></div>

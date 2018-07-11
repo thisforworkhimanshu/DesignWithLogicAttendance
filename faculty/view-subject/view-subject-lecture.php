@@ -45,6 +45,15 @@ if(!isset($_SESSION['fid'])){
                 });
             });
         </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         
@@ -83,7 +92,7 @@ if(!isset($_SESSION['fid'])){
                         <div class="row">
                             <div class="col-lg-5">
                                 <div class="form-group">
-                                    <input class="form-control" id="semester" name="semester" placeholder="Semester"/>
+                                    <input type="number" class="form-control" id="semester" name="semester" placeholder="Semester"/>
                                 </div>
                             </div>
                             <div class="col-lg-3 form-group">

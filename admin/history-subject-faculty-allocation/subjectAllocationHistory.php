@@ -37,6 +37,15 @@ if(!isset($_SESSION['aid'])){
                 })
             });
         </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -50,7 +59,7 @@ if(!isset($_SESSION['aid'])){
             <form action="subjectAllocationHistory.php" method="get">
                 <div class="row" style="margin-top: 2%;">
                     <div class="col-lg-3 form-group">
-                        <input type="text" placeholder="Batch Year" id="batchyear" name="batchyear" class="form-control"/>
+                        <input type="number" placeholder="Batch Year" id="batchyear" name="batchyear" class="form-control"/>
                     </div>
                     <div class="col-lg-4 form-group">
                         <select id="semester" name="semester" class="form-control">

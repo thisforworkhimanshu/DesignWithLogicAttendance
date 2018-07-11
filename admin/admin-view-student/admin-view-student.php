@@ -37,6 +37,15 @@ if(!isset($_SESSION['aid'])){
                 })
             });
         </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -53,7 +62,7 @@ if(!isset($_SESSION['aid'])){
                 <form action="admin-view-student.php" method="get">
                 <div class="row" id="hideIt">
                     <div class="col-lg-3 form-group">
-                        <input type="text" id="batchyear" placeholder="Batch Year" name="batchyear" class="form-control" required/>                            
+                        <input type="number" id="batchyear" placeholder="Batch Year" name="batchyear" class="form-control" required/>                            
                     </div>
                     <div class="col-lg-3 form-group">
                         <input type="submit" name="submit_btn" id="btnSubmit" value="View" class="form-control btn btn-success"/>
