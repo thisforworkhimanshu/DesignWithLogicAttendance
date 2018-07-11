@@ -107,7 +107,7 @@ and open the template in the editor.
                     $(this).text(function (i, text) {
                         return text === "a|t" ? "%" : "a|t";
                     });
-                    sendData = {semester: $("#cbsemester").val(),
+                    var sendData = {semester: $("#cbsemester").val(),
                         dateFrom: $("#dateFrom").val(),
                         dateTo: $("#dateTo").val(),
                         lec_type: $("#btnType").text(),
@@ -117,7 +117,7 @@ and open the template in the editor.
                 //script:button for division selection
                 $(document).on('click', 'a.dropdown-item', function (event) {
                     $('#btndiv').text($(this).text());
-                    sendData = {semester: $("#cbsemester").val(),
+                    var sendData = {semester: $("#cbsemester").val(),
                         dateFrom: $("#dateFrom").val(),
                         dateTo: $("#dateTo").val(),
                         lec_type: $("#btnType").text(),
@@ -144,7 +144,7 @@ and open the template in the editor.
                         }
                         return text === "theory" ? "practical" : "theory";
                     });
-                    sendData = {semester: $("#cbsemester").val(),
+                    var sendData = {semester: $("#cbsemester").val(),
                         dateFrom: $("#dateFrom").val(),
                         dateTo: $("#dateTo").val(),
                         lec_type: $("#btnType").text(),
@@ -166,7 +166,7 @@ and open the template in the editor.
                     changeYear: true,
                     dateFormat: 'yy-mm-dd',
                     onSelect: function (date, instance) {
-                        sendData = {semester: $("#cbsemester").val(),
+                        var sendData = {semester: $("#cbsemester").val(),
                             dateFrom: $("#dateFrom").val(),
                             dateTo: $("#dateTo").val(),
                             lec_type: $("#btnType").text(),
@@ -180,7 +180,7 @@ and open the template in the editor.
                     defaultDate: '',
                     dateFormat: 'yy-mm-dd',
                     onSelect: function (date, instance) {
-                        sendData = {semester: $("#cbsemester").val(),
+                        var sendData = {semester: $("#cbsemester").val(),
                             dateFrom: $("#dateFrom").val(),
                             dateTo: $("#dateTo").val(),
                             lec_type: $("#btnType").text(),
@@ -215,7 +215,7 @@ and open the template in the editor.
                     } else {
                         $('#attendance-info').hide();
                         $('#attendance-table').show();
-                        sendData = {semester: $("#cbsemester").val(), lec_type: $("#btnType").text(), div: $("#btndiv").text()};
+                        var sendData = {semester: $("#cbsemester").val(), lec_type: $("#btnType").text(), div: $("#btndiv").text()};
                         callAjax(sendData);
                         $("#search").prop("disabled", false);
                         $("#dateFrom").prop("disabled", false);
@@ -339,6 +339,7 @@ and open the template in the editor.
                     $("#modal").css("display", "none");
                     $("body").removeClass("modal-open");
                 });
+
                 //script: modal single date selection 
                 $("#mSingleDate").datepicker({
                     changeMonth: true,
@@ -354,19 +355,19 @@ and open the template in the editor.
                             data: {singleDate: date, lec_type: $("#btnType").text(), div: $("#btndiv").text()},
                             datetype: 'json',
                             success: function (data) {
+                                console.log(data);
                                 jsonData = JSON.parse(data);
                                 $('#mSub').empty();
                                 $('#mSub').append($('<option>').text("sel"));
                                 $('#mFac').empty();
                                 $.each(jsonData, function (i, item) {
                                     $('#mSub').append($('<option>').text(item.sub_name).val(item.sub_code));
-
                                 });
                             }
                         });
                     }
-
                 });
+
                 //scrpit: dropdown select subject msub
                 $('#mSub').change(function () {
                     sub = $(this).val();
@@ -379,20 +380,46 @@ and open the template in the editor.
                     });
                 });
 
+                //script: anchor tag
+                var selection = '#single';
+                $('a.nav-link').click(function () {
+                    selection = $(this).attr('href');
+                });
+
                 //script:button update button modal
                 $('#mbtnUpdate').click(function () {
-                    var sendData = {singleDate: $('#mSingleDate').val(), sub_code: sub, fac_id: $('#mFac').val(), lec_type: $("#btnType").text(), div: $("#btndiv").text(), action: $('input[name=selAction]:checked').val(), sel: sel};
-
-                    $.ajax({
-                        type: 'POST',
-                        url: "ajax-admin-update-single.php",
-                        data: {sendData: JSON.stringify(sendData)},
-                        datetype: 'json',
-                        success: function (data) {
-                            alert(data);
-                            sel = [];
-                        }
-                    });
+                    if (selection == '#single') {
+                        var sendData = {singleDate: $('#mSingleDate').val(), sub_code: sub, fac_id: $('#mFac').val(), lec_type: $("#btnType").text(), div: $("#btndiv").text(), action: $('input[name=selAction]:checked').val(), sel: sel};
+                        $.ajax({
+                            type: 'POST',
+                            url: "ajax-admin-update-single.php",
+                            data: {sendData: JSON.stringify(sendData)},
+                            datetype: 'json',
+                            success: function (data) {
+                                var sendData = {semester: $("#cbsemester").val(),
+                                    dateFrom: $("#dateFrom").val(),
+                                    dateTo: $("#dateTo").val(),
+                                    lec_type: $("#btnType").text(),
+                                    div: $("#btndiv").text()};
+                                callAjax(sendData);
+                                $("#modal").css("display", "none");
+                                $("body").removeClass("modal-open");
+                                sel = [];
+                            }
+                        });
+                    } else {
+                        var sendDataBulk = {dates: dates, sel: sel, action: $('input[name=selAction]:checked').val()};
+                        $.ajax({
+                            type: 'POST',
+                            url: "ajax-admin-update-single.php",
+                            data: {sendDataBulk: JSON.stringify(sendDataBulk)},
+                            datetype: 'json',
+                            success: function (data) {
+                                alert(data);
+                                sel = [];
+                            }
+                        });
+                    }
                 });
 
                 //script: multiple date selection
@@ -565,7 +592,7 @@ and open the template in the editor.
                                 <div class="form-group">
                                     <label class="col-form-label-sm" for="mSub">Select Subject:</label>
                                     <select class="form-control" style="height: 80px" id="mSub">
-                                        
+
                                     </select>
                                 </div>
                                 <div class="form-group">

@@ -35,7 +35,6 @@ if (isset($_POST['singleDate']) && isset($_POST['lec_type']) && isset($_POST['di
 
 if (isset($_POST['sendData'])) {
     $data = json_decode($_POST['sendData']);
-    echo $_POST['sendData'];
     $date = $data->singleDate;
     $lec_type = $data->lec_type;
     $div = $data->div;
@@ -57,9 +56,16 @@ if (isset($_POST['sendData'])) {
             $sUpdateAction .= "UPDATE attendance_of_$dept_id SET is_present = $action WHERE enrolment = $enrol AND lecture_id = $lec_id;";
         }
         if ($db->multi_query($sUpdateAction) === TRUE) {
-                echo 'change count: '.$i;
-            } else {
-                echo $db->error;
-            }
+            echo 'change count: ' . $i;
+        } else {
+            echo $db->error;
+        }
     }
+}
+
+if (isset($_POST['sendDataBulk'])) {
+    echo $_POST['sendDataBulk'];
+    $data = json_decode($_POST['sendDataBulk']);
+    $dates = $data->dates;
+    $sel = $data->sel;
 }
