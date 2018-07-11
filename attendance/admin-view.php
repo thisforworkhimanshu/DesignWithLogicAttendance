@@ -415,7 +415,14 @@ and open the template in the editor.
                             data: {sendDataBulk: JSON.stringify(sendDataBulk)},
                             datetype: 'json',
                             success: function (data) {
-                                alert(data);
+                                var sendData = {semester: $("#cbsemester").val(),
+                                    dateFrom: $("#dateFrom").val(),
+                                    dateTo: $("#dateTo").val(),
+                                    lec_type: $("#btnType").text(),
+                                    div: $("#btndiv").text()};
+                                callAjax(sendData);
+                                $("#modal").css("display", "none");
+                                $("body").removeClass("modal-open");
                                 sel = [];
                             }
                         });

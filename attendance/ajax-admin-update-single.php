@@ -64,8 +64,31 @@ if (isset($_POST['sendData'])) {
 }
 
 if (isset($_POST['sendDataBulk'])) {
-    echo $_POST['sendDataBulk'];
     $data = json_decode($_POST['sendDataBulk']);
     $dates = $data->dates;
     $sel = $data->sel;
+    $action = $data->action;
+
+    foreach ($dates as $date) {
+        echo $date;
+        $sGetLecIds = "SELECT lecture_id FROM lecture_tb_$dept_id WHERE date = '$date'";
+        $rGetLecIds = $db->query($sGetLecIds);
+        if ($rGetLecIds->num_rows > 0) {
+            while ($row = $rGetLecIds->fetch_assoc()) {
+                $lec_id = $row['lecture_id'];
+                foreach ($sel as $enrol) {
+                    $sUpdateBulk = "UPDATE attendance_of_$dept_id SET is_present = $action WHERE enrolment = $enrol";
+                    $rUpdateBulk = $db->query($sUpdateBulk);
+                    if($rUpdateBulk == TRUE) {
+                        echo 'ok';
+                    } else {
+                        echo $db->error();
+                    }
+                }
+            }
+        } else {
+            echo $db->error();
+        }
+    }
 }
+    
