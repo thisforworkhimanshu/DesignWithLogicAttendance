@@ -10,6 +10,10 @@ $dept_id = $_SESSION['a_dept_id'];
 include '../Connection.php';
 $conn = new Connection();
 $db = $conn->createConnection();
+$db->autocommit(FALSE);
+$db->begin_transaction();
+$transactionStatus = TRUE;
+
 if (isset($_POST['singleDate']) && isset($_POST['lec_type']) && isset($_POST['div'])) {
     $date = $_POST['singleDate'];
     $lec_type = $_POST['lec_type'];
@@ -56,8 +60,12 @@ if (isset($_POST['sendData'])) {
             $sUpdateAction .= "UPDATE attendance_of_$dept_id SET is_present = $action WHERE enrolment = $enrol AND lecture_id = $lec_id;";
         }
         if ($db->multi_query($sUpdateAction) === TRUE) {
+            while ($db->next_result()) {
+                ;
+            } // flush multi_queries
             echo 'change count: ' . $i;
         } else {
+            $transactionStatus = FALSE;
             echo $db->error;
         }
     }
@@ -75,6 +83,7 @@ if (isset($_POST['sendDataBulk'])) {
         $rGetLecIds = $db->query($sGetLecIds);
         if ($rGetLecIds->num_rows > 0) {
             $sUpdateBulk = '';
+            
             while ($row = $rGetLecIds->fetch_assoc()) {
                 $lec_id = $row['lecture_id'];
                 foreach ($sel as $enrol) {
@@ -82,8 +91,12 @@ if (isset($_POST['sendDataBulk'])) {
                 }
             }
             if ($db->multi_query($sUpdateBulk) === TRUE) {
+                while ($db->next_result()) {
+                    ;
+                } // flush multi_queries
                 echo 'ok';
             } else {
+                $transactionStatus = FALSE;
                 echo $db->error;
             }
         } else {
@@ -91,4 +104,9 @@ if (isset($_POST['sendDataBulk'])) {
         }
     }
 }
-    
+
+if ($transactionStatus) {
+    $db->commit();
+} else {
+    $db->rollback();
+}

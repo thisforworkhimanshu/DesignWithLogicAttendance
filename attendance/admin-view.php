@@ -549,7 +549,7 @@ and open the template in the editor.
         <hr/>
         <div id="attendance-view" class="container" style="height: 86vh">
             <div id="attendance-info" class="alert alert-info">
-                <i class="material-icons" style="vertical-align: bottom">error_outline</i>&nbspNothing to dispaly here :(
+                <i class="material-icons" style="vertical-align: bottom">error_outline</i>&nbsp Please select semester from dropdown.
             </div>
             <table  id="attendance-table" class="record_table">        
                 <thead class="bg-light">

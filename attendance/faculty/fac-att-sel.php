@@ -80,6 +80,7 @@ and open the template in the editor.
                     $("#lec_type").val($(this).val());
                     $("#division").prop("disabled", false);
                     $("#subject").prop("disabled", true);
+                    $('#next').prop('disabled', true);
                     $("#division").empty();
                     var sendData = {'lec_type': 'theory'};
                     callAjax(sendData, "div");
@@ -88,6 +89,7 @@ and open the template in the editor.
                     $("#lec_type").val($(this).val());
                     $("#division").prop("disabled", false);
                     $("#subject").prop("disabled", true);
+                    $('#next').prop('disabled', true);
                     $("#division").empty();
                     var sendData = {'lec_type': 'practical'};
                     callAjax(sendData, "div");
@@ -95,10 +97,19 @@ and open the template in the editor.
 
                 //script: combobox fatch subject
                 $("#division").change(function () {
+                    $('#next').prop('disabled', true);
                     $("#subject").prop("disabled", false);
                     $("#subject").empty();
                     var sendData = {'division': $(this).val()};
                     callAjax(sendData);
+                });
+
+                $('#subject').change(function () {
+                    if (this.selectedIndex != 0) {
+                        $('#next').prop('disabled', false);
+                    } else {
+                        $('#next').prop('disabled', true);
+                    }
                 });
 
                 function callAjax(sendData, type) {
@@ -166,7 +177,7 @@ and open the template in the editor.
                             </div>
                         <?php }
                         ?>
-                        <div class="d-flex justify-content-center"><button type="submit" value="submit" class="btn btn-primary">NEXT &raquo;</button></div>
+                        <div class="d-flex justify-content-center"><button id="next" type="submit" value="submit" class="btn btn-primary" disabled="true">NEXT &raquo;</button></div>
                     </form>
                 </div>
                 <div class="col-sm-4"></div>

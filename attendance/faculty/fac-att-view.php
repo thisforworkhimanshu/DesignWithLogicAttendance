@@ -98,6 +98,9 @@ and open the template in the editor.
                     $("#attendance-table > thead").empty();
                     $("#attendance-table > tbody").empty();
                     $("#subject").empty();
+                    $('#search').val('');
+                    $('#dateTo').val('');
+                    $('#dateFrom').val('');
 
                     var sendData = {'lec_type': lec_type};
                     callAjax(sendData);
@@ -116,6 +119,7 @@ and open the template in the editor.
                     $("#attendance-table > thead").empty();
                     $("#attendance-table > tbody").empty();
                     $("#subject").empty();
+                    $('#search').val('');
 
                     var sendData = {'lec_type': lec_type};
                     callAjax(sendData);
@@ -124,7 +128,13 @@ and open the template in the editor.
                 //script: combobox fatch subject and call ajax after subject selection
                 $("#division").change(function () {
                     if (this.selectedIndex !== 0) {
-                        var sendData = {'lec_type': lec_type, 'div': $(this).val(), 'sub': $("#subject").val()};
+                        $('#btnprint').prop('disabled', false);
+                        $('#search').val('');
+                        var sendData = {'lec_type': lec_type,
+                            'div': $(this).val(),
+                            'sub': $("#subject").val(),
+                            dateFrom: $("#dateFrom").val(),
+                            dateTo: $("#dateTo").val()};
                         callAjaxTable(sendData);
                     }
                 });
@@ -166,10 +176,11 @@ and open the template in the editor.
                 });
 
                 //script:button print export table to excel
-                $("#print").click(function () {
+                $("#btnprint").click(function () {
                     $("#attendance-table [type=checkbox]").remove();
                     $("#attendance-table").excelexportjs({
                         containerid: "attendance-table",
+                        worksheetName: "My Worksheet",
                         datatype: 'table'
                     });
                     $("#attendance-table > tbody tr td:first-child").prepend('<input type="checkbox">');
