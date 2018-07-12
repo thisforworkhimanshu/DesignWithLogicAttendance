@@ -308,7 +308,7 @@ and open the template in the editor.
                     <input type="text" id="dateTo" disabled="true" placeholder="last date" class="form-control">
                 </div>
                 <div class="form-inline ml-md-auto ml-sm-5">
-                    <button id="btnopenmodal" class="btn btn-success mr-1" disabled="true">update attendance</button>
+                    <button id="btnopenmodal" class="btn btn-success mr-1" disabled="true" style="display: none">update attendance</button>
                     <button id="btnprint" class="btn btn-info mr-1" disabled="true"><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
                 </div>
             </div>
