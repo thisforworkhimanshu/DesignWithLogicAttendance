@@ -1,17 +1,19 @@
 <?php
-
+session_start();
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+include '../Connection.php';
+$conn = new Connection();
+$db = $conn->createConnection();
 if (isset($_POST['semester']) && isset($_POST['div'])) {
-    include '../Connection.php';
-    $conn = new Connection();
-    $db = $conn->createConnection();
+
     $sem = $_POST['semester'];
     $div = $_POST['div'];
-    $dept_id = 16;
+    $lec_type = $_POST['lec_type'];
+    $dept_id = $_SESSION['a_dept_id'];
     $appendSql = '';
     if (isset($_POST['dateFrom']) && isset($_POST['dateTo'])) {
         if ($_POST['dateFrom'] != '' && $_POST['dateTo'] != '') {
@@ -24,7 +26,13 @@ if (isset($_POST['semester']) && isset($_POST['div'])) {
     }
 
     $uploadJson = array();
-    $qStudDetail = "SELECT student_enrolment,student_name FROM student WHERE student_semester = $sem AND student_division= '$div'";
+    $appendSql2 = '';
+    if ($lec_type == 'theory') {
+        $appendSql2 = " AND student_division = '$div'";
+    } else {
+        $appendSql2 = " AND student_batch = '$div'";
+    }
+    $qStudDetail = "SELECT student_enrolment,student_name FROM student WHERE student_semester = $sem" . $appendSql2;
     $rStudDetail = $db->query($qStudDetail);
 
     $sSubjects = "SELECT * FROM subject WHERE semester = $sem";
@@ -69,4 +77,13 @@ if (isset($_POST['semester']) && isset($_POST['div'])) {
     echo json_encode($uploadJson);
 }
 
+//for criteria adjust setting store
+
+if (isset($_POST['criteria'])) {
+    $criteria = $_POST['criteria'];
+    $sSetCriteria = "UPDATE basic_settings SET setting_value = $criteria WHERE setting_key = 'criteria'";
+    if ($db->query($sSetCriteria) === TRUE) {
+        echo $criteria;
+    }
+}
     

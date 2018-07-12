@@ -61,3 +61,4 @@ if (isset($_SESSION['aid'])) {
 } else {
     header("Location: index.php");
 }
+?>
