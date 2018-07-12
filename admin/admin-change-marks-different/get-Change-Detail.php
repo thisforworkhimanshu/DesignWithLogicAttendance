@@ -14,15 +14,40 @@ if(!isset($_SESSION['aid'])){
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Change Marks Semester Wise</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script>
+            //script:highlight the active link in navigation bar
+            $(document).ready(function () {
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                })
+            });
+        </script>
+        
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -59,7 +84,7 @@ if(!isset($_SESSION['aid'])){
                         </select>
                     </div>
                     <div class="col-lg-4 form-group">
-                        <input type="text" id="enrolment" name="enrolment" class="form-control" placeholder="Enrolment Number" required/>
+                        <input type="number" id="enrolment" name="enrolment" class="form-control" placeholder="Enrolment Number" required/>
                     </div>
                 </div>
 
@@ -109,14 +134,14 @@ if(!isset($_SESSION['aid'])){
                         
                         
                         if(mysqli_num_rows($resultSubject)>0){
-                            
+                            $btnSubmitStat = TRUE;
                             ?>
                 <form action="change-my-marks.php" method="post">
                     <div class="row">
                         <div class="col-lg-3"></div>
                         <div class="col-lg-6">
                             <div class="table-responsive">
-                                <table class="table-lg table-striped">
+                                <table id="mark-table" class="table-lg table-striped">
                                     <tr>
                                         <th>Subject Code</th>
                                         <th>Subject Name</th>
@@ -139,33 +164,59 @@ if(!isset($_SESSION['aid'])){
                                                 $resultMark = mysqli_query($conn, $sqlGetMark);
                                                 if(mysqli_num_rows($resultMark)>0){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
-                                                    ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>"/>
+                                                    if($rowmark['mid']!=""){
+                                                        ?>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>" required/>
                                                         <?php
+                                                    }else{
+                                                        $btnSubmitStat = false;
+                                                        ?>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['mid']?>" disabled/>
+                                                        <?php
+                                                    }
                                                 }else{
                                                     echo 'N.A.';
+                                                    $btnSubmitStat = false;
                                                 }
                                             }else if($examtype==="v"){
                                                 $sqlGetMark = "select ".$subject_code."_v as viva from sem".$semester."_".$dept_id." where enrolment = $enrolment";
                                                 $resultMark = mysqli_query($conn, $sqlGetMark);
                                                 if(mysqli_num_rows($resultMark)>0){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
-                                                    ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>"/>
+                                                    if($rowmark['viva']!=""){
+                                                            ?>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>" required/>
                                                         <?php
+                                                    }else{
+                                                        $btnSubmitStat = false;
+                                                            ?>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['viva']?>" disabled/>
+                                                        <?php
+                                                    }
+                                                
                                                 }else{
                                                     echo 'N.A.';
+                                                    $btnSubmitStat = false;
                                                 }
                                             }else if($examtype==="r"){
                                                 $sqlGetMark = "select ".$subject_code."_r as remid from sem".$semester."_".$dept_id."_r where enrolment = $enrolment";
                                                 $resultMark = mysqli_query($conn, $sqlGetMark);
                                                 if(mysqli_num_rows($resultMark)>0){
                                                     $rowmark = mysqli_fetch_assoc($resultMark);
-                                                    ?>
-                                            <input type="text" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>"/>
+                                                    if($rowmark['remid']!=""){
+                                                        ?>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>" required/>
                                                         <?php
+                                                    }else{
+                                                        $btnSubmitStat = false;
+                                                        ?>
+                                            <input type="number" id="<?php echo $subject_code?>" name="<?php echo $subject_code?>" value="<?php echo $rowmark['remid']?>" disabled/>
+                                                        <?php
+                                                    }
+                                                    
                                                 }else{
                                                     echo 'N.A.';
+                                                    $btnSubmitStat = false;
                                                 }
                                             }
                                             ?>
@@ -180,8 +231,26 @@ if(!isset($_SESSION['aid'])){
                     </div>
                     <div class="row" style="margin-top: 2%;">
                         <div class="col-lg-4"></div>
+                        
+                            <?php
+                                if($btnSubmitStat){
+                                    ?>
                         <div class="col-lg-4">
                             <input type="submit" name="submit" id="submit" class="form-control btn btn-primary" value="Update"/>
+                                        <?php
+                                }else{
+                                    ?>
+                            <div class="col-lg-5">
+                            <script>
+                                $(document).ready(function(){
+                                    $("#mark-table").remove();
+                                });
+                            </script>
+                            <label class="alert alert-warning">All Marks First Should be Entered By Faculty.</label>
+                                        <?php
+                                }
+                            ?>
+                            
                         </div>
                     </div>
                 </form>

@@ -13,16 +13,17 @@ if (!isset($_SESSION['aid'])) {
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>View - Faculty</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
-
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <script src="../../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        
         <script>
             $(document).ready(function () {
                 //script:highlight the active link in navigation bar
@@ -37,12 +38,8 @@ if (!isset($_SESSION['aid'])) {
                         }
                     })
                 });
-
+        </script>
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
-        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../../Paginathing/paginathing.js"></script>
         <script>
             $(document).ready(function(){

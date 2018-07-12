@@ -30,6 +30,21 @@ and open the template in the editor.
         <script src="../../jquery/tableHeadFixer.js"></script>
 
         <script>
+            //script:highlight the active link in navigation bar
+            $(document).ready(function () {
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                });
+            });
+        </script>
+        
+        <script>
             $(document).ready(function () {
                 //script:highlight the active link in navigation bar
                 var current = location.pathname;

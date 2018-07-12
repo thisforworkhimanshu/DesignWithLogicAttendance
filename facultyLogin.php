@@ -34,7 +34,7 @@ if (isset($_SESSION['fid'])) {
 
     </head>
     <body>
-        <div>
+        <div class="container">
             <div>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <a class="navbar-brand" href="index.php"><i class="material-icons" style=" padding-right: 2px">school</i>StudInfo</a>

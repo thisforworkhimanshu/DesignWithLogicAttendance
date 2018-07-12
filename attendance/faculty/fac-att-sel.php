@@ -57,7 +57,23 @@ and open the template in the editor.
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="../../bootstrap-4.1.1-dist/js/bootstrap.min.js"></script> <!-- bootstrap js -->
         <script src="../../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
-
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <script>
+            //script:highlight the active link in navigation bar
+            $(document).ready(function () {
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                });
+            });
+        </script>
         <script type="text/javascript">
             $(document).ready(function () {
                 //script:highlight the active link in navigation bar
@@ -85,6 +101,7 @@ and open the template in the editor.
                     var sendData = {'lec_type': 'theory'};
                     callAjax(sendData, "div");
                 });
+                
                 $("#practical").click(function () {
                     $("#lec_type").val($(this).val());
                     $("#division").prop("disabled", false);
@@ -119,6 +136,7 @@ and open the template in the editor.
                         data: sendData,
                         success: function (data, textStatus, jqXHR) {
                             if (type == 'div') {
+                                console.log(data);
                                 appendDivision(data);
                             } else {
                                 console.log(data);

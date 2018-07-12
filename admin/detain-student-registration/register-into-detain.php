@@ -13,15 +13,39 @@ if(!isset($_SESSION['aid'])){
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Detain Student Section</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script>
+            //script:highlight the active link in navigation bar
+            $(document).ready(function () {
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                })
+            });
+        </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -73,7 +97,7 @@ if(!isset($_SESSION['aid'])){
                                     }
                                 });
                            }else{
-                                alert('Bother Enrolment Should Match');
+                                alert('Both Enrolment Should Match');
                            }
                        }
                        return false;
@@ -85,12 +109,12 @@ if(!isset($_SESSION['aid'])){
                 <div class="row" style="margin-top: 3%;">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="enrolment" placeholder="Enrolment Number" name="enrolment" required="required"/>
+                            <input type="number" class="form-control" id="enrolment" placeholder="Enrolment Number" name="enrolment" required="required"/>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="cenrolment" placeholder="Confirm Enrolment Number" name="enrolment" required="required"/>
+                            <input type="number" class="form-control" id="cenrolment" placeholder="Confirm Enrolment Number" name="enrolment" required="required"/>
                         </div>
                     </div>
                     <div class="col-lg-2">
@@ -111,7 +135,7 @@ if(!isset($_SESSION['aid'])){
             <hr/>
             <div class="badge-light" style="margin-top: 1%;">
                 <div class="text-center">
-                    <h5>Regularized Detain Student</h5>
+                    <h5>Regularise Detain Student</h5>
                 </div>
             </div>
             <hr/>
@@ -137,7 +161,7 @@ if(!isset($_SESSION['aid'])){
                                         $("#msgsuccessR").hide();
                                     },
                                     success: function (data) {
-                                        console.log(data);
+//                                        console.log(data);
                                         if(data==="norecord"){
                                             $("#msgsuccessR").hide();
                                             $("#msgerrR").show();
@@ -170,17 +194,17 @@ if(!isset($_SESSION['aid'])){
                 <div class="row" style="margin-top: 3%;">
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="enrolmentReg" placeholder="Enrolment Number" name="enrolment"/>
+                            <input type="number" class="form-control" id="enrolmentReg" placeholder="Enrolment Number" name="enrolment"/>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="cenrolmentReg" placeholder="Confirm Enrolment Number" name="enrolment"/>
+                            <input type="number" class="form-control" id="cenrolmentReg" placeholder="Confirm Enrolment Number" name="enrolment"/>
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="batchyear" placeholder="Batch Year" name="enrolment"/>
+                            <input type="number" class="form-control" id="batchyear" placeholder="Batch Year" name="enrolment"/>
                         </div>
                     </div>
                     <div class="col-lg-2">

@@ -24,7 +24,7 @@ $enrolment =  $_SESSION['enrolment'];
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="container">
+        <div>
             <div class="bg-light text-center">
                 <hr style="border-color: greenyellow; margin-top: 0%;"/>
                 <div>
@@ -41,63 +41,66 @@ $enrolment =  $_SESSION['enrolment'];
                 <div class="collapse navbar-collapse" id="collapsibleNavbar">
                   <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="student-view-mark.php" style="color: #99a22f; ">View Marks</a>
+                        <a class="nav-link" href="#" style="color: #000000;">View Marks</a>
                     </li>
+                  </ul>
+                  <ul class="navbar-nav navbar-right">
                     <li class="nav-item">
-                      <a class="nav-link" href="" style="color: #000000;">View Attendance</a>
+                        <a class="nav-link" href="/DesignwithLogicAttendance/Student/sessionDestroy.php" style="color: #000000;">Logout</a>
                     </li>
                   </ul>
                 </div>  
             </nav>
-            
-            <div class="row" style="margin-top: 2%;">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4 form-group">
-                    <?php
-                        require_once '../../Connection.php';
-                        $connection = new Connection();
-                        $conn = $connection->createConnection("college");
-                        
-                        $sqlGetSemester = "select student_semester from student where student_enrolment = $enrolment and student_dept_id = $dept_id";
-                        $resultGetSemester = mysqli_query($conn, $sqlGetSemester);
-                        if(mysqli_num_rows($resultGetSemester)){
-                            $rowSem = mysqli_fetch_assoc($resultGetSemester);
-                            $semester = $rowSem['student_semester'];
-                            $_SESSION['s_sem'] = $semester;
-                        }
-                    ?>
-                    <select id="semester" name="semester" class="form-control">
-                        <option value="" disabled selected>--Select Semester--</option>
+            <div class="container">
+                <div class="row" style="margin-top: 2%;">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4 form-group">
                         <?php
-                            for($i=1;$i<=$semester;$i++){
-                                ?>
-                        <option value="<?php echo $i?>"><?php echo $i?></option>
-                                    <?php
+                            require_once '../../Connection.php';
+                            $connection = new Connection();
+                            $conn = $connection->createConnection("college");
+
+                            $sqlGetSemester = "select student_semester from student where student_enrolment = $enrolment and student_dept_id = $dept_id";
+                            $resultGetSemester = mysqli_query($conn, $sqlGetSemester);
+                            if(mysqli_num_rows($resultGetSemester)){
+                                $rowSem = mysqli_fetch_assoc($resultGetSemester);
+                                $semester = $rowSem['student_semester'];
+                                $_SESSION['s_sem'] = $semester;
                             }
                         ?>
-                    </select>
-                </div>
-                
-                <script>
-                    $(document).ready(function(){
-                        $("#semester").change(function(){
-                            var sem = $(this).val();
-                            $.ajax({
-                                type: 'POST',
-                                url: "ajax-return-mark.php",
-                                data: {semester:sem},
-                                success: function (data, textStatus, jqXHR) {
-                                    $("#showTable").html(data);
+                        <select id="semester" name="semester" class="form-control">
+                            <option value="" disabled selected>--Select Semester--</option>
+                            <?php
+                                for($i=1;$i<=$semester;$i++){
+                                    ?>
+                            <option value="<?php echo $i?>"><?php echo $i?></option>
+                                        <?php
                                 }
+                            ?>
+                        </select>
+                    </div>
+
+                    <script>
+                        $(document).ready(function(){
+                            $("#semester").change(function(){
+                                var sem = $(this).val();
+                                $.ajax({
+                                    type: 'POST',
+                                    url: "ajax-return-mark.php",
+                                    data: {semester:sem},
+                                    success: function (data, textStatus, jqXHR) {
+                                        $("#showTable").html(data);
+                                    }
+                                });
                             });
                         });
-                    });
-                </script>
-            </div>
-            <div class="row">
-                <div class="col-lg-3"></div>
-                <div class="col-lg-6">
-                    <div id="showTable"></div>
+                    </script>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+                        <div id="showTable"></div>
+                    </div>
                 </div>
             </div>
             

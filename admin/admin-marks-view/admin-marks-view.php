@@ -14,15 +14,39 @@ if(!isset($_SESSION['aid'])){
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>View Marks - History</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script>
+            //script:highlight the active link in navigation bar
+            $(document).ready(function () {
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                })
+            });
+        </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -39,7 +63,7 @@ if(!isset($_SESSION['aid'])){
                     <div class="row form-group">
                         <div class="col-lg-4"></div>
                         <div class="col-lg-4">
-                            <input type="text" class="form-control" placeholder="Enrolment Number" name="enrol" required autofocus/>
+                            <input type="number" class="form-control" placeholder="Enrolment Number" name="enrol" required autofocus/>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -64,6 +88,7 @@ if(!isset($_SESSION['aid'])){
                         $resultStud = mysqli_query($conn, $sql);
                         if(mysqli_num_rows($resultStud)>0){
                             $rowStud = mysqli_fetch_assoc($resultStud);
+                            $semester = $rowStud['student_semester'];
                             ?>
                 <div class="table-responsive-sm">
                     <table class="table table-hover table-light">
@@ -80,7 +105,10 @@ if(!isset($_SESSION['aid'])){
                     </table>
                     
                     <?php
-                        for($i=1;$i<=8;$i++){
+                        if($semester==0){
+                            $semester=8;
+                        }
+                        for($i=1;$i<=$semester;$i++){
                             $sqlGetSubject = "select * from subject where semester = $i and dept_id = $dept_id";
                             $resultSubject = mysqli_query($conn, $sqlGetSubject);
                             if(mysqli_num_rows($resultSubject)>0){

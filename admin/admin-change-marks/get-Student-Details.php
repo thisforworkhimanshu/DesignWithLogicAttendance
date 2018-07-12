@@ -13,15 +13,39 @@ if(!isset($_SESSION['aid'])){
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Change Mark Subject Wise</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script>
+            //script:highlight the active link in navigation bar
+            $(document).ready(function () {
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                })
+            });
+        </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -120,7 +144,7 @@ if(!isset($_SESSION['aid'])){
                         </div>
                         
                         <div class="form-group">
-                            <input type="text" name="enrolment" id="enrolment" class="form-control" placeholder="Enrolment" required/>
+                            <input type="number" name="enrolment" id="enrolment" class="form-control" placeholder="Enrolment" required/>
                         </div>
                         
                         <script>
@@ -159,7 +183,7 @@ if(!isset($_SESSION['aid'])){
                         </script>
                         
                         <div class="form-group">
-                            <input type="text" name="marks" id="marks" class="form-control" placeholder="Your Marks will appear Here"/>
+                            <input type="number" name="marks" id="marks" class="form-control" placeholder="Click Here To Show Marks"/>
                         </div>
                         
                         <script>

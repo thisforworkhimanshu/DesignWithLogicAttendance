@@ -13,11 +13,12 @@ if(!isset($_SESSION['aid'])){
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Update Faculty Details</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <script src="../../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
@@ -63,6 +64,7 @@ if(!isset($_SESSION['aid'])){
                                     <select name="faculty" id="faculty" autofocus class="form-control">
                                         <option selected value="">--Select Faculty--</option>
                                         <?php
+                                            $conn->where('dept_id',$dept_id);
                                             $faculty = $conn->get("faculty");
                                             if($conn->count>0){
                                                 foreach ($faculty as $fac) {
@@ -205,11 +207,29 @@ if(!isset($_SESSION['aid'])){
                                 <label class="control-label">Password</label>
                                 <input type="password" id="faculty_pass" disabled name="faculty_pass" class="form-control" required/>
                             </div>
-
+                            
+                            <script>
+                                $(document).ready(function(){
+                                    $("#faculty_email").blur(function(){
+                                        var email = $("#faculty_email").val();
+                                        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+                                        if (!filter.test(email)) {
+                                            $("#emailerror").html("<div class='alert alert-danger'>Invalid Email Address</div>");
+                                            $("#btnSave").attr("disabled", true);
+                                        } else {
+                                            $("#btnSave").attr("disabled", false);
+                                            $("#emailerror").empty();
+                                            $("#emailerror").hide();
+                                        }
+                                    });
+                                });
+                            </script>
+                            
                             <div class="form-group">
                                 <label class="control-label">Email</label>
                                 <input type="email" id="faculty_email" disabled name="faculty_email" class="form-control" required/>
                             </div>
+                            <div id="emailerror"></div>
 
                             <div class="form-group">
                                 <label class="control-label">Mobile Number</label>
@@ -230,13 +250,13 @@ if(!isset($_SESSION['aid'])){
                             <div id="error"></div>
                             <div class="form-group">
                                     <div style="margin-left: 36%;">
-                                        <button type="submit" id="btnSubmit" class="btn btn-light btn-outline-primary" disabled>Update</button>
+                                        <button type="submit" id="btnSubmit" class="btn btn-light btn-outline-primary" disabled>Edit</button>
                                     </div>
                             </div>
 
                             <div class="form-group">
                                     <div style="margin-left: 30%;">
-                                        <button type="submit" id="btnSave" class="btn btn-light btn-outline-primary" style="display: none;">Save</button>
+                                        <button type="submit" id="btnSave" class="btn btn-light btn-outline-primary" style="display: none;">Update</button>
                                         <button type="button" id="btnCancle" class="btn btn-light btn-outline-primary" style="display: none;">Cancle</button>
                                     </div>
                             </div>

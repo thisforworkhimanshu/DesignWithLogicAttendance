@@ -13,7 +13,7 @@ if (!isset($_SESSION['aid'])) {
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Remove Faculty</title>
+        <title>Subject Delete</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">-->
@@ -24,19 +24,17 @@ if (!isset($_SESSION['aid'])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
         <script>
+            //script:highlight the active link in navigation bar
             $(document).ready(function () {
-                //script:highlight the active link in navigation bar
-                $(document).ready(function () {
-                    var current = location.pathname;
-                    $('#nav li a').each(function () {
-                        var $this = $(this);
-                        // if the current path is like this link, make it active
-                        if ($this.attr('href').indexOf(current) !== -1) {
-                            $this.addClass('active');
-                            return false;
-                        }
-                    });
-                });
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                })
             });
         </script>
     </head>
@@ -51,25 +49,24 @@ if (!isset($_SESSION['aid'])) {
             $conn = $connection->createConnection("college");
 
             $dept_id = $_SESSION['a_dept_id'];
-            $sql = "select faculty_id,faculty_fname from faculty where dept_id = $dept_id";
+            $sql = "select * from subject where dept_id = $dept_id";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
                 ?>
-                <form action="faculty-delete.php" method="post">
+                <form action="subject-delete.php" method="post">
                     <div class="row form-group" style="margin-top: 2%;">
                         <div class="col-lg-3"></div>
                         <div class="col-lg-6">
-                            <select name="faculty" class="form-control">
-                                <option value="" disabled selected>--Select Faculty --</option>
+                            <select name="subject" class="form-control">
+                                <option value="" disabled selected>--Select Subject--</option>
                                 <?php
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
-                                    <option value="<?php echo $row['faculty_id'] ?>"><?php echo $row['faculty_fname'] ?></option>
+                                    <option value="<?php echo $row['subject_code'] ?>"><?php echo $row['subject_name'] ?></option>
                                     <?php
                                 }
                                 ?>
                             </select>
-
                         </div>
                     </div>
                     <div class="row form-group">
@@ -78,37 +75,31 @@ if (!isset($_SESSION['aid'])) {
                             <input type="submit" class="form-control btn btn-danger" name="btnSubmit" id="btnSubmit"/>
                         </div>
                     </div>
-
                 </form>
-                        <?php
-                }else{
-                    ?>
-            <div class="text-center" style="margin-top: 3%;">
-                <h5>No Faculty Detail Available</h5>
-            </div>
-                        <?php
-                }
-                
-        if(isset($_POST['faculty']) && $_POST['faculty']!="")
+                <?php
+            }else{
+                ?>
+                <div class="text-center" style="margin-top: 3%;">
+                    <h5>No Subject Detail Available</h5>
+                </div>
+                <?php
+            }    
+        if(isset($_POST['subject']) && $_POST['subject']!="")
         {
-            $sql = "delete from faculty where faculty_id=".$_POST['faculty'];
+            $sql = "delete from subject where subject_code=".$_POST['subject'];
             if(mysqli_query($conn, $sql))
             {
                 ?>
-            <div class="alert alert-success">Record Delete Sucessfully...Redirecting</div>
-            <script>
-                setTimeout(function(){
-                    window.location.href='faculty-delete.php';
-                },1000);
-            </script>
-            <?php
-                    }
-                    
+                    <div class="alert alert-success">Record Delete Sucessfully...Redirecting</div>
+                    <script>
+                        setTimeout(function(){
+                            window.location.href='subject-delete.php';
+                        },1000);
+                    </script>
+                <?php
+            }
         }
-            ?>
-
+                ?>
         </div>
     </body>
 </html>
-
-

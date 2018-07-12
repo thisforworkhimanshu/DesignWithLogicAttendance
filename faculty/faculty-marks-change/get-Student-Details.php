@@ -24,12 +24,39 @@ if(!isset($_SESSION['fid'])){
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
+        <script>
+            //script:highlight the active link in navigation bar
+            $(document).ready(function () {
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                })
+            });
+        </script>
+        
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
+        
     </head>
     <body>
+        <?php
+            require_once '../../master-layout/faculty/master-faculty-layout.php';
+        ?>
         <div class="container">
-            <?php
-                require_once '../../master-layout/faculty/master-faculty-layout.php';
-            ?>
+            
             <div class="badge-light" style="margin-top: 1%;">
                 <div class="text-center">
                     <h5>Change Marks</h5>
@@ -46,12 +73,12 @@ if(!isset($_SESSION['fid'])){
                                     require_once '../../Connection.php';
                                     $connection = new Connection();
                                     $conn = $connection->createConnection("college");
-                                    $sqlSem = "select semester from subject_faculty_allocation where faculty_id = $fac_id and dept_id = $dept_id";
+                                    $sqlSem = "SELECT DISTINCT(semester) as sem FROM subject_faculty_allocation WHERE dept_id = $dept_id and faculty_id=$fac_id ORDER BY semester DESC";
                                     $resultSem = mysqli_query($conn, $sqlSem);
                                     if(mysqli_num_rows($resultSem)>0){
                                         while($row= mysqli_fetch_assoc($resultSem)){
                                             ?>
-                                <option value="<?php echo $row['semester']?>"><?php echo $row['semester']?></option>
+                                <option value="<?php echo $row['sem']?>"><?php echo $row['sem']?></option>
                                                 <?php
                                         }
                                     }
@@ -121,7 +148,7 @@ if(!isset($_SESSION['fid'])){
                         </div>
                         
                         <div class="form-group">
-                            <input type="text" name="enrolment" id="enrolment" class="form-control" placeholder="Enrolment" required/>
+                            <input type="number" name="enrolment" id="enrolment" class="form-control" placeholder="Enrolment" required/>
                         </div>
                         
                         <script>
@@ -154,13 +181,12 @@ if(!isset($_SESSION['fid'])){
                                             }
                                         });
                                     }
-                               });
-                               
+                               }); 
                             });
                         </script>
                         
                         <div class="form-group">
-                            <input type="text" name="marks" id="marks" class="form-control" placeholder="Your Marks will appear Here"/>
+                            <input type="number" name="marks" id="marks" class="form-control" placeholder="Your Marks will appear Here"/>
                         </div>
                         
                         <script>

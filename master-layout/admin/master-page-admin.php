@@ -26,13 +26,14 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/student-registration/student-registration.php">Student Registration</a>
+                        <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/student-registration/studentindividualregistration.php">Student - Registration Individual</a>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/detain-student-registration/register-into-detain.php">Detain Student</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/student-division-allocation/student-division-allocation.php">Division Allocation</a>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/student-prac-batch-allocation/student-prac-batch-allocation.php">Practical Batch Allocation</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/admin-view-student/admin-view-student.php">View Student</a>
-
+                        <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/detain-student-view/detain-student-view.php">View Detain Student</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -61,22 +62,29 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/subject-register/getSubjectDetail.php">Add Subject</a>
+                        <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/subject-delete/subject-delete.php">Delete Subject</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/rollno-to-enrolment/roll-to-enrolment.php">Transfer Roll No. To Enrolment No.</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/move-batch-next-sem/getBatchDetails.php">Move Batch To Next Semester</a>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/move-to-passout/getBatchDetails.php">Move Batch To Passout</a>
                     </div>
                 </li>
-
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        History
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/DesignWithLogicAttendance/admin/history-subject-faculty-allocation/subjectAllocationHistory.php">Past Subject Allocation</a>
+                    </div>
+                </li>
             </ul>
             <ul class="navbar-nav navbar-right">
                 <li class="nav-item dropdown">
-
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="material-icons" style="padding-right: 2px; font-size: 12pt">public</i>Admin</a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/DesignWithLogicAttendance/sessionDestroy.php">Logout</a>
+                    </div>
                 </li>
             </ul>
         </div>

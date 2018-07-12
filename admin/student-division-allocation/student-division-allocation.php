@@ -13,15 +13,39 @@ if(!isset($_SESSION['aid'])){
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Allocate - Division</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script>
+            //script:highlight the active link in navigation bar
+            $(document).ready(function () {
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                })
+            });
+        </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -132,6 +156,8 @@ if(!isset($_SESSION['aid'])){
                         var toenrol = $("#toenrol").val();
                         var divVal = $("#division").val();
                         var batchyear = $("#batchyear").val();
+                        $body = $("body");
+                        $body.addClass("loadingfac");
                         $.ajax({
                             type: 'POST',
                             url: "ajax-allocate-division.php",
@@ -139,26 +165,29 @@ if(!isset($_SESSION['aid'])){
                             success: function(data) {
                                 console.log(data);
                                 if(data==="ok"){
-                                    $body = $("body");
+                                    $body.removeClass("loadingfac");
+                                    $bodyredirect = $("body");
                                     $("#gowithsuggestion").hide();
                                     $("#suggest-div-success").show();
                                     $("#suggest-div-success").html('Successfully Allocated');
                                     $("#btnSuggest").prop("disabled",true);
-                                    $body.addClass("loading1");
+                                    $bodyredirect.addClass("loading1");
                                     setTimeout(function(){
                                        window.location.href="student-division-allocation.php"; 
-                                       $body.removeClass("loading1");
+                                       $bodyredirect.removeClass("loading1");
                                     },5000);
                                 }else{
-                                    $body = $("body");
+//                                    $body = $("body");
+                                    $body.removeClass("loadingfac");
                                     $("#gowithsuggestion").hide();
                                     $("#suggest-div-success").show();
-                                    $("#suggest-div-success").html('Operation Failed');
+                                    $("#suggest-div-success").html('Operation Failed! Redirecting..');
                                     $("#btnSuggest").prop("disabled",true);
-                                    $body.addClass("loading1");
+                                    $("#btnSubmit").hide();
+//                                    $body.addClass("loading1");
                                     setTimeout(function(){
                                        window.location.href="student-division-allocation.php"; 
-                                       $body.removeClass("loading1");
+//                                       $body.removeClass("loading1");
                                     },2000);
                                 }
                             }
@@ -171,7 +200,7 @@ if(!isset($_SESSION['aid'])){
             <div class="division-allocation" style="margin-top: 2%;">
                 <div class="row form-group">
                     <div class="col-lg-2">
-                        <input type="text" name="batchyear" placeholder="Batch Year" id="batchyear" class="form-control"/>
+                        <input type="number" name="batchyear" placeholder="Batch Year" id="batchyear" class="form-control"/>
                     </div>
                     <div id="totalcountdiv" class="col-lg-4 text-center form-control alert-success" style="display: none;"></div>
                 </div>
@@ -201,6 +230,8 @@ if(!isset($_SESSION['aid'])){
                         var toenrol = $("#toenrolinp").val();
                         var divVal = $("#division").val();
                         var batchyear = $("#batchyear").val();
+                        $body = $("body");
+                        $body.addClass("loadingfac");
                         $.ajax({
                             type: 'POST',
                             url: "ajax-allocate-division.php",
@@ -208,26 +239,25 @@ if(!isset($_SESSION['aid'])){
                             success: function(data) {
                                 console.log(data);
                                 if(data==="ok"){
-                                    $body = $("body");
+                                    $body.removeClass("loadingfac");
+                                    $bodyredirect = $("body");
                                     $("#inputdetailmsg").show();
                                     $("#inputdetailmsg").html('<div class="alert alert-success">Division Successfully Allocated</div>');
                                     $("#btnSubmit").prop("disabled",true);
                                     $("#gowithsuggestion").hide();
-                                    $body.addClass("loading1");
+                                    $bodyredirect.addClass("loading1");
                                     setTimeout(function(){
                                        window.location.href="student-division-allocation.php"; 
-                                       $body.removeClass("loading1");
+                                       $bodyredirect.removeClass("loading1");
                                     },3000);
                                 }else{
-                                    $body = $("body");
+                                    $body.removeClass("loadingfac");
                                     $("#inputdetailmsg").show();
-                                    $("#inputdetailmsg").html('<div class="alert alert-success">Operation Failed</div>');
+                                    $("#inputdetailmsg").html('<div class="alert alert-success">Operation Failed! Redirecting...</div>');
                                     $("#btnSubmit").prop("disabled",true);
-                                    $body.addClass("loading1");
                                     $("#gowithsuggestion").hide();
                                     setTimeout(function(){
                                        window.location.href="student-division-allocation.php"; 
-                                       $body.removeClass("loading1");
                                     },3000);
                                 }
                             }
@@ -246,12 +276,12 @@ if(!isset($_SESSION['aid'])){
                         <div class="row">
                                 <div class="col-lg-2 text-center">Enrolment From:</div>
                                 <div class="col-lg-3">
-                                    <input type="text" class="form-control" id="fromenrolinp" required/> 
+                                    <input type="number" class="form-control" id="fromenrolinp" required/> 
                                 </div>
 
                                 <div class="col-lg-2 text-center">Enrolment To:</div>
                                 <div class="col-lg-3">
-                                    <input type="text" class="form-control" id="toenrolinp" required/> 
+                                    <input type="number" class="form-control" id="toenrolinp" required/> 
                                 </div>
                         </div>
                         <div class="row" style="margin-top: 3%;">
@@ -276,5 +306,6 @@ if(!isset($_SESSION['aid'])){
             
         </div>
         <div class="modal1"></div>
+        <div class="modalfacreg"></div>
     </body>
 </html>

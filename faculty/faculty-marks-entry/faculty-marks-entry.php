@@ -19,6 +19,7 @@ if(!isset($_SESSION['fid'])){
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <!-- jQuery library -->
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -32,10 +33,10 @@ if(!isset($_SESSION['fid'])){
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     </head>
     <body>
+        <?php
+            require_once '../../master-layout/faculty/master-faculty-layout.php';
+        ?>
         <div class="container">
-            <?php
-                require_once '../../master-layout/faculty/master-faculty-layout.php';
-            ?>
             <div class="badge-light" style="margin-top: 0.5%;">
                 <div class="text-center">
                     <h5>Marks Entry</h5>

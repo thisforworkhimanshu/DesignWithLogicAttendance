@@ -13,15 +13,39 @@ if(!isset($_SESSION['aid'])){
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Subject Allocation - History</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="../../css/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
         <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script>
+            //script:highlight the active link in navigation bar
+            $(document).ready(function () {
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                })
+            });
+        </script>
+        <style>
+            input[type=number]::-webkit-inner-spin-button, 
+                input[type=number]::-webkit-outer-spin-button { 
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    margin: 0; 
+                }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -29,13 +53,13 @@ if(!isset($_SESSION['aid'])){
             
             <div class="badge-light" style="margin-top: 1%;">
                 <div class="text-center">
-                    <h5>Subject Entry Into Department</h5>
+                    <h5>Past Subject Allocation</h5>
                 </div>
             </div>
-            <form action="subjectAllocationHistory.php" method="post">
+            <form action="subjectAllocationHistory.php" method="get">
                 <div class="row" style="margin-top: 2%;">
                     <div class="col-lg-3 form-group">
-                        <input type="text" placeholder="Batch Year" id="batchyear" name="batchyear" class="form-control"/>
+                        <input type="number" placeholder="Batch Year" id="batchyear" name="batchyear" class="form-control"/>
                     </div>
                     <div class="col-lg-4 form-group">
                         <select id="semester" name="semester" class="form-control">
@@ -59,13 +83,13 @@ if(!isset($_SESSION['aid'])){
             
             <?php
             
-            if(isset($_POST['batchyear'])&&$_POST['semester']){
+            if(isset($_GET['batchyear'])&&$_GET['semester']){
                 require_once '../../Connection.php';
                 $connection = new Connection();
                 $conn = $connection->createConnection("college");
                 $dept_id = $_SESSION['a_dept_id'];
-                $sem = $_POST['semester'];
-                $batch_year = $_POST['batchyear'];
+                $sem = $_GET['semester'];
+                $batch_year = $_GET['batchyear'];
                 
                 if($sem==1||$sem==2){
                     $sql = "SELECT * FROM faculty where dept_id  in ($dept_id,1)";
@@ -76,51 +100,60 @@ if(!isset($_SESSION['aid'])){
                 $result = mysqli_query($conn, $sql);
                 
                 if(mysqli_num_rows($result)>0){
+                    $allocationstat = TRUE;
                     while($rowFac = mysqli_fetch_assoc($result)){
                         $fac_id = $rowFac['faculty_id'];
                         $fac_name = $rowFac['faculty_fname'];
                         
                         $sqlSub = "select * from duplicate_subject_faculty_allocation where faculty_id = $fac_id and batch_year = $batch_year and semester = $sem and dept_id = $dept_id";
                         $rsqlSub = mysqli_query($conn,$sqlSub);
-                        ?>
-            <div class="table-responsive">
-                <table class="table-sm table-bordered">
-                    <tr>
-                        <th colspan="3">Faculty Name : <?php echo $fac_name ?></th>
-                        <th colspan="1">Semester : <?php echo $sem?></th>
-                        <th>Department Id: <?php echo $dept_id?></th>
-                        <th>Category : Past Subject Allocation</th>
-                    </tr>
-                    <tr>
-                        <th>Subject Code</th>
-                        <th>Subject Name</th>
-                        <th>Theory/Practical</th>
-                        <th>Division/Batch</th>
-                        <th>Hours Allocated</th>
-                        <th>Approx. Total Theory/Practical in Term</th>
-                    </tr>
-                
-                            <?php
-                        while($rowSub = mysqli_fetch_assoc($rsqlSub)){
-                            $sub_code = $rowSub['subject_code'];
-                            $subName = "select subject_name from subject where subject_code = $sub_code and dept_id = $dept_id and semester = $sem";
-                            $rSubject = mysqli_query($conn, $subName);
-                            
-                            $rowSubject = mysqli_fetch_assoc($rSubject);
-                            $subject_name = $rowSubject['subject_name'];
-                            
+                        if(mysqli_num_rows($rsqlSub)>0){
                             ?>
-                    <tr>
-                        <td><?php echo $sub_code?></td>
-                        <td><?php echo $subject_name?></td>
-                        <td><?php echo $rowSub['lecture_type']?></td>
-                        <td><?php echo $rowSub['type']?></td>
-                        <td><?php echo $rowSub['total_hours']?></td>
-                        <td><?php echo $rowSub['expected_total_lecture']?></td>
-                    </tr>
-                                <?php
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th colspan="3" style="width: 50%;">Faculty Name : <?php echo $fac_name ?></th>
+                                    <th colspan="1" style="width: 10%;">Semester : <?php echo $sem?></th>
+                                    <th style="width: 15%;">Department Id: <?php echo $dept_id?></th>
+                                    <th style="width: 20%;">Category : Past Subject Allocation</th>
+                                </tr>
+                                <tr>
+                                    <th style="width: 12%;">Subject Code</th>
+                                    <th>Subject Name</th>
+                                    <th style="width: 5%;">Theory/Practical</th>
+                                    <th>Division/Batch</th>
+                                    <th>Hours Allocated</th>
+                                    <th>Approx. Total Theory/Practical in Term</th>
+                                </tr>
+                                        <?php
+                                    while($rowSub = mysqli_fetch_assoc($rsqlSub)){
+                                        $sub_code = $rowSub['subject_code'];
+                                        $subName = "select subject_name from subject where subject_code = $sub_code and dept_id = $dept_id and semester = $sem";
+                                        $rSubject = mysqli_query($conn, $subName);
+
+                                        $rowSubject = mysqli_fetch_assoc($rSubject);
+                                        $subject_name = $rowSubject['subject_name'];
+
+                                        ?>
+                                <tr>
+                                    <td><?php echo $sub_code?></td>
+                                    <td><?php echo $subject_name?></td>
+                                    <td><?php echo $rowSub['lecture_type']?></td>
+                                    <td><?php echo $rowSub['type']?></td>
+                                    <td><?php echo $rowSub['total_hours']?></td>
+                                    <td><?php echo $rowSub['expected_total_lecture']?></td>
+                                </tr>
+                                            <?php
+                                    }
+                        }else{
+                            $allocationstat = false;
                         }
                     }
+                    if(!$allocationstat){
+                        echo 'No Such Data Present';
+                    }
+                }else{
+                    echo 'No Faculty Present';
                 }
                 ?>
                 </table>

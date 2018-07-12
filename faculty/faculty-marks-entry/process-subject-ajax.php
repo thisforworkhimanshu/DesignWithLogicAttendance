@@ -19,7 +19,11 @@ $fid = $_SESSION['fid'];
 
 $sem = $_POST['semester'];
 
-$sql = "SELECT DISTINCT(subject_code) FROM subject_faculty_allocation where semester = $sem and dept_id = $dept_id and faculty_id = $fid";
+if($dept_id==1){
+    $sql = "SELECT DISTINCT(subject_code) FROM subject_faculty_allocation where semester = $sem and faculty_id = $fid";
+}else{
+    $sql = "SELECT DISTINCT(subject_code) FROM subject_faculty_allocation where semester = $sem and dept_id = $dept_id and faculty_id = $fid";
+}
 
 $result = mysqli_query($conn, $sql);
 
