@@ -100,7 +100,7 @@ if(!isset($_SESSION['aid'])){
                                     <input type="date" name="toDate" min="<?php echo date("Y-m-d")?>" class="form-control"/>
                                 </div>
                             </div>
-                            <div class=""><label style="color: red; font-size: 14px;">* CSV File only accepted with prescribe format as below, you can afford only first column for your purpose.</label></div>
+                            <div class=""><label style="color: red; font-size: 14px;">* CSV File only accepted with prescribe format as below, you can afford only first row for your purpose.</label></div>
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
@@ -150,7 +150,7 @@ if(!isset($_SESSION['aid'])){
                             ?></div>
                     </div>
                     <div id="divdiplomatodegree">
-                        <div><label style="color: red; font-size: 14px;">* CSV File only accepted with prescribe format as below, you can afford only first column for your purpose.</label></div>
+                        <div><label style="color: red; font-size: 14px;">* CSV File only accepted with prescribe format as below, you can afford only first row for your purpose.</label></div>
                         <div><label style="color: red; font-size: 14px;">* <b>Batch Year should be one less than Admission year, For e.g 2016 Admitted Student's batch year is 2015</b>.</label></div>
                         <div class="table-responsive">
                             <table class="table  table-striped">
