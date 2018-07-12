@@ -16,16 +16,18 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>SIM: faculty attendance view</title>
 
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href='../custom.css'>
+        <link rel="stylesheet" href="../custom.css">
+        <link rel="stylesheet" href="../../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.css"> <!-- jquery-ui css -->
+        <link rel="stylesheet" href="../../bootstrap-4.1.1-dist/css/bootstrap.min.css"> <!-- bootstrap css -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> <!-- cdn google icons -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="../../bootstrap-4.1.1-dist/js/bootstrap.min.js"></script> <!-- bootstrap js -->
+        <script src="../../jquery/jquery-3.3.1.js"></script> <!-- jquery js -->
+        <script src="../../jquery/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script> <!-- jquery-ui css -->
         <script src="../excelexportjs.js"></script>
+        <script src="../../jquery/tableHeadFixer.js"></script>
 
         <script>
             //script:highlight the active link in navigation bar
@@ -44,6 +46,16 @@ and open the template in the editor.
         
         <script>
             $(document).ready(function () {
+                //script:highlight the active link in navigation bar
+                var current = location.pathname;
+                $('#nav li a').each(function () {
+                    var $this = $(this);
+                    // if the current path is like this link, make it active
+                    if ($this.attr('href').indexOf(current) !== -1) {
+                        $this.addClass('active');
+                        return false;
+                    }
+                });
 
                 var sel = []; //store selected student from table 
 
@@ -101,6 +113,9 @@ and open the template in the editor.
                     $("#attendance-table > thead").empty();
                     $("#attendance-table > tbody").empty();
                     $("#subject").empty();
+                    $('#search').val('');
+                    $('#dateTo').val('');
+                    $('#dateFrom').val('');
 
                     var sendData = {'lec_type': lec_type};
                     callAjax(sendData);
@@ -119,6 +134,7 @@ and open the template in the editor.
                     $("#attendance-table > thead").empty();
                     $("#attendance-table > tbody").empty();
                     $("#subject").empty();
+                    $('#search').val('');
 
                     var sendData = {'lec_type': lec_type};
                     callAjax(sendData);
@@ -127,7 +143,13 @@ and open the template in the editor.
                 //script: combobox fatch subject and call ajax after subject selection
                 $("#division").change(function () {
                     if (this.selectedIndex !== 0) {
-                        var sendData = {'lec_type': lec_type, 'div': $(this).val(), 'sub': $("#subject").val()};
+                        $('#btnprint').prop('disabled', false);
+                        $('#search').val('');
+                        var sendData = {'lec_type': lec_type,
+                            'div': $(this).val(),
+                            'sub': $("#subject").val(),
+                            dateFrom: $("#dateFrom").val(),
+                            dateTo: $("#dateTo").val()};
                         callAjaxTable(sendData);
                     }
                 });
@@ -169,10 +191,11 @@ and open the template in the editor.
                 });
 
                 //script:button print export table to excel
-                $("#print").click(function () {
+                $("#btnprint").click(function () {
                     $("#attendance-table [type=checkbox]").remove();
                     $("#attendance-table").excelexportjs({
                         containerid: "attendance-table",
+                        worksheetName: "My Worksheet",
                         datatype: 'table'
                     });
                     $("#attendance-table > tbody tr td:first-child").prepend('<input type="checkbox">');
@@ -207,7 +230,7 @@ and open the template in the editor.
                 //script: apppend table data on subject seletion
                 function appendTable(data) {
                     var jsonData = $.parseJSON(data);
-
+                    console.log(jsonData);
                     //empty table
                     $("#attendance-table > thead").empty();
                     $("#attendance-table > tbody").empty();
@@ -247,6 +270,8 @@ and open the template in the editor.
                     $("#search").prop("disabled", false);
                     $("#dateFrom").prop("disabled", false);
                     $("#dateTo").prop("disabled", false);
+
+                    $("#attendance-table").tableHeadFixer({"left": 2});
                 }
 
                 function appendDivision(data) {
@@ -264,40 +289,48 @@ and open the template in the editor.
                         $("#subject").append($("<option>").text(item.short_name).val(item.subject_code));
                     });
                 }
-
-
-
             });
         </script>
 
     </head>
     <body>
         <?php include '../../master-layout/faculty/master-faculty-layout.php'; ?>
-        <div class="form-inline">
-            <div class="btn-group form-group d-flex justify-content-center form-group mb-2" role="group" aria-label="selection" style="float: left;padding: 5px">
-                <button type="button" class="btn btn-outline-primary" id="theory" value="theory">Theory</button>
-                <button type="button" class="btn btn-outline-primary" id="practical" value="practical">Practical</button>
+        <div class=" container-fluid mt-2">
+            <div class="form-row form-group">
+                <div class="col-2">
+                    <div class="btn-group" role="group" aria-label="selection">
+                        <button type="button" class="btn btn-outline-primary" id="theory" value="theory">Theory</button>
+                        <button type="button" class="btn btn-outline-primary" id="practical" value="practical">Practical</button>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <select class="form-control" id="subject" name="subject" disabled="true">
+                        <option>--Select subject--</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <select class="form-control" id="division" name="division"disabled="true">
+                        <option>--Select division--</option>
+                    </select>
+                </div>
             </div>
-            <div class="form-group mx-sm-3 mb-2">
-                <select class="form-control-sm border border-primary" id="subject" name="subject" style="margin: 5px" disabled="true">
-                    <option>--Select subject--</option>
-                </select>
-                <select class="form-control-sm border border-primary" id="division" name="division" style="margin: 5px" disabled="true">
-                    <option>--Select division--</option>
-                </select>
+            <div class="form-row">
+                <div class="col-md-3">
+                    <input id="search" type="text" placeholder="Search in table..." disabled="true" class="form-control">
+                </div>
+                <div class="col-md-5 form-inline">
+                    <input type="text" id="dateFrom" disabled="true" placeholder="for date" class="form-control"> -from to-
+                    <input type="text" id="dateTo" disabled="true" placeholder="last date" class="form-control">
+                </div>
+                <div class="form-inline ml-md-auto ml-sm-5">
+                    <button id="btnopenmodal" class="btn btn-success mr-1" disabled="true" style="display: none">update attendance</button>
+                    <button id="btnprint" class="btn btn-info mr-1" disabled="true"><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
+                </div>
             </div>
+        </div>
 
-        </div>
-        <br/>
-        <div>
-            <input type="text" id="search" placeholder="search in table" disabled="true">
-            <input type="text" id="dateFrom" disabled="true"> -from to-
-            <input type="text" id="dateTo"  disabled="true">
-            <button type="button" class="btn btn-success" id="modal">change</button>
-            <button id="print" class="btn btn-info">export to excel!</button>
-        </div>
         <hr/>
-        <div id="attendance-view" class="container">
+        <div id="attendance-view" class="container" style="height: 87vh; width: 87vw">
             <table id="attendance-table" class="record_table">
                 <thead>
 
