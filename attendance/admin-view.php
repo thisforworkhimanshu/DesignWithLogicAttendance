@@ -466,15 +466,15 @@ and open the template in the editor.
     <body>
         <?php require_once '../master-layout/admin/master-page-admin.php'; ?>
         <div class="p-2 mt-1">
+            <div class="form-row form-group">
+                    <div class="col-md-2">
+                        <select name="semester" id="cbsemester" class="form-control">
+                            <option selected="selected">--Select Semester--</option>
             <?php
             $sgetSemester = "Select DISTINCT student_semester from student";
             $rgetSemester = $db->query($sgetSemester);
             if ($rgetSemester->num_rows > 0) {
                 ?>
-                <div class="form-row form-group">
-                    <div class="col-md-2">
-                        <select name="semester" id="cbsemester" class="form-control">
-                            <option >Select Semester</option>
                             <?php
                             while ($row = $rgetSemester->fetch_assoc()) {
                                 ?>
@@ -482,10 +482,11 @@ and open the template in the editor.
                                 <?php
                             }
                             ?>
-                        </select>
+                        
                         <?php
                     }
                     ?>
+                        </select>
                 </div>
                 <div class="ml-2 col-2">
                     <div class="btn-group" role="group">
@@ -510,7 +511,7 @@ and open the template in the editor.
                     <input type="text" id="dateTo" disabled="true" placeholder="last date" class="form-control">
                 </div>
                 <div class="form-inline ml-md-auto ml-sm-5">
-                    <button id="btnopenmodal" class="btn btn-success mr-1">update attendance</button>
+                    <button id="btnopenmodal" class="btn btn-success mr-1" disabled="disabled">update attendance</button>
                     <button id="btnprint" class="btn btn-info mr-1" disabled="true"><i class="material-icons" style="vertical-align: bottom; padding-right: 2px">insert_drive_file</i>Export</button>
                     <div class="dropdown show">
                         <i class="material-icons crossRotate" href="#" style="cursor: pointer" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">settings</i>
@@ -580,13 +581,13 @@ and open the template in the editor.
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label-sm" for="mSub">Select Subject:</label>
-                                    <select class="form-control" style="height: 80px" id="mSub">
+                                    <select class="form-control" id="mSub">
 
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-form-label-sm" for="mFac">Select Lecturer:</label>
-                                    <select class="form-control" style="height: 80px" id="mFac">
+                                    <select class="form-control" id="mFac">
 
                                     </select>
                                 </div>
