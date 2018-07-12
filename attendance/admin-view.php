@@ -4,11 +4,9 @@ if (!isset($_SESSION['aid'])) {
     header('location:/DesignWithLogicAttendance/index.php');
     return;
 }
-
 include '../Connection.php';
 $conn = new Connection();
 $db = $conn->createConnection();
-
 //get criteria adjust store in setting
 $sGetCriteria = "SELECT * FROM basic_settings WHERE setting_key = 'criteria' LIMIT 1";
 $rGetCriteria = $db->query($sGetCriteria);
@@ -61,14 +59,12 @@ and open the template in the editor.
                             if (!sel.includes(temp)) {
                                 sel.push(temp);
                             }
-
                         } else {
                             var index = sel.indexOf(temp);
                             if (index > -1) {
                                 sel.splice(index, 1);
                             }
                         }
-
                     }
                 });
                 $(document).on("change", "input[type='checkbox']", function (event) {
@@ -187,7 +183,6 @@ and open the template in the editor.
                             div: $("#btndiv").text()};
                         callAjax(sendData);
                     }
-
                 });
                 //script:input search in table
                 $('#search').click(function () {
@@ -223,8 +218,6 @@ and open the template in the editor.
                         $('#btnopenmodal').prop('disabled', false);
                         $('#btnprint').prop('disabled', false);
                     }
-
-
                 });
                 function callAjax(sendData) {
                     $.ajax({
@@ -237,7 +230,6 @@ and open the template in the editor.
                         }
                     });
                 }
-
                 function showTable(data) {
                     var criteria = parseInt($('#criteria').val());
                     jsonData = $.parseJSON(data);
@@ -258,7 +250,6 @@ and open the template in the editor.
                         });
                         //create table body, normal view
                         $.each(jsonData, function (i, row) {
-
                             $("#attendance-table > tbody:last-child").append($('<tr>'));
                             var $tr = $("#attendance-table > tbody tr:last-child");
                             $.each(jsonData[i], function (j, value) {
@@ -278,7 +269,6 @@ and open the template in the editor.
                                         }
                                         $($tr).append($('<td>').text(value.attend).css("background-color", setColor), $('<td>').text(value.total));
                                     }
-
                                 }
                             });
                         });
@@ -316,14 +306,11 @@ and open the template in the editor.
                             });
                         });
                     }
-
                     $("#attendance-table").tableHeadFixer({
                         head: true
                     });
                 }
-
                 //script: modal section-----------------------------------------
-
                 //script:button open update attendance modal
                 $("#btnopenmodal").click(function () {
                     $("body").addClass("modal-open");
@@ -339,7 +326,6 @@ and open the template in the editor.
                     $("#modal").css("display", "none");
                     $("body").removeClass("modal-open");
                 });
-
                 //script: modal single date selection 
                 $("#mSingleDate").datepicker({
                     changeMonth: true,
@@ -367,7 +353,6 @@ and open the template in the editor.
                         });
                     }
                 });
-
                 //scrpit: dropdown select subject msub
                 $('#mSub').change(function () {
                     sub = $(this).val();
@@ -379,13 +364,11 @@ and open the template in the editor.
                         }
                     });
                 });
-
                 //script: anchor tag
                 var selection = '#single';
                 $('a.nav-link').click(function () {
                     selection = $(this).attr('href');
                 });
-
                 //script:button update button modal
                 $('#mbtnUpdate').click(function () {
                     if (selection == '#single') {
@@ -428,7 +411,6 @@ and open the template in the editor.
                         });
                     }
                 });
-
                 //script: multiple date selection
                 var dates = [];
                 function addDate(date) {
